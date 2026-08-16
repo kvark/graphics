@@ -92,8 +92,7 @@ specific thing that was wrong.
 ## Tools
 
 ```
-python3 tools/build.py            # validate, then regenerate README diagrams
-python3 tools/build.py --check    # validate only; non-zero exit if stale (used by CI)
+python3 tools/check.py            # validate the graph; this is what CI runs
 python3 tools/kg.py show ggx      # node detail, with incoming and outgoing edges
 python3 tools/kg.py path lambert diffuse-layering
 python3 tools/kg.py search fresnel
@@ -104,6 +103,11 @@ python3 tools/site.py --vendor    # ...bundling mermaid, as the deploy does
 
 All three read the graph through `tools/graph.py`, which owns the schema —
 the relation vocabulary and the validation rules live there and nowhere else.
+
+No tool writes into the repository. `site.py` is the only generator and its
+output goes to `site/`, which is gitignored and published to Pages. Counts,
+indexes and diagrams therefore live on the site only: nothing committed here
+can go stale, because nothing committed here is derived.
 
 `path` is the query the mind-map format could never answer: it prints the
 chain of typed edges connecting two techniques, with the reason on each hop.

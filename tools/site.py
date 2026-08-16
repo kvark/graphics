@@ -41,6 +41,73 @@ MERMAID_FILE = "mermaid.min.js"
 MERMAID_CDN = f"https://cdn.jsdelivr.net/npm/mermaid@{MERMAID_VERSION}/dist/{MERMAID_FILE}"
 REPO = "https://github.com/kvark/graphics"
 
+# Relation colouring.
+#
+# Eight fully distinct hues do not survive a colourblind-separation check when
+# any two edges can end up side by side: the worst all-pairs pair measures a
+# normal-vision ΔE of 7.1, far under the 15 floor. Searching the validated
+# palette, four is the largest set that passes on both the light and the dark
+# surface. So relations are grouped into four families that carry the colour,
+# and the two members of each family are told apart by line pattern — the
+# second channel — rather than by a fifth hue nobody could reliably name.
+FAMILIES = {
+    "supersede":  ("supersedes",     "#2a78d6", "#3987e5"),
+    "structure":  ("classifies",     "#008300", "#008300"),
+    "substitute": ("substitutes for", "#e87ba4", "#d55181"),
+    "support":    ("depends on",     "#eda100", "#c98500"),
+}
+
+# rel -> (family, dashed)
+RELATION_STYLE = {
+    "corrects": ("supersede", False),
+    "extends": ("supersede", True),
+    "specializes": ("structure", False),
+    "part-of": ("structure", True),
+    "approximates": ("substitute", False),
+    "alternative-to": ("substitute", True),
+    "requires": ("support", False),
+    "validates": ("support", True),
+}
+
+
+def relation_css():
+    """Colour rules for edges and legend swatches, from one mapping."""
+    out = [":root {"]
+    out += [f"  --fam-{k}: {light};" for k, (_, light, _) in FAMILIES.items()]
+    out.append("}")
+    out.append('@media (prefers-color-scheme: dark) { :root {')
+    out += [f"  --fam-{k}: {dark};" for k, (_, _, dark) in FAMILIES.items()]
+    out.append("} }")
+    for rel, (family, dashed) in RELATION_STYLE.items():
+        dash = " stroke-dasharray: 7 5 !important;" if dashed else ""
+        out.append(
+            f".diagram svg path.flowchart-link.e-{rel} "
+            f"{{ stroke: var(--fam-{family}) !important;{dash} }}"
+        )
+        border = "dashed" if dashed else "solid"
+        out.append(
+            f".legend .r-{rel} {{ border-top-color: var(--fam-{family}); "
+            f"border-top-style: {border}; }}"
+        )
+        # Tie the chips on a node page back to the colours in the diagram.
+        out.append(f".rel.k-{rel} {{ border-left: 3px solid var(--fam-{family}); }}")
+    return "\n".join(out)
+
+
+def legend():
+    items = []
+    for family, (reads, _, _) in FAMILIES.items():
+        members = [r for r, (f, _) in RELATION_STYLE.items() if f == family]
+        names = " · ".join(
+            f'<span class="ln"><i class="r-{r}"></i>{esc(r)}</span>' for r in members
+        )
+        items.append(f'<li><b>{esc(reads)}</b>{names}</li>')
+    return (
+        '<ul class="legend">' + "".join(items) + "</ul>"
+        '<p class="legend-note">Colour is the family; a dashed line is the second '
+        "member of it.</p>"
+    )
+
 STYLE = """
 :root {
   --bg: #fbfbfa; --fg: #1a1a19; --muted: #6b6b66; --line: #e2e2dd;
@@ -112,6 +179,14 @@ pre.mermaid { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monos
               font-size: .78rem; line-height: 1.5; color: var(--muted);
               white-space: pre; }
 pre.mermaid[data-processed] { color: inherit; }
+.legend { list-style: none; padding: 0; margin: 0 0 .35rem; display: flex;
+          flex-wrap: wrap; gap: .3rem 1.6rem; font-size: .82rem; color: var(--muted); }
+.legend li { display: flex; align-items: baseline; gap: .5rem; }
+.legend b { font-weight: 600; color: var(--fg); font-size: .74rem;
+            text-transform: uppercase; letter-spacing: .05em; }
+.legend .ln { display: inline-flex; align-items: center; gap: .35rem; }
+.legend i { width: 1.5rem; border-top-width: 2.5px; display: inline-block; }
+.legend-note { font-size: .78rem; color: var(--muted); margin: 0 0 1.25rem; }
 .refs { list-style: none; padding: 0; }
 .refs li { padding: .4rem 0; color: var(--muted); font-size: .92rem; }
 .refs .t { color: var(--fg); }
@@ -131,9 +206,21 @@ footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line);
 
 PANZOOM = """
 (function () {
+  // Tag each link path with its relation. Mermaid suffixes every link id with
+  // the edge's declaration index, which is the order data-rels is written in.
+  function paint(box) {
+    var rels = (box.getAttribute('data-rels') || '').split(',');
+    if (!rels[0]) return;
+    box.querySelectorAll('path.flowchart-link').forEach(function (p) {
+      var m = /_(\\d+)$/.exec(p.id || '');
+      if (m && rels[+m[1]]) p.classList.add('e-' + rels[+m[1]]);
+    });
+  }
+
   function setup(box) {
     var svg = box.querySelector('svg');
     if (!svg) return;
+    paint(box);
     var raw = (svg.getAttribute('viewBox') || '').split(/[\\s,]+/).map(Number);
     if (raw.length !== 4 || !raw[2]) return;
     var home = raw.slice(), vb = raw.slice();
@@ -275,7 +362,8 @@ if (window.mermaid) {{
 """
 
 
-def fig(source, wide=False):
+def fig(rendered, wide=False):
+    source, rels = rendered
     tools = (
         '<div class="tools">'
         '<button data-act="out" title="Zoom out">&minus;</button>'
@@ -285,7 +373,7 @@ def fig(source, wide=False):
         "</div>"
     )
     cls = "diagram wide" if wide else "diagram"
-    return (f'<div class="{cls}">{tools}'
+    return (f'<div class="{cls}" data-rels="{esc(",".join(rels))}">{tools}'
             f'<pre class="mermaid">{esc(source)}</pre></div>')
 
 
@@ -320,7 +408,7 @@ def render_refs(node):
 
 def edge_items(rows):
     return "".join(
-        f'<li><span class="rel">{esc(rel)}</span>{text}'
+        f'<li><span class="rel k-{esc(rel)}">{esc(rel)}</span>{text}'
         + (f'<span class="why">{esc(why)}</span>' if why else "")
         + "</li>"
         for rel, text, why in rows
@@ -349,6 +437,7 @@ def render_node(nid, nodes, clusters, backlinks, mermaid_src):
     neighbours.update(e["to"] for e in node.get("edges") or [] if e.get("to") in nodes)
     neighbours.update(src for src, _ in backlinks[nid])
     if len(neighbours) > 1:
+        out.append(legend())
         out.append(fig(diagram(
             nodes, neighbours, click=lambda n: f"../n/{n}.html",
             click_target="_self", focus=nid,
@@ -388,6 +477,7 @@ def render_cluster(cid, title, blurb, nodes, mermaid_src):
         f"<h1>{esc(title)}</h1>"
         f'<p class="lede">{esc(blurb)} '
         "<em>Drag to pan, scroll to zoom, click a node to open it.</em></p>"
+        f"{legend()}"
         f"{fig(source, wide=True)}"
         f'<h2>{len(members)} nodes</h2><div class="cards">{cards}</div>'
     )
@@ -514,7 +604,7 @@ def main():
 
     backlinks = incoming(nodes)
 
-    (out_dir / "style.css").write_text(STYLE.strip() + "\n")
+    (out_dir / "style.css").write_text(STYLE.strip() + "\n" + relation_css() + "\n")
     (out_dir / ".nojekyll").write_text("")
     (out_dir / "index.html").write_text(render_index(nodes, clusters, src(0)))
 

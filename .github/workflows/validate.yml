@@ -14,5 +14,5 @@ jobs:
           python-version: "3.x"
       - run: pip install pyyaml
       # Fails on unknown relations, edges pointing at missing nodes, a `why`
-      # missing where one is required, or a README that was not regenerated.
-      - run: python3 tools/build.py --check
+      # missing where one is required, or a node with no link out.
+      - run: python3 tools/check.py

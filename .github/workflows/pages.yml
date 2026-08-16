@@ -29,7 +29,7 @@ jobs:
       - run: pip install pyyaml
 
       # Same validation the push check runs: a graph that fails it is not published.
-      - run: python3 tools/build.py --check
+      - run: python3 tools/check.py
 
       # --vendor bundles mermaid into the artifact, so the published site
       # makes no external requests at runtime.
