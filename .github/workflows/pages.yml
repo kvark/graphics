@@ -27,13 +27,14 @@ jobs:
         with:
           python-version: "3.x"
       - run: pip install pyyaml
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends graphviz
 
       # Same validation the push check runs: a graph that fails it is not published.
       - run: python3 tools/check.py
 
-      # --vendor bundles mermaid into the artifact, so the published site
-      # makes no external requests at runtime.
-      - run: python3 tools/site.py --vendor --out site
+      # Diagrams are laid out here and inlined as SVG, so the published pages
+      # load no diagramming library at all.
+      - run: python3 tools/site.py --out site
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
