@@ -87,7 +87,12 @@ python3 tools/kg.py show ggx      # node detail, with incoming and outgoing edge
 python3 tools/kg.py path lambert diffuse-layering
 python3 tools/kg.py search fresnel
 python3 tools/kg.py stats
+python3 tools/site.py             # build the GitHub Pages site into site/
+python3 tools/site.py --vendor    # ...bundling mermaid, as the deploy does
 ```
+
+All three read the graph through `tools/graph.py`, which owns the schema —
+the relation vocabulary and the validation rules live there and nowhere else.
 
 `path` is the query the mind-map format could never answer: it prints the
 chain of typed edges connecting two techniques, with the reason on each hop.

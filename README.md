@@ -41,6 +41,19 @@ There are eight relations and no free-form types: `part-of`, `specializes`,
 `validates`. Every edge except `part-of` must say *why*. See
 [SCHEMA.md](SCHEMA.md).
 
+## Browsing it
+
+**[kvark.github.io/graphics](https://kvark.github.io/graphics/)** — every node
+gets a page with its reasoned edges in both directions, a diagram of its
+neighbourhood, and links to its sources. Published automatically from `main`;
+the whole graph is also served as
+[`graph.json`](https://kvark.github.io/graphics/graph.json).
+
+```console
+$ python3 tools/site.py            # build it locally into site/
+$ python3 tools/site.py --vendor   # ...with mermaid bundled, as CI publishes it
+```
+
 ## Querying it
 
 The question a rendered mind map can never answer is "what connects these two
@@ -75,7 +88,8 @@ new one, because edges are declared on the node that owns them — so two people
 working in the same area do not collide.
 
 Then run `python3 tools/build.py`, which validates the graph and regenerates
-everything below this line. CI runs `--check` on every push.
+everything below this line. CI runs `--check` on every push, and a merge to
+`main` republishes the site.
 
 An edge whose `why` could be swapped onto any other pair of nodes is not
 carrying its weight. "improves on it" is not a reason; "photon count is capped
@@ -195,7 +209,7 @@ graph LR;
     vertex_connection_and_merging -->|"adds photon merging as an extra connection strategy"| bidirectional_path_tracing;
     vertex_connection_and_merging -->|"connection and merging must be weighted against each other"| multiple_importance_sampling;
     whitted_ray_tracing -->|"only mirror and refraction bounces, plus one shadow ray"| rendering_equation;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class importance_sampling,monte_carlo_integration,rendering_equation,temporal_reprojection ext;
 ```
 
@@ -310,7 +324,7 @@ graph LR;
     torrance_sparrow --> microfacet_model;
     vndf -->|"can't hit back-facing normals"| ggx;
     ward_anisotropic -->|"roughness differs along two tangent directions"| specular_reflection;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class brdf,bsdf,reflection,refraction ext;
 ```
 
@@ -379,7 +393,7 @@ graph LR;
     sggx -->|"microflake distribution closed under linear transforms"| microflake;
     volumetric_path_tracing -->|"paths can scatter inside a volume, not only at surfaces"| path_tracing;
     volumetric_path_tracing -->|"solves it by random walks through the medium"| radiative_transfer_equation;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class path_tracing,rendering_equation,scattering ext;
 ```
 
@@ -464,6 +478,7 @@ graph LR;
     visibility_buffer["Visibility Buffer"];
     irradiance_caching["Irradiance Caching"];
     microfacet_model["Microfacet Model"];
+    click microfacet_model "http://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf" _blank;
     radiosity["Radiosity"];
     rasterization["Rasterization"];
     rendering_equation["The Rendering Equation"];
@@ -487,7 +502,7 @@ graph LR;
     split_sum_approximation -->|"one of the two factors is the prefiltered map"| prefiltered_environment_map;
     ssao -->|"estimated from the depth buffer at runtime"| ambient_occlusion;
     visibility_buffer -->|"fat G-buffers are bandwidth-bound at high resolution"| deferred_shading;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class irradiance_caching,microfacet_model,radiosity,rasterization,rendering_equation,specular_reflection ext;
 ```
 
@@ -540,7 +555,7 @@ graph LR;
     shadow_mapping -->|"the depth image comes from an ordinary raster pass"| rasterization;
     shadow_volumes -->|"exact silhouettes, but fill-rate bound"| shadow_mapping;
     variance_shadow_maps -->|"PCF cost grows with filter width; this prefilters"| percentage_closer_filtering;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class next_event_estimation,rasterization ext;
 ```
 
@@ -591,7 +606,7 @@ graph LR;
     taa -->|"the history must be aligned to this frame"| temporal_reprojection;
     temporal_reprojection --> antialiasing_over_time;
     temporal_upscaling -->|"the same history also fills in resolution, not just edges"| taa;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class rasterization,texture_mapping ext;
 ```
 
@@ -632,7 +647,7 @@ graph LR;
     neural_denoising -->|"learns the filter from data instead of hand-tuned weights"| svgf;
     svgf -->|"drives filter width from measured variance"| a_trous_filter;
     svgf -->|"the variance estimate comes from accumulated history"| temporal_reprojection;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class monte_carlo_integration,temporal_reprojection ext;
 ```
 
@@ -704,7 +719,7 @@ graph LR;
     virtual_geometry -->|"discrete per-object LOD pops and cannot stream"| level_of_detail;
     virtual_geometry -->|"the cut through the hierarchy is expressed as clusters"| meshlets;
     watertight_ray_triangle -->|"rounding lets rays leak through shared edges"| moller_trumbore;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class whitted_ray_tracing ext;
 ```
 
@@ -808,7 +823,7 @@ graph LR;
     neural_radiance_cache -->|"terminates paths into a cache learned while rendering"| path_tracing;
     neural_radiance_cache -->|"a learned cache instead of an interpolated one"| irradiance_caching;
     plenoxels -->|"a sparse grid works too; the network was not the point"| nerf;
-    classDef ext fill:#eee,stroke:#999,stroke-dasharray:4 3,color:#555;
+    classDef ext stroke:#888,stroke-dasharray:5 3;
     class irradiance_caching,path_tracing,radiative_transfer_equation,rasterization ext;
 ```
 
