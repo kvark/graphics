@@ -1,0 +1,15 @@
+title: Whitted Ray Tracing
+cluster: light-transport
+year: 1980
+summary: >
+  Recursive ray tracing with perfect mirror reflection, refraction and a
+  single shadow ray per light. The first algorithm to get interreflection
+  right, and restricted to ideal specular paths.
+refs:
+  - title: An Improved Illumination Model for Shaded Display
+    authors: Whitted
+    year: 1980
+edges:
+  - rel: specializes
+    to: rendering-equation
+    why: only mirror and refraction bounces, plus one shadow ray

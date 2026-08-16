@@ -1,0 +1,7 @@
+title: Light Transport
+cluster: foundations
+tags: [root]
+summary: >
+  The problem of computing how radiance moves through a scene from
+  emitters to the camera, accounting for every path it can take on the
+  way.

@@ -1,0 +1,11 @@
+title: Linear Workflow
+cluster: color
+summary: >
+  Decode textures to linear light on read, do every lighting operation in
+  linear space, and encode once on output. Blending or filtering encoded
+  values is simply wrong arithmetic, and the errors show up as dark
+  fringes.
+edges:
+  - rel: requires
+    to: srgb
+    why: inputs are encoded and must be decoded before any math

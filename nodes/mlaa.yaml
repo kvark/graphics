@@ -1,0 +1,16 @@
+title: Morphological Anti-Aliasing
+cluster: antialiasing
+year: 2009
+aka: [MLAA]
+summary: >
+  Finds edge patterns in the finished image and reconstructs a coverage
+  estimate from their shape, adding anti-aliasing entirely as a post-
+  process.
+refs:
+  - title: Morphological Antialiasing
+    authors: Reshetov
+    year: 2009
+edges:
+  - rel: alternative-to
+    to: msaa
+    why: reconstructs edges from the final image, no extra samples

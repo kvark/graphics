@@ -1,0 +1,17 @@
+title: The Rendering Equation
+cluster: foundations
+year: 1986
+summary: >
+  States outgoing radiance at a point as emission plus the integral of
+  incoming radiance weighted by the BSDF. Unified the previously separate
+  ray tracing and radiosity traditions as approximations of one integral.
+refs:
+  - title: The Rendering Equation
+    authors: Kajiya
+    year: 1986
+edges:
+  - rel: part-of
+    to: light-transport
+  - rel: requires
+    to: radiance
+    why: the unknown it solves for is a radiance field

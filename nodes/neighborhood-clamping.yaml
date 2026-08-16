@@ -1,0 +1,10 @@
+title: Neighborhood Clamping
+cluster: antialiasing
+summary: >
+  Constrains the reprojected history to the colour range of the current
+  frame's neighbouring pixels, so a history sample that no longer
+  describes this surface is pulled back into range.
+edges:
+  - rel: corrects
+    to: taa
+    why: wrong history ghosts and smears behind moving objects

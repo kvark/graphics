@@ -1,0 +1,6 @@
+title: Surface Representation
+cluster: geometry
+tags: [root]
+summary: >
+  How a surface is stored before anything is rendered: explicitly as
+  primitives, or implicitly as a function whose zero set is the surface.

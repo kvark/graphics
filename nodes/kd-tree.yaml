@@ -1,0 +1,10 @@
+title: kd-Tree
+cluster: geometry
+summary: >
+  Recursively splits space rather than objects with axis-aligned planes.
+  Nodes never overlap, which makes traversal tight, but primitives
+  straddling a plane must be referenced twice.
+edges:
+  - rel: alternative-to
+    to: bvh
+    why: splits space, not objects, so nodes never overlap

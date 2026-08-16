@@ -1,0 +1,16 @@
+title: Instant NGP
+cluster: neural
+year: 2022
+summary: >
+  A fused CUDA implementation built on hash encoding that trains a usable
+  radiance field in seconds rather than hours, which is what turned NeRF
+  from a result into a tool.
+refs:
+  - title: Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
+    authors: Muller, Evans, Schied, Keller
+    year: 2022
+    url: https://arxiv.org/abs/2201.05989
+edges:
+  - rel: requires
+    to: multiresolution-hash-encoding
+    why: the speedup is the encoding, not the network

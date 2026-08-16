@@ -1,0 +1,15 @@
+title: Reinhard Tone Mapping
+cluster: color
+year: 2002
+summary: >
+  A simple rational curve that maps zero to zero and infinity to one, so
+  nothing ever clips. Desaturates highlights and leaves images looking
+  flat, but it is the reference everyone starts from.
+refs:
+  - title: Photographic Tone Reproduction for Digital Images
+    authors: Reinhard, Stark, Shirley, Ferwerda
+    year: 2002
+edges:
+  - rel: specializes
+    to: tone-mapping
+    why: a rational curve that never clips

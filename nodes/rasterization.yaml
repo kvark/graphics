@@ -1,0 +1,10 @@
+title: Rasterization
+cluster: geometry
+summary: >
+  Projects primitives to the screen and fills the pixels they cover. Cost
+  scales with primitives times coverage, and visibility comes free from a
+  depth buffer.
+edges:
+  - rel: requires
+    to: polygon-mesh
+    why: it fills projected primitives, not implicit surfaces

@@ -1,0 +1,19 @@
+title: Many-Light Sampling
+cluster: light-transport
+year: 2018
+aka: [Light BVH, Light hierarchy]
+summary: >
+  Builds a hierarchy over the light sources and descends it stochastically
+  using bounds on each cluster's contribution, so shading cost grows with
+  the log of the light count instead of linearly.
+refs:
+  - title: Importance Sampling of Many Lights with Adaptive Tree Splitting
+    authors: Conty Estevez, Kulla
+    year: 2018
+edges:
+  - rel: corrects
+    to: instant-radiosity
+    why: cost grows linearly in the number of virtual lights
+  - rel: extends
+    to: next-event-estimation
+    why: picks which light to sample when there are thousands

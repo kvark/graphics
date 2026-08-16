@@ -1,0 +1,16 @@
+title: Subpixel Morphological Anti-Aliasing
+cluster: antialiasing
+year: 2012
+aka: [SMAA]
+summary: >
+  Adds proper pattern classification, sharper edge detection and optional
+  multi-sample or temporal inputs, recovering the detail that cheap
+  morphological filters blur away.
+refs:
+  - title: "SMAA: Enhanced Subpixel Morphological Antialiasing"
+    authors: Jimenez, Echevarria, Sousa, Gutierrez
+    year: 2012
+edges:
+  - rel: corrects
+    to: mlaa
+    why: morphological filtering alone blurs and misses subpixel detail

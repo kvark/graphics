@@ -1,0 +1,15 @@
+title: Microflake Theory
+cluster: volumetrics
+year: 2010
+summary: >
+  Applies microfacet reasoning to volumes: the medium is filled with
+  oriented flakes rather than isotropic particles, so anisotropic
+  materials like cloth and fur can be rendered as media.
+refs:
+  - title: A Radiative Transfer Framework for Rendering Materials with Anisotropic Structure
+    authors: Jakob, Arbree, Moon, Bala, Marschner
+    year: 2010
+edges:
+  - rel: extends
+    to: phase-function
+    why: oriented flakes give the medium a direction

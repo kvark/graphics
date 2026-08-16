@@ -1,0 +1,8 @@
+title: sRGB Transfer Function
+cluster: color
+year: 1996
+tags: [encoding]
+summary: >
+  The near-gamma-2.2 encoding almost all image files and displays use. It
+  allocates more precision to darks, matching human contrast sensitivity,
+  and is an encoding rather than a light-linear quantity.

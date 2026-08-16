@@ -1,0 +1,10 @@
+title: Beckmann Distribution
+cluster: materials
+summary: >
+  A Gaussian distribution of microfacet slopes, derived from physical
+  optics. Its tail falls off quickly, so highlights end more abruptly than
+  measured materials do.
+edges:
+  - rel: specializes
+    to: microfacet-model
+    why: supplies a Gaussian slope distribution as D

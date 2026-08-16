@@ -1,0 +1,10 @@
+title: Multisample Anti-Aliasing
+cluster: antialiasing
+summary: >
+  Samples coverage and depth at several points per pixel but shades only
+  once per covered primitive, which fixes geometric edges at a fraction of
+  the cost and does nothing for shader aliasing.
+edges:
+  - rel: approximates
+    to: supersampling
+    why: supersamples coverage but shades only once

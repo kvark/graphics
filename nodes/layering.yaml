@@ -1,0 +1,17 @@
+title: Coated Layer Model
+cluster: materials
+year: 2007
+aka: [Weidlich-Wilkie]
+summary: >
+  Composes a stack of smooth or rough interfaces into a single BSDF by
+  tracking attenuation between them, giving car paint and lacquered wood
+  without simulating the layers explicitly.
+refs:
+  - title: Arbitrarily Layered Micro-Facet Surfaces
+    authors: Weidlich, Wilkie
+    year: 2007
+    url: https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/weidlich_2007_almfs-paper.pdf
+edges:
+  - rel: extends
+    to: microfacet-model
+    why: microfacet layers stacked into a single BSDF

@@ -1,0 +1,23 @@
+title: Microfacet Model
+cluster: materials
+year: 2007
+summary: >
+  Treats a rough surface as a statistical field of tiny perfect mirrors.
+  The BSDF factors into a normal distribution D, a Fresnel term F and a
+  masking-shadowing term G, and nearly every modern material model is an
+  instance of it.
+refs:
+  - title: Microfacet Models for Refraction through Rough Surfaces
+    authors: Walter, Marschner, Li, Torrance
+    year: 2007
+    url: http://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf
+edges:
+  - rel: specializes
+    to: bsdf
+    why: derives the BSDF from a statistical surface model
+  - rel: requires
+    to: fresnel
+    why: each microfacet is a mirror, so needs its reflectance
+  - rel: requires
+    to: smith-masking
+    why: microfacets occlude each other at grazing angles

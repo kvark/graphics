@@ -1,0 +1,16 @@
+title: Primary Sample Space MLT
+cluster: light-transport
+year: 2002
+aka: [PSSMLT, Kelemen-style MLT]
+summary: >
+  Runs the Metropolis chain over the random numbers fed to an ordinary
+  path tracer rather than over path space itself, so the mutation
+  machinery becomes independent of the underlying integrator.
+refs:
+  - title: A Simple and Robust Mutation Strategy for the Metropolis Light Transport Algorithm
+    authors: Kelemen, Szirmay-Kalos, Antal, Csonka
+    year: 2002
+edges:
+  - rel: corrects
+    to: metropolis-light-transport
+    why: path-space mutations are hard to implement correctly

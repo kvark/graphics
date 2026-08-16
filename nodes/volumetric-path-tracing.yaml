@@ -1,0 +1,13 @@
+title: Volumetric Path Tracing
+cluster: volumetrics
+summary: >
+  Extends path tracing with sampled scattering events inside media,
+  choosing a distance along each ray and then a new direction from the
+  phase function.
+edges:
+  - rel: extends
+    to: path-tracing
+    why: paths can scatter inside a volume, not only at surfaces
+  - rel: specializes
+    to: radiative-transfer-equation
+    why: solves it by random walks through the medium

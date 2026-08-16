@@ -1,0 +1,11 @@
+title: Screen-Space Reflections
+cluster: real-time-shading
+aka: [SSR]
+summary: >
+  Ray-marches the depth buffer to find reflected surfaces. Convincing
+  while the reflected geometry is on screen, and falls back to an
+  environment map the moment it is not.
+edges:
+  - rel: approximates
+    to: specular-reflection
+    why: reuses the frame buffer instead of tracing the scene

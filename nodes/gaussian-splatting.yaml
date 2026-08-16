@@ -1,0 +1,20 @@
+title: 3D Gaussian Splatting
+cluster: neural
+year: 2023
+summary: >
+  Represents the scene as anisotropic Gaussians with spherical harmonic
+  colour and rasterizes them sorted by depth. Explicit primitives and a
+  rasterizer instead of ray marching an implicit field, which is what
+  makes it real time.
+refs:
+  - title: 3D Gaussian Splatting for Real-Time Radiance Field Rendering
+    authors: Kerbl, Kopanas, Leimkuhler, Drettakis
+    year: 2023
+    url: https://arxiv.org/abs/2308.04079
+edges:
+  - rel: alternative-to
+    to: nerf
+    why: rasterizes explicit primitives instead of querying a field
+  - rel: requires
+    to: rasterization
+    why: the speed comes from sorted alpha-blended splatting

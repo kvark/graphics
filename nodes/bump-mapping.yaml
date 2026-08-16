@@ -1,0 +1,15 @@
+title: Bump Mapping
+cluster: geometry
+year: 1978
+summary: >
+  Perturbs the shading normal from a height texture without moving any
+  geometry. Almost free, and its limits are visible the moment a
+  silhouette or a self-shadow is involved.
+refs:
+  - title: Simulation of Wrinkled Surfaces
+    authors: Blinn
+    year: 1978
+edges:
+  - rel: approximates
+    to: displacement-mapping
+    why: perturbs normals only; silhouettes stay flat

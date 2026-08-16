@@ -1,0 +1,10 @@
+title: Temporal Sample Reuse
+cluster: antialiasing
+summary: >
+  The general idea that a frame is one sample of a continuously moving
+  signal, so previous frames are usable samples if you can find the
+  corresponding point.
+edges:
+  - rel: approximates
+    to: supersampling
+    why: spreads the extra samples across frames

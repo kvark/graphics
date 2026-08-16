@@ -1,0 +1,10 @@
+title: Tone Mapping
+cluster: color
+summary: >
+  Maps unbounded scene radiance into the range a display can emit. Every
+  renderer needs one, and the choice of curve is as much a look decision
+  as a technical one.
+edges:
+  - rel: requires
+    to: linear-workflow
+    why: compressing radiance only makes sense in linear light

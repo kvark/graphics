@@ -1,0 +1,19 @@
+title: Virtualized Geometry
+cluster: geometry
+year: 2021
+aka: [Nanite]
+summary: >
+  Builds a hierarchy of pre-simplified clusters and chooses the cut
+  through it per frame, so level of detail changes per cluster and streams
+  from disk rather than switching whole objects.
+refs:
+  - title: "Nanite: A Deep Dive"
+    authors: Karis, Stubbe, Wihlidal
+    year: 2021
+edges:
+  - rel: corrects
+    to: level-of-detail
+    why: discrete per-object LOD pops and cannot stream
+  - rel: requires
+    to: meshlets
+    why: the cut through the hierarchy is expressed as clusters

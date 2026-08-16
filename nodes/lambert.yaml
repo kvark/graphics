@@ -1,0 +1,10 @@
+title: Lambertian Diffuse
+cluster: materials
+summary: >
+  A constant BRDF: outgoing radiance is the same in every direction, so
+  the surface looks equally bright from any viewpoint. Cheap, reciprocal,
+  and the default diffuse term almost everywhere.
+edges:
+  - rel: specializes
+    to: diffuse-reflection
+    why: the simplest case, a constant BRDF

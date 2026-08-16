@@ -1,0 +1,15 @@
+title: Moller-Trumbore Intersection
+cluster: geometry
+year: 1997
+summary: >
+  Solves for barycentric coordinates directly with a scalar triple
+  product, needing no precomputed plane equation and therefore no per-
+  triangle storage.
+refs:
+  - title: Fast, Minimum Storage Ray-Triangle Intersection
+    authors: Moller, Trumbore
+    year: 1997
+edges:
+  - rel: specializes
+    to: ray-triangle-intersection
+    why: barycentric solve with nothing precomputed

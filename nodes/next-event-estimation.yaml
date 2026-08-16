@@ -1,0 +1,11 @@
+title: Next Event Estimation
+cluster: light-transport
+aka: [Direct light sampling, Shadow rays]
+summary: >
+  At every path vertex, additionally sample a point on a light and trace a
+  shadow ray to it, rather than waiting for the random walk to wander onto
+  an emitter by chance.
+edges:
+  - rel: corrects
+    to: path-tracing
+    why: random walks almost never hit small light sources

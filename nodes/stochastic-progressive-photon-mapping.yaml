@@ -1,0 +1,15 @@
+title: Stochastic Progressive Photon Mapping
+cluster: light-transport
+year: 2009
+aka: [SPPM]
+summary: >
+  Regenerates the camera hit points every pass rather than fixing them
+  once, which restores depth of field, motion blur and glossy reflection.
+refs:
+  - title: Stochastic Progressive Photon Mapping
+    authors: Hachisuka, Jensen
+    year: 2009
+edges:
+  - rel: corrects
+    to: progressive-photon-mapping
+    why: a fixed hit point set cannot express a pixel-wide integral

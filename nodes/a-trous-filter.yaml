@@ -1,0 +1,15 @@
+title: A-Trous Wavelet Filter
+cluster: denoising
+year: 2010
+summary: >
+  Applies a small kernel repeatedly with exponentially increasing sample
+  spacing, reaching a wide filter in a few passes instead of one enormous
+  kernel.
+refs:
+  - title: Edge-Avoiding A-Trous Wavelet Transform for Fast Global Illumination Filtering
+    authors: Dammertz, Sewtz, Hanika, Lensch
+    year: 2010
+edges:
+  - rel: approximates
+    to: bilateral-filter
+    why: wide support in a few sparse passes, not one big kernel

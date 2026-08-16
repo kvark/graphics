@@ -1,0 +1,15 @@
+title: Phong
+cluster: materials
+year: 1975
+summary: >
+  An empirical specular lobe: the cosine between the reflection vector and
+  the view, raised to a power. No physical basis, but it was the first
+  shading model cheap enough to be ubiquitous.
+refs:
+  - title: Illumination for Computer Generated Pictures
+    authors: Phong
+    year: 1975
+edges:
+  - rel: specializes
+    to: specular-reflection
+    why: an ad hoc cosine-power lobe with no physical basis

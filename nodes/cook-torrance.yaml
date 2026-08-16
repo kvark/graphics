@@ -1,0 +1,15 @@
+title: Cook-Torrance
+cluster: materials
+year: 1982
+summary: >
+  Brought microfacet theory into graphics, with spectral Fresnel and a
+  proper distinction between metals and dielectrics. The direct ancestor
+  of every physically based shading model in use today.
+refs:
+  - title: A Reflectance Model for Computer Graphics
+    authors: Cook, Torrance
+    year: 1982
+edges:
+  - rel: specializes
+    to: microfacet-model
+    why: first graphics-side instance of the framework

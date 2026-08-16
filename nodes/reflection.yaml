@@ -1,0 +1,7 @@
+title: Reflection
+cluster: foundations
+summary: >
+  Light leaving a surface on the same side it arrived from.
+edges:
+  - rel: part-of
+    to: light-transport

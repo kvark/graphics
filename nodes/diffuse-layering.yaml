@@ -1,0 +1,14 @@
+title: Layering with Diffuse Interfaces
+cluster: materials
+year: 2022
+summary: >
+  Extends statistical layering to stacks containing diffuse interfaces,
+  which the lobe-variance formulation could not represent.
+refs:
+  - title: Rendering Layered Materials with Diffuse Interfaces
+    year: 2022
+    url: https://arxiv.org/pdf/2203.11835.pdf
+edges:
+  - rel: extends
+    to: statistical-operators-layering
+    why: diffuse interfaces, not just rough specular ones

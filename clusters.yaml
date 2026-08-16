@@ -1,0 +1,50 @@
+# Diagram groupings. Order here is the order of sections in the README.
+# A node's `cluster` field must name one of these ids.
+
+- id: foundations
+  title: Foundations
+  blurb: The quantities everything else is defined in terms of.
+
+- id: light-transport
+  title: Light Transport
+  blurb: Algorithms that solve the rendering equation, and the estimators they are built from.
+
+- id: materials
+  title: Materials and BSDFs
+  blurb: Models for what a surface does to light that hits it.
+
+- id: volumetrics
+  title: Participating Media
+  blurb: Transport through a volume rather than across a surface.
+
+- id: sampling
+  title: Sampling
+  blurb: Where to put the samples, and how the error is distributed when you cannot afford enough of them.
+
+- id: real-time-shading
+  title: Real-Time Shading
+  blurb: Getting a usable approximation of the above inside a frame budget.
+
+- id: shadows
+  title: Shadows
+  blurb: Visibility from the light, and the artifacts of every way of caching it.
+
+- id: antialiasing
+  title: Anti-Aliasing and Filtering
+  blurb: Reconstruction, in space and over time.
+
+- id: denoising
+  title: Denoising
+  blurb: Trading variance for bias so that low sample counts are shippable.
+
+- id: geometry
+  title: Geometry and Intersection
+  blurb: Representing surfaces and finding where a ray meets them.
+
+- id: color
+  title: Color and Tone
+  blurb: Turning radiance into pixels a display can show.
+
+- id: neural
+  title: Neural Representations
+  blurb: Learned scene representations, and their reconstruction lineage.

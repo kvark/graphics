@@ -1,0 +1,15 @@
+title: Multiple-Scattering Microfacet BSDF
+cluster: materials
+year: 2016
+summary: >
+  Random-walks light between microfacets instead of discarding whatever
+  the masking term blocks. Rough metals stop going dark, which is the
+  visible symptom of the energy single-scattering models throw away.
+refs:
+  - title: Multiple-Scattering Microfacet BSDFs with the Smith Model
+    authors: "Heitz, Hanika, d'Eon, Dachsbacher"
+    year: 2016
+edges:
+  - rel: corrects
+    to: smith-masking
+    why: some hits are lost in scatter, never re-emitted

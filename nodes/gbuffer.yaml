@@ -1,0 +1,8 @@
+title: G-Buffer
+cluster: real-time-shading
+summary: >
+  The set of screen-space textures holding albedo, normal, roughness and
+  depth between the geometry pass and the lighting pass.
+edges:
+  - rel: part-of
+    to: deferred-shading

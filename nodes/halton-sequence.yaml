@@ -1,0 +1,10 @@
+title: Halton Sequence
+cluster: sampling
+summary: >
+  Uses the radical inverse in a different prime base for each dimension.
+  Simple and progressive, but correlations between high dimensions show up
+  as visible structure.
+edges:
+  - rel: specializes
+    to: quasi-monte-carlo
+    why: radical inverse in a different prime per dimension

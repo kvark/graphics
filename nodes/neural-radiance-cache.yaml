@@ -1,0 +1,18 @@
+title: Neural Radiance Cache
+cluster: neural
+year: 2021
+summary: >
+  Trains a small network online, during rendering, to predict outgoing
+  radiance, so paths can terminate into a learned estimate after a couple
+  of bounces instead of continuing.
+refs:
+  - title: Real-time Neural Radiance Caching for Path Tracing
+    authors: Muller, Rousselle, Novak, Keller
+    year: 2021
+edges:
+  - rel: extends
+    to: path-tracing
+    why: terminates paths into a cache learned while rendering
+  - rel: alternative-to
+    to: irradiance-caching
+    why: a learned cache instead of an interpolated one

@@ -1,0 +1,16 @@
+title: Metropolis Light Transport
+cluster: light-transport
+year: 1997
+aka: [MLT]
+summary: >
+  Once a path reaching the light is found, mutate it locally and accept
+  mutations with a Metropolis-Hastings rule, so effort concentrates where
+  transport actually happens instead of restarting blindly.
+refs:
+  - title: Metropolis Light Transport
+    authors: Veach, Guibas
+    year: 1997
+edges:
+  - rel: extends
+    to: bidirectional-path-tracing
+    why: explores near paths that already found light

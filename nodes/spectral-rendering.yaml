@@ -1,0 +1,10 @@
+title: Spectral Rendering
+cluster: color
+summary: >
+  Transports light at wavelengths rather than as RGB triples. Required for
+  dispersion, fluorescence and correct metamerism under unusual
+  illuminants, where RGB gives an answer that is simply the wrong colour.
+edges:
+  - rel: corrects
+    to: linear-workflow
+    why: RGB math cannot express dispersion or metamerism

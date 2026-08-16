@@ -1,0 +1,17 @@
+title: Visible Normal Distribution Sampling
+cluster: materials
+year: 2018
+aka: [VNDF]
+summary: >
+  Samples the distribution of microfacet normals actually visible from the
+  view direction, rather than the full distribution. Every sample is
+  usable, and variance at high roughness drops sharply.
+refs:
+  - title: Sampling the GGX Distribution of Visible Normals
+    authors: Heitz
+    year: 2018
+    url: https://jcgt.org/published/0007/04/01/paper.pdf
+edges:
+  - rel: corrects
+    to: ggx
+    why: "can't hit back-facing normals"

@@ -1,0 +1,14 @@
+title: Texture Mapping
+cluster: geometry
+year: 1974
+summary: >
+  Assigns surface parameters from an image indexed by per-vertex
+  coordinates, decoupling material detail from geometric density.
+refs:
+  - title: Computer Display of Curved Surfaces
+    authors: Catmull
+    year: 1974
+edges:
+  - rel: requires
+    to: polygon-mesh
+    why: needs a surface parameterization to index into

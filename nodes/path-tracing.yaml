@@ -1,0 +1,21 @@
+title: Path Tracing
+cluster: light-transport
+year: 1986
+summary: >
+  Solves the rendering equation by tracing random walks from the camera
+  and averaging their contributions. Unbiased and simple, and the baseline
+  every other transport algorithm is measured against.
+refs:
+  - title: The Rendering Equation
+    authors: Kajiya
+    year: 1986
+edges:
+  - rel: specializes
+    to: rendering-equation
+    why: expands the recursive integral into random walks
+  - rel: specializes
+    to: monte-carlo-integration
+    why: the sample space is the space of light paths
+  - rel: extends
+    to: whitted-ray-tracing
+    why: randomizes every bounce instead of only mirrors

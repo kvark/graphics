@@ -1,0 +1,9 @@
+title: Energy Conservation
+cluster: foundations
+summary: >
+  A surface may not reflect more energy than it receives. Violating it
+  makes multi-bounce renders diverge into brightness rather than settle.
+edges:
+  - rel: validates
+    to: bsdf
+    why: the BSDF integrated over the sphere must not exceed 1

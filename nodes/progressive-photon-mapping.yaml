@@ -1,0 +1,16 @@
+title: Progressive Photon Mapping
+cluster: light-transport
+year: 2008
+aka: [PPM]
+summary: >
+  Keeps camera hit points instead of photons and shrinks each one's search
+  radius as more photon passes arrive, so the estimate converges to the
+  correct answer in bounded memory.
+refs:
+  - title: Progressive Photon Mapping
+    authors: Hachisuka, Ogaki, Jensen
+    year: 2008
+edges:
+  - rel: corrects
+    to: photon-mapping
+    why: photon count is capped by memory, so bias never vanishes

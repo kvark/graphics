@@ -1,0 +1,15 @@
+title: Shadow Volumes
+cluster: shadows
+year: 1977
+summary: >
+  Extrudes silhouette edges away from the light and uses the stencil
+  buffer to count entries and exits. Geometrically exact, with no
+  resolution artifacts, but fill-rate cost scales badly.
+refs:
+  - title: Shadow Algorithms for Computer Graphics
+    authors: Crow
+    year: 1977
+edges:
+  - rel: alternative-to
+    to: shadow-mapping
+    why: exact silhouettes, but fill-rate bound

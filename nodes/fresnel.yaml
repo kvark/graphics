@@ -1,0 +1,15 @@
+title: Fresnel Equations
+cluster: materials
+summary: >
+  Give the fraction of light reflected rather than transmitted at an
+  interface, as a function of angle and the two indices of refraction.
+  Reflectance rises to one at grazing incidence for every material.
+refs:
+  - title: Fresnel equations (lecture notes)
+    url: https://www.brown.edu/research/labs/mittleman/sites/brown.edu.research.labs.mittleman/files/uploads/lecture13_0.pdf
+edges:
+  - rel: part-of
+    to: reflection
+  - rel: requires
+    to: refraction
+    why: the split between the two is what it computes

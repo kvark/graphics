@@ -1,0 +1,10 @@
+title: Lightmaps
+cluster: real-time-shading
+summary: >
+  Bakes static indirect lighting into textures parameterized over
+  surfaces. Still the highest-quality option for static geometry, at the
+  cost of build time and unique UVs.
+edges:
+  - rel: approximates
+    to: radiosity
+    why: bakes the converged solution into textures

@@ -1,0 +1,10 @@
+title: Level of Detail
+cluster: geometry
+aka: [LOD]
+summary: >
+  Swaps in coarser geometry as an object shrinks on screen, keeping
+  triangle density roughly constant in screen space.
+edges:
+  - rel: corrects
+    to: rasterization
+    why: distant meshes otherwise cost far more than they show

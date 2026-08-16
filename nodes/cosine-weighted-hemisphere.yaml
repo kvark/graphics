@@ -1,0 +1,10 @@
+title: Cosine-Weighted Hemisphere Sampling
+cluster: sampling
+summary: >
+  Samples directions with density proportional to the cosine of the angle
+  from the normal, cancelling the geometry term in the rendering equation
+  exactly.
+edges:
+  - rel: specializes
+    to: importance-sampling
+    why: cancels the cosine factor in the integrand exactly

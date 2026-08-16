@@ -1,0 +1,15 @@
+title: Filmic Tone Mapping
+cluster: color
+year: 2010
+summary: >
+  An S-shaped curve with a toe and shoulder fitted to photographic film
+  response, which holds saturation in the highlights where a simple ratio
+  curve washes out.
+refs:
+  - title: "Uncharted 2: HDR Lighting"
+    authors: Hable
+    year: 2010
+edges:
+  - rel: alternative-to
+    to: reinhard-tonemapping
+    why: an S-curve with a toe, matching film response

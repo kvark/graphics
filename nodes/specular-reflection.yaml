@@ -1,0 +1,8 @@
+title: Specular Reflection
+cluster: materials
+summary: >
+  Light reflected about the surface normal, concentrated in a lobe whose
+  width is set by how rough the interface is.
+edges:
+  - rel: part-of
+    to: reflection

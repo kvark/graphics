@@ -1,0 +1,16 @@
+title: Dynamic Diffuse Global Illumination
+cluster: real-time-shading
+year: 2019
+aka: [DDGI]
+summary: >
+  Stores filtered depth alongside irradiance at each probe and weights
+  probe contributions by a visibility test, so a probe on the far side of
+  a wall stops contributing.
+refs:
+  - title: Dynamic Diffuse Global Illumination with Ray-Traced Irradiance Fields
+    authors: Majercik, Guertin, Nowrouzezahrai, McGuire
+    year: 2019
+edges:
+  - rel: corrects
+    to: light-probes
+    why: plain probe interpolation leaks light through walls

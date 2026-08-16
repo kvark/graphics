@@ -1,0 +1,9 @@
+title: Radiance
+cluster: foundations
+summary: >
+  Power per unit projected area per unit solid angle. It is the quantity
+  that is constant along a ray in a vacuum, which is why renderers
+  transport it rather than irradiance or flux.
+edges:
+  - rel: part-of
+    to: light-transport

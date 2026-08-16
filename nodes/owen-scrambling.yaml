@@ -1,0 +1,10 @@
+title: Owen Scrambling
+cluster: sampling
+summary: >
+  Randomizes a low-discrepancy sequence with a recursive permutation that
+  preserves its stratification, restoring an unbiased estimator with a
+  measurable error rather than a fixed deterministic pattern.
+edges:
+  - rel: corrects
+    to: sobol-sequence
+    why: a fixed sequence gives structure and no error estimate

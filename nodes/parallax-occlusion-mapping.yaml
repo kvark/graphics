@@ -1,0 +1,15 @@
+title: Parallax Occlusion Mapping
+cluster: geometry
+year: 2006
+summary: >
+  Ray-marches the height field in tangent space so texture features shift
+  with view angle and occlude each other, recovering the parallax that
+  normals alone cannot express.
+refs:
+  - title: Dynamic Parallax Occlusion Mapping with Approximate Soft Shadows
+    authors: Tatarchuk
+    year: 2006
+edges:
+  - rel: corrects
+    to: normal-mapping
+    why: perturbed normals give no parallax or self-occlusion

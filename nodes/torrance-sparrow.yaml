@@ -1,0 +1,14 @@
+title: Torrance-Sparrow
+cluster: materials
+year: 1967
+summary: >
+  The optics paper that introduced the microfacet formulation, developed
+  to explain off-specular peaks in measured reflectance that mirror models
+  could not account for.
+refs:
+  - title: Theory for Off-Specular Reflection From Roughened Surfaces
+    authors: Torrance, Sparrow
+    year: 1967
+edges:
+  - rel: part-of
+    to: microfacet-model

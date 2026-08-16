@@ -1,0 +1,15 @@
+title: Irradiance Caching
+cluster: light-transport
+year: 1988
+summary: >
+  Computes diffuse indirect irradiance at sparse points and interpolates
+  between them, adding new samples only where the gradient estimate says
+  the interpolation would be unreliable.
+refs:
+  - title: A Ray Tracing Solution for Diffuse Interreflection
+    authors: Ward, Rubinstein, Clear
+    year: 1988
+edges:
+  - rel: corrects
+    to: path-tracing
+    why: diffuse indirect is smooth, so per-pixel sampling is wasted

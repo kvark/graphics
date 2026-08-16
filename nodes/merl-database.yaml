@@ -1,0 +1,14 @@
+title: MERL BRDF Database
+cluster: materials
+year: 2003
+summary: >
+  Densely measured reflectance for a hundred real materials. The de facto
+  ground truth that analytic models are fitted and compared against.
+refs:
+  - title: A Data-Driven Reflectance Model
+    authors: Matusik, Pfister, Brand, McMillan
+    year: 2003
+edges:
+  - rel: validates
+    to: brdf
+    why: measured ground truth to fit analytic models against

@@ -1,0 +1,9 @@
+title: Ray-Triangle Intersection
+cluster: geometry
+summary: >
+  The innermost operation of every ray tracer, so constant factors and
+  numerical robustness here dominate both performance and correctness.
+edges:
+  - rel: requires
+    to: polygon-mesh
+    why: the primitive being intersected

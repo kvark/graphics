@@ -1,0 +1,16 @@
+title: SGGX Microflake Distribution
+cluster: volumetrics
+year: 2015
+summary: >
+  A microflake distribution parameterized by a symmetric matrix, so it
+  stays in the same family under linear transforms and can be filtered and
+  interpolated across levels of detail.
+refs:
+  - title: The SGGX Microflake Distribution
+    authors: Heitz, Dupuy, Crassin, Dachsbacher
+    year: 2015
+    url: https://research.nvidia.com/sites/default/files/pubs/2015-08_The-SGGX-microflake/sggx.pdf
+edges:
+  - rel: specializes
+    to: microflake
+    why: microflake distribution closed under linear transforms

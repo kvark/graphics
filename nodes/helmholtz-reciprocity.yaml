@@ -1,0 +1,11 @@
+title: Helmholtz Reciprocity
+cluster: foundations
+summary: >
+  A physically valid BSDF gives the same value when incoming and outgoing
+  directions are swapped. Bidirectional algorithms depend on it: without
+  it, a path built from the light differs from the same path built from
+  the camera.
+edges:
+  - rel: validates
+    to: bsdf
+    why: swapping the directions must not change the value

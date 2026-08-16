@@ -1,0 +1,16 @@
+title: Statistical Operators Layering
+cluster: materials
+year: 2018
+summary: >
+  Represents each layer's effect as an operator on the mean and variance
+  of a lobe, so light scattering between interfaces is carried through the
+  stack instead of being ignored.
+refs:
+  - title: Efficient Rendering of Layered Materials using an Atomic Decomposition with Statistical Operators
+    authors: Belcour
+    year: 2018
+    url: https://hal.archives-ouvertes.fr/hal-01785457/document
+edges:
+  - rel: corrects
+    to: layering
+    why: scattering between interfaces, tracked as variance

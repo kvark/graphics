@@ -1,0 +1,11 @@
+title: Cascaded Shadow Maps
+cluster: shadows
+aka: [CSM, Parallel-split shadow maps]
+summary: >
+  Splits the view frustum by depth and gives each slice its own shadow
+  map, so texel density roughly tracks screen-space size instead of being
+  wasted on the far distance.
+edges:
+  - rel: corrects
+    to: shadow-mapping
+    why: "one map cannot cover a whole frustum's depth range"

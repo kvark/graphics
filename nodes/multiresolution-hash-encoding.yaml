@@ -1,0 +1,16 @@
+title: Multiresolution Hash Encoding
+cluster: neural
+year: 2022
+summary: >
+  Replaces most of the network's capacity with trainable feature vectors
+  in hash tables at several resolutions, so a tiny MLP suffices and
+  collisions are resolved by the optimizer rather than avoided.
+refs:
+  - title: Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
+    authors: Muller, Evans, Schied, Keller
+    year: 2022
+    url: https://arxiv.org/abs/2201.05989
+edges:
+  - rel: corrects
+    to: nerf
+    why: the deep MLP, not the idea, is what made it slow

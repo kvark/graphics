@@ -1,0 +1,17 @@
+title: BSSRDF
+cluster: materials
+year: 2001
+aka: [Subsurface scattering]
+summary: >
+  Relates light entering at one point to light leaving at another, rather
+  than assuming both happen at the same place. Necessary for skin, marble
+  and milk, where the transport distance is visible at normal viewing
+  scale.
+refs:
+  - title: A Practical Model for Subsurface Light Transport
+    authors: Jensen, Marschner, Levoy, Hanrahan
+    year: 2001
+edges:
+  - rel: extends
+    to: bsdf
+    why: light can leave far from where it entered

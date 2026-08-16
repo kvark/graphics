@@ -1,0 +1,10 @@
+title: Image-Based Lighting
+cluster: real-time-shading
+aka: [IBL, Environment lighting]
+summary: >
+  Uses a captured or rendered environment map as the light source, so that
+  ambient light carries the colour and directionality of a real location.
+edges:
+  - rel: approximates
+    to: rendering-equation
+    why: distant incoming radiance baked into a single map

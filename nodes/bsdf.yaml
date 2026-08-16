@@ -1,0 +1,11 @@
+title: BSDF
+cluster: foundations
+aka: [Bidirectional Scattering Distribution Function]
+summary: >
+  A BRDF and a BTDF taken together, defined over the whole sphere rather
+  than the upper hemisphere, so that one function describes both sides of
+  a surface.
+edges:
+  - rel: extends
+    to: brdf
+    why: covers the transmitted hemisphere as well

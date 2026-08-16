@@ -1,0 +1,16 @@
+title: Height-Correlated Smith
+cluster: materials
+year: 2014
+summary: >
+  Accounts for the fact that a microfacet hidden from the light is likely
+  to be hidden from the view as well, since both depend on the same height
+  field.
+refs:
+  - title: Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs
+    authors: Heitz
+    year: 2014
+    url: https://jcgt.org/published/0003/02/03/paper.pdf
+edges:
+  - rel: corrects
+    to: smith-masking
+    why: incident and exitant masks are related, not independent

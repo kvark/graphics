@@ -1,0 +1,14 @@
+title: Temporal Anti-Aliasing
+cluster: antialiasing
+aka: [TAA]
+summary: >
+  Jitters the projection each frame and blends the reprojected history,
+  giving supersampled quality at one sample per pixel. Now the default,
+  and the source of most complaints about modern image softness.
+edges:
+  - rel: specializes
+    to: antialiasing-over-time
+    why: jitters the subpixel offset every frame
+  - rel: requires
+    to: temporal-reprojection
+    why: the history must be aligned to this frame

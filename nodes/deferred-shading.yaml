@@ -1,0 +1,11 @@
+title: Deferred Shading
+cluster: real-time-shading
+summary: >
+  Rasterize surface attributes into a G-buffer first, then light every
+  visible pixel exactly once in a full-screen pass. Decouples lighting
+  cost from scene complexity, at the price of bandwidth and awkward
+  transparency.
+edges:
+  - rel: alternative-to
+    to: forward-shading
+    why: shades once per pixel, not once per overlapping fragment

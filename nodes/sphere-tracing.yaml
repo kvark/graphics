@@ -1,0 +1,15 @@
+title: Sphere Tracing
+cluster: geometry
+year: 1996
+summary: >
+  Marches along a ray by exactly the distance value at each point, which
+  can never overshoot the surface. Renders implicit geometry without ever
+  tessellating it.
+refs:
+  - title: "Sphere Tracing: A Geometric Method for the Antialiased Ray Tracing of Implicit Surfaces"
+    authors: Hart
+    year: 1996
+edges:
+  - rel: requires
+    to: signed-distance-field
+    why: the step length is the distance value itself
