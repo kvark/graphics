@@ -1,0 +1,15 @@
+title: Mipmapping
+cluster: antialiasing
+year: 1983
+summary: >
+  Stores a prefiltered pyramid and picks the level matching the screen-
+  space footprint, turning texture minification from a sampling problem
+  into a lookup.
+refs:
+  - title: Pyramidal Parametrics
+    authors: Williams
+    year: 1983
+edges:
+  - rel: corrects
+    to: texture-mapping
+    why: minified textures alias badly without prefiltering

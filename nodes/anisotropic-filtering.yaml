@@ -1,0 +1,9 @@
+title: Anisotropic Filtering
+cluster: antialiasing
+summary: >
+  Takes several mip samples along the direction the footprint is
+  stretched, instead of choosing one level from its widest extent.
+edges:
+  - rel: corrects
+    to: mipmapping
+    why: one isotropic level overblurs surfaces seen at an angle

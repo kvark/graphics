@@ -1,0 +1,8 @@
+title: Diffuse Reflection
+cluster: materials
+summary: >
+  Light that enters a surface, scatters under it and re-emerges in a broad
+  distribution largely independent of the incoming direction.
+edges:
+  - rel: part-of
+    to: reflection

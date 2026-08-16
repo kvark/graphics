@@ -1,0 +1,15 @@
+title: Clustered / Tiled Shading
+cluster: real-time-shading
+year: 2012
+summary: >
+  Bins lights into screen tiles or view-space froxels so each pixel
+  iterates only the lights that can reach it, making thousands of local
+  lights affordable.
+refs:
+  - title: Clustered Deferred and Forward Shading
+    authors: Olsson, Billeter, Assarsson
+    year: 2012
+edges:
+  - rel: corrects
+    to: deferred-shading
+    why: every light otherwise touches every pixel it covers

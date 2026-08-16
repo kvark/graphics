@@ -1,0 +1,16 @@
+title: Linearly Transformed Cosines
+cluster: real-time-shading
+year: 2016
+aka: [LTC]
+summary: >
+  Represents a GGX lobe as a linear transform of a clamped cosine, and
+  cosines can be integrated over a polygon in closed form. Turns area-
+  light shading into an analytic evaluation.
+refs:
+  - title: Real-Time Polygonal-Light Shading with Linearly Transformed Cosines
+    authors: Heitz, Dupuy, Hill, Neubelt
+    year: 2016
+edges:
+  - rel: approximates
+    to: microfacet-model
+    why: makes area-light integrals closed form

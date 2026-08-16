@@ -1,0 +1,15 @@
+title: Blinn-Phong
+cluster: materials
+year: 1977
+summary: >
+  Replaces Phong's reflection vector with the half vector between light
+  and view. Cheaper, and the resulting highlight elongates at grazing
+  angles the way real ones do.
+refs:
+  - title: Models of Light Reflection for Computer Synthesized Pictures
+    authors: Blinn
+    year: 1977
+edges:
+  - rel: corrects
+    to: phong
+    why: the half vector is cheaper and behaves at grazing angles

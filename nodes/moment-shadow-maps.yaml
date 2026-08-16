@@ -1,0 +1,15 @@
+title: Moment Shadow Maps
+cluster: shadows
+year: 2015
+summary: >
+  Keeps four moments of the depth distribution rather than two, which
+  tightens the bound enough to suppress the light leaking that two moments
+  cannot represent.
+refs:
+  - title: Moment Shadow Mapping
+    authors: Peters, Klein
+    year: 2015
+edges:
+  - rel: corrects
+    to: variance-shadow-maps
+    why: two moments light-leak between separated occluders

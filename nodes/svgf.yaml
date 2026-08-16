@@ -1,0 +1,19 @@
+title: Spatiotemporal Variance-Guided Filtering
+cluster: denoising
+year: 2017
+aka: [SVGF]
+summary: >
+  Estimates per-pixel variance from the temporal history and drives the
+  spatial filter width from it, so converged regions stay sharp while
+  noisy ones are blurred hard.
+refs:
+  - title: "Spatiotemporal Variance-Guided Filtering: Real-Time Reconstruction for Path-Traced Global Illumination"
+    authors: Schied et al.
+    year: 2017
+edges:
+  - rel: extends
+    to: a-trous-filter
+    why: drives filter width from measured variance
+  - rel: requires
+    to: temporal-reprojection
+    why: the variance estimate comes from accumulated history

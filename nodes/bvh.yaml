@@ -1,0 +1,11 @@
+title: Bounding Volume Hierarchy
+cluster: geometry
+aka: [BVH]
+summary: >
+  A tree of nested bounding boxes over primitives. Handles unevenly
+  distributed geometry gracefully, refits cheaply under animation, and is
+  what ray tracing hardware implements.
+edges:
+  - rel: corrects
+    to: whitted-ray-tracing
+    why: testing every primitive per ray is linear in scene size

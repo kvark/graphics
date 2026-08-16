@@ -1,0 +1,10 @@
+title: Irradiance Probes
+cluster: real-time-shading
+summary: >
+  Samples indirect irradiance at a grid of points and interpolates between
+  them for dynamic objects, decoupling indirect lighting cost from the
+  number of things being lit.
+edges:
+  - rel: approximates
+    to: irradiance-caching
+    why: a fixed grid instead of adaptively placed samples

@@ -1,0 +1,11 @@
+title: Quasi-Monte Carlo
+cluster: sampling
+aka: [QMC, Low-discrepancy sampling]
+summary: >
+  Replaces random points with deterministic low-discrepancy sequences that
+  cover the domain more evenly, improving the convergence rate on smooth
+  integrands beyond the inverse square root.
+edges:
+  - rel: alternative-to
+    to: monte-carlo-integration
+    why: deterministic even coverage converges faster

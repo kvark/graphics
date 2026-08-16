@@ -1,0 +1,10 @@
+title: Firefly Clamping
+cluster: denoising
+summary: >
+  Caps individual sample contributions at a threshold. Biased,
+  unapologetically so: a single sample thousands of times brighter than
+  its neighbours will not average out in any practical sample count.
+edges:
+  - rel: corrects
+    to: monte-carlo-integration
+    why: rare huge samples never average away in practice

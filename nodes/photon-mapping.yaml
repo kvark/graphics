@@ -1,0 +1,18 @@
+title: Photon Mapping
+cluster: light-transport
+year: 1996
+summary: >
+  Trace particles from the lights, store their hits in a spatial
+  structure, then estimate radiance at camera hit points by density
+  estimation over nearby photons. Biased but consistent.
+refs:
+  - title: Global Illumination using Photon Maps
+    authors: Jensen
+    year: 1996
+edges:
+  - rel: corrects
+    to: path-tracing
+    why: caustics through glass essentially never converge
+  - rel: alternative-to
+    to: bidirectional-path-tracing
+    why: caches light subpaths instead of connecting to them

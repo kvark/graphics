@@ -1,0 +1,15 @@
+title: Linear BVH
+cluster: geometry
+year: 2012
+summary: >
+  Sorts primitives along a Morton curve and builds the hierarchy from the
+  resulting bit patterns, which parallelizes perfectly and rebuilds in
+  milliseconds at some cost in tree quality.
+refs:
+  - title: Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees
+    authors: Karras
+    year: 2012
+edges:
+  - rel: approximates
+    to: surface-area-heuristic
+    why: Morton order instead of a cost-driven split search

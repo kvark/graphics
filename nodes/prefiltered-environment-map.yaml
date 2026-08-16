@@ -1,0 +1,10 @@
+title: Prefiltered Environment Map
+cluster: real-time-shading
+summary: >
+  Convolves the environment map against the BRDF lobe ahead of time,
+  storing successively rougher versions in mip levels so a runtime lookup
+  replaces a runtime integral.
+edges:
+  - rel: approximates
+    to: image-based-lighting
+    why: prefilter per roughness instead of sampling at runtime

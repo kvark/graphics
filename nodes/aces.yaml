@@ -1,0 +1,10 @@
+title: ACES
+cluster: color
+summary: >
+  A standardized colour management pipeline with defined working spaces
+  and a reference rendering transform, so that the same render matches
+  across displays and facilities.
+edges:
+  - rel: extends
+    to: filmic-tonemapping
+    why: a whole managed pipeline, not just an output curve

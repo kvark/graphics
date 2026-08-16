@@ -1,0 +1,22 @@
+title: Vertex Connection and Merging
+cluster: light-transport
+year: 2012
+aka: [VCM, UPS]
+summary: >
+  Treats photon merging as just another sampling technique alongside
+  bidirectional connection, and MIS-weights the two together, so one
+  integrator handles both diffuse interreflection and caustics.
+refs:
+  - title: Light Transport Simulation with Vertex Connection and Merging
+    authors: Georgiev, Krivanek, Davidovic, Slusallek
+    year: 2012
+  - title: Progressive Expectation-Maximization for Hierarchical Volumetric Photon Mapping
+    authors: Hachisuka, Pantaleoni, Jensen
+    year: 2012
+edges:
+  - rel: extends
+    to: bidirectional-path-tracing
+    why: adds photon merging as an extra connection strategy
+  - rel: requires
+    to: multiple-importance-sampling
+    why: connection and merging must be weighted against each other

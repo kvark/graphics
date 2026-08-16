@@ -1,0 +1,19 @@
+title: Radiosity
+cluster: light-transport
+year: 1984
+summary: >
+  Discretizes the scene into patches and solves a linear system of form
+  factors for diffuse interreflection. View-independent, so the solution
+  can be walked through in real time, but it cannot represent specular
+  transport.
+refs:
+  - title: Modeling the Interaction of Light Between Diffuse Surfaces
+    authors: Goral, Torrance, Greenberg, Battaile
+    year: 1984
+edges:
+  - rel: specializes
+    to: rendering-equation
+    why: solves the diffuse-only case as a linear system
+  - rel: alternative-to
+    to: path-tracing
+    why: view-independent solve instead of per-pixel sampling

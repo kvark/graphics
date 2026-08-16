@@ -1,0 +1,16 @@
+title: Normalized Diffusion
+cluster: materials
+year: 2015
+aka: [Burley diffusion profile]
+summary: >
+  Replaces the dipole's physically derived profile with a two-exponential
+  curve fitted directly to Monte Carlo ground truth, which matches
+  measured skin far better near the entry point.
+refs:
+  - title: Approximate Reflectance Profiles for Efficient Subsurface Scattering
+    authors: Christensen, Burley
+    year: 2015
+edges:
+  - rel: corrects
+    to: dipole-diffusion
+    why: the dipole fits poorly close to the entry point

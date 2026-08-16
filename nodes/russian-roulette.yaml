@@ -1,0 +1,10 @@
+title: Russian Roulette
+cluster: light-transport
+summary: >
+  Terminate a path with some probability and divide the survivors by the
+  survival probability. Bounds path length without the bias that a hard
+  depth cutoff introduces.
+edges:
+  - rel: corrects
+    to: path-tracing
+    why: cutting paths at a fixed depth loses energy

@@ -1,0 +1,18 @@
+title: Path Guiding
+cluster: light-transport
+year: 2017
+summary: >
+  Learns an approximation of the incident radiance distribution during
+  rendering and samples directions from it, so paths head toward light
+  rather than being drawn from the BSDF alone.
+refs:
+  - title: Practical Path Guiding for Efficient Light-Transport Simulation
+    authors: Muller, Gross, Novak
+    year: 2017
+edges:
+  - rel: corrects
+    to: path-tracing
+    why: BSDF sampling ignores where the light actually is
+  - rel: requires
+    to: importance-sampling
+    why: the learned distribution is used as the sampling pdf

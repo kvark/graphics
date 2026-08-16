@@ -1,0 +1,15 @@
+title: Horizon-Based Ambient Occlusion
+cluster: real-time-shading
+year: 2008
+summary: >
+  Marches the depth buffer to find the horizon angle in several directions
+  and integrates the unoccluded wedge, which is a defensible approximation
+  of the occlusion integral rather than a sample count.
+refs:
+  - title: Image-Space Horizon-Based Ambient Occlusion
+    authors: Bavoil, Sainz, Dimitrov
+    year: 2008
+edges:
+  - rel: corrects
+    to: ssao
+    why: point sampling ignores the actual horizon of the surface

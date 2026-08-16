@@ -1,0 +1,16 @@
+title: Resampled Importance Sampling
+cluster: light-transport
+year: 2005
+aka: [RIS]
+summary: >
+  Draw a pool of cheap candidates, then pick one from the pool with
+  probability proportional to a better target function. Approximates
+  sampling from a distribution you cannot sample from directly.
+refs:
+  - title: Importance Resampling for Global Illumination
+    authors: Talbot, Cline, Egbert
+    year: 2005
+edges:
+  - rel: extends
+    to: importance-sampling
+    why: approximates a pdf that cannot be sampled directly

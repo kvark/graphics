@@ -1,0 +1,15 @@
+title: Dipole Diffusion Approximation
+cluster: materials
+year: 2001
+summary: >
+  Approximates subsurface transport with a pair of virtual light sources
+  straddling the surface, reducing a volumetric simulation to a closed-
+  form falloff.
+refs:
+  - title: A Practical Model for Subsurface Light Transport
+    authors: Jensen, Marschner, Levoy, Hanrahan
+    year: 2001
+edges:
+  - rel: approximates
+    to: bssrdf
+    why: a closed-form falloff instead of volumetric transport

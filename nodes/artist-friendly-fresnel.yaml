@@ -1,0 +1,16 @@
+title: Artist-Friendly Metallic Fresnel
+cluster: materials
+year: 2014
+summary: >
+  Reparameterizes conductor Fresnel from complex indices of refraction,
+  which nobody can author, into reflectivity and edge tint, which can be
+  picked from a colour swatch.
+refs:
+  - title: Artist Friendly Metallic Fresnel
+    authors: Gulbrandsen
+    year: 2014
+    url: https://jcgt.org/published/0003/04/03/paper.pdf
+edges:
+  - rel: corrects
+    to: fresnel
+    why: reflectivity and edge tint, not unauthorable complex IOR

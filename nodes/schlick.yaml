@@ -1,0 +1,16 @@
+title: "Schlick's Approximation"
+cluster: materials
+year: 1994
+summary: >
+  Approximates Fresnel reflectance as a fifth-power interpolation between
+  normal incidence reflectance and one. Accurate enough for dielectrics
+  and cheap enough for a pixel shader.
+refs:
+  - title: An Inexpensive BRDF Model for Physically-based Rendering
+    authors: Schlick
+    year: 1994
+    url: http://igorsklyar.com/system/documents/papers/28/Schlick94.pdf
+edges:
+  - rel: approximates
+    to: fresnel
+    why: a fifth-power curve instead of the full equations

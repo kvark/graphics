@@ -1,0 +1,10 @@
+title: Sobol Sequence
+cluster: sampling
+summary: >
+  A base-two low-discrepancy construction with good high-dimensional
+  properties and very fast incremental evaluation, which is why renderers
+  reach for it first.
+edges:
+  - rel: specializes
+    to: quasi-monte-carlo
+    why: base-2 construction, cheap to evaluate incrementally

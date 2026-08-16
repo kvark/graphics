@@ -1,0 +1,15 @@
+title: Henyey-Greenstein Phase Function
+cluster: volumetrics
+year: 1941
+summary: >
+  A one-parameter phase function, originally fitted to interstellar dust,
+  whose single anisotropy value spans strong forward through isotropic to
+  backward scattering. Cheap to evaluate and to sample.
+refs:
+  - title: Diffuse Radiation in the Galaxy
+    authors: Henyey, Greenstein
+    year: 1941
+edges:
+  - rel: specializes
+    to: phase-function
+    why: one anisotropy parameter spans forward to backward

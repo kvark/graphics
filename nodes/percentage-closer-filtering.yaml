@@ -1,0 +1,16 @@
+title: Percentage-Closer Filtering
+cluster: shadows
+year: 1987
+aka: [PCF]
+summary: >
+  Takes several depth comparisons across the shadow map footprint and
+  averages the binary results. Filtering the comparisons rather than the
+  depths is the key: averaging depths is meaningless.
+refs:
+  - title: Rendering Antialiased Shadows with Depth Maps
+    authors: Reeves, Salesin, Cook
+    year: 1987
+edges:
+  - rel: corrects
+    to: shadow-mapping
+    why: a single depth compare gives hard, aliased edges

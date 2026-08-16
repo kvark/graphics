@@ -1,0 +1,10 @@
+title: Importance Sampling
+cluster: sampling
+summary: >
+  Draw samples proportional to how much they contribute and divide by that
+  density. Same expected value, far less variance, and the foundation
+  every practical estimator in rendering is built on.
+edges:
+  - rel: corrects
+    to: monte-carlo-integration
+    why: uniform samples are wasted where the integrand is small

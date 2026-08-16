@@ -1,0 +1,19 @@
+title: ReSTIR
+cluster: light-transport
+year: 2020
+aka: [Spatiotemporal reservoir resampling]
+summary: >
+  Keeps a small reservoir of chosen light samples per pixel and repeatedly
+  resamples it against neighbours and the previous frame, so each pixel
+  effectively inherits thousands of candidates for a handful of rays.
+refs:
+  - title: Spatiotemporal Reservoir Resampling for Real-Time Ray Tracing with Dynamic Direct Lighting
+    authors: Bitterli, Wyman, Pharr, Rayfield, Jarosz, Novak
+    year: 2020
+edges:
+  - rel: specializes
+    to: resampled-importance-sampling
+    why: reuses candidate pools across pixels and frames
+  - rel: requires
+    to: temporal-reprojection
+    why: "the previous frame's reservoir must be located"

@@ -1,0 +1,15 @@
+title: ReSTIR GI
+cluster: light-transport
+year: 2021
+summary: >
+  Applies reservoir resampling to indirect paths by storing sample points
+  and their outgoing radiance, extending the technique past direct
+  lighting.
+refs:
+  - title: "ReSTIR GI: Path Resampling for Real-Time Path Tracing"
+    authors: Ouyang, Liu, Kettunen, Pharr, Pantaleoni
+    year: 2021
+edges:
+  - rel: extends
+    to: restir
+    why: reuses indirect paths, not just direct light samples

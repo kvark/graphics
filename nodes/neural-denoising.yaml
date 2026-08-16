@@ -1,0 +1,16 @@
+title: Learned Denoising
+cluster: denoising
+year: 2017
+aka: [OIDN, OptiX denoiser]
+summary: >
+  Trains a network on noisy and converged pairs, taking auxiliary buffers
+  such as albedo and normal as input. Reconstructs detail that hand-tuned
+  filters smooth away, and can hallucinate detail that was never sampled.
+refs:
+  - title: Interactive Reconstruction of Monte Carlo Image Sequences using a Recurrent Denoising Autoencoder
+    authors: Chaitanya et al.
+    year: 2017
+edges:
+  - rel: alternative-to
+    to: svgf
+    why: learns the filter from data instead of hand-tuned weights

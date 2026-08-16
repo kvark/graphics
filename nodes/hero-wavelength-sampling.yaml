@@ -1,0 +1,15 @@
+title: Hero Wavelength Spectral Sampling
+cluster: color
+year: 2014
+summary: >
+  Carries several correlated wavelengths per path, one chosen and the rest
+  derived from it, which removes most of the colour noise that sampling a
+  single wavelength per path produces.
+refs:
+  - title: Hero Wavelength Spectral Sampling
+    authors: Wilkie, Nawaz, Droske, Weidlich, Hanika
+    year: 2014
+edges:
+  - rel: corrects
+    to: spectral-rendering
+    why: one wavelength per path is unusably noisy

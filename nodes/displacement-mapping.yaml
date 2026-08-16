@@ -1,0 +1,15 @@
+title: Displacement Mapping
+cluster: geometry
+year: 1984
+summary: >
+  Moves surface points along the normal by a stored height, producing
+  detail that occludes itself and changes the silhouette because the
+  geometry really moved.
+refs:
+  - title: Generalized Stochastic Subdivision
+    authors: Cook
+    year: 1984
+edges:
+  - rel: extends
+    to: texture-mapping
+    why: the texture moves geometry rather than shading it

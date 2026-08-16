@@ -1,0 +1,15 @@
+title: Screen-Space Ambient Occlusion
+cluster: real-time-shading
+year: 2007
+summary: >
+  Estimates occlusion by sampling the depth buffer around each pixel,
+  making ambient occlusion fully dynamic and independent of scene
+  complexity.
+refs:
+  - title: "Finding Next Gen: CryEngine 2"
+    authors: Mittring
+    year: 2007
+edges:
+  - rel: specializes
+    to: ambient-occlusion
+    why: estimated from the depth buffer at runtime

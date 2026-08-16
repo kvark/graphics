@@ -1,0 +1,18 @@
+title: Disney Principled BRDF
+cluster: materials
+year: 2012
+summary: >
+  A single artist-facing parameter set, all normalized to zero-to-one,
+  fitted against measured data. Its influence is mostly social: it made
+  one vocabulary of material parameters near-universal across renderers.
+refs:
+  - title: Physically Based Shading at Disney
+    authors: Burley
+    year: 2012
+edges:
+  - rel: specializes
+    to: microfacet-model
+    why: wraps it in parameters artists can actually author
+  - rel: requires
+    to: merl-database
+    why: the lobes were fitted against measured materials

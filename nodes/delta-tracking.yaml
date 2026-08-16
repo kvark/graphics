@@ -1,0 +1,12 @@
+title: Delta Tracking
+cluster: volumetrics
+aka: [Woodcock tracking]
+summary: >
+  Fills a heterogeneous medium with fictitious matter up to a uniform
+  majorant so distances can be sampled analytically, then randomly rejects
+  the fictitious collisions. Unbiased with no need to invert the optical
+  depth.
+edges:
+  - rel: corrects
+    to: volumetric-path-tracing
+    why: heterogeneous media have no closed-form transmittance

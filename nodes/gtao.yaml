@@ -1,0 +1,16 @@
+title: Ground-Truth Ambient Occlusion
+cluster: real-time-shading
+year: 2016
+aka: [GTAO]
+summary: >
+  Reformulates horizon-based occlusion with the correct cosine weighting
+  and normalization so it converges to reference ambient occlusion instead
+  of a darker look that needs artist compensation.
+refs:
+  - title: Practical Real-Time Strategies for Accurate Indirect Occlusion
+    authors: Jimenez, Wu, Pesce, Jarabo
+    year: 2016
+edges:
+  - rel: corrects
+    to: hbao
+    why: earlier estimators were never normalized to ground truth

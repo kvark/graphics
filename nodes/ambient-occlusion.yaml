@@ -1,0 +1,10 @@
+title: Ambient Occlusion
+cluster: real-time-shading
+summary: >
+  A scalar factor for how much of the hemisphere above a point is blocked
+  by nearby geometry, multiplied into ambient light. Not physically
+  justified, but it restores the contact darkening flat ambient loses.
+edges:
+  - rel: approximates
+    to: rendering-equation
+    why: one visibility scalar instead of an indirect bounce

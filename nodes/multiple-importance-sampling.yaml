@@ -1,0 +1,16 @@
+title: Multiple Importance Sampling
+cluster: light-transport
+year: 1995
+aka: [MIS, Balance heuristic]
+summary: >
+  Combine several sampling strategies by weighting each sample according
+  to the probability every strategy would have had of generating it. The
+  balance heuristic makes the combination provably near-optimal.
+refs:
+  - title: Optimally Combining Sampling Techniques for Monte Carlo Rendering
+    authors: Veach, Guibas
+    year: 1995
+edges:
+  - rel: corrects
+    to: next-event-estimation
+    why: light sampling alone is terrible on near-specular surfaces

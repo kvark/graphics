@@ -1,0 +1,15 @@
+title: Ratio Tracking
+cluster: volumetrics
+year: 2014
+summary: >
+  Instead of accepting or rejecting each collision outright, accumulates a
+  continuous transmittance ratio, which removes the binary outcome that
+  makes delta tracking noisy in optically thin media.
+refs:
+  - title: Residual Ratio Tracking for Estimating Attenuation in Participating Media
+    authors: Novak, Selle, Jarosz
+    year: 2014
+edges:
+  - rel: corrects
+    to: delta-tracking
+    why: the binary accept/reject outcome is high variance

@@ -1,0 +1,11 @@
+title: Temporal Upscaling
+cluster: antialiasing
+aka: [DLSS, FSR, TSR]
+summary: >
+  Renders below display resolution and reconstructs the full frame from
+  jittered history, treating anti-aliasing and upscaling as the same
+  reconstruction problem.
+edges:
+  - rel: extends
+    to: taa
+    why: the same history also fills in resolution, not just edges

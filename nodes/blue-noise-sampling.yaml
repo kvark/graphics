@@ -1,0 +1,15 @@
+title: Blue-Noise Error Distribution
+cluster: sampling
+year: 2019
+summary: >
+  Chooses per-pixel sample seeds so that the residual error is high-
+  frequency across the screen. The error is not smaller, but the eye and
+  any subsequent filter both handle it far better than white noise.
+refs:
+  - title: A Low-Discrepancy Sampler that Distributes Monte Carlo Errors as a Blue Noise in Screen Space
+    authors: Heitz, Belcour, Chizhov, Lucas, Iehl, Ostromoukhov
+    year: 2019
+edges:
+  - rel: corrects
+    to: monte-carlo-integration
+    why: same error, redistributed to where the eye sees it least

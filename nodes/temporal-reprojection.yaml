@@ -1,0 +1,9 @@
+title: Temporal Reprojection
+cluster: antialiasing
+summary: >
+  Uses per-pixel motion vectors to find where this pixel's surface was in
+  the previous frame, making last frame's result available as an input to
+  this one.
+edges:
+  - rel: part-of
+    to: antialiasing-over-time

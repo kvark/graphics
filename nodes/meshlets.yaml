@@ -1,0 +1,10 @@
+title: Meshlets and Mesh Shaders
+cluster: geometry
+summary: >
+  Splits a mesh into small vertex-and-triangle clusters that can be culled
+  and dispatched independently, replacing the fixed vertex-fetch pipeline
+  with a programmable one.
+edges:
+  - rel: extends
+    to: rasterization
+    why: culls per cluster instead of per triangle or per object

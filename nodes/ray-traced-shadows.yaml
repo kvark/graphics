@@ -1,0 +1,13 @@
+title: Ray-Traced Shadows
+cluster: shadows
+summary: >
+  Traces a ray toward the light per shaded point. No resolution, bias or
+  cascade artifacts at all, replaced by sampling noise and a per-pixel
+  tracing cost.
+edges:
+  - rel: alternative-to
+    to: shadow-mapping
+    why: no resolution or bias artifacts, but noise instead
+  - rel: specializes
+    to: next-event-estimation
+    why: the visibility term of a direct lighting sample

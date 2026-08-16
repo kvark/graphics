@@ -1,0 +1,18 @@
+title: Split-Sum Approximation
+cluster: real-time-shading
+year: 2013
+summary: >
+  Factors the specular IBL integral into a prefiltered radiance lookup
+  times a precomputed BRDF response table. Both halves fit in textures,
+  which is what made physically based specular affordable in real time.
+refs:
+  - title: Real Shading in Unreal Engine 4
+    authors: Karis
+    year: 2013
+edges:
+  - rel: approximates
+    to: microfacet-model
+    why: splits the integral into two precomputable factors
+  - rel: requires
+    to: prefiltered-environment-map
+    why: one of the two factors is the prefiltered map

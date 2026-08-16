@@ -1,0 +1,15 @@
+title: Marching Cubes
+cluster: geometry
+year: 1987
+summary: >
+  Extracts a triangle mesh from a scalar field by table lookup on the sign
+  pattern at each cell's corners. The reason volume data can be handed to
+  ordinary triangle pipelines.
+refs:
+  - title: "Marching Cubes: A High Resolution 3D Surface Construction Algorithm"
+    authors: Lorensen, Cline
+    year: 1987
+edges:
+  - rel: alternative-to
+    to: sphere-tracing
+    why: converts the field to triangles instead of tracing it

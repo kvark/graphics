@@ -1,0 +1,9 @@
+title: Polygon Mesh
+cluster: geometry
+summary: >
+  Vertices, edges and faces. Explicit, cheap to rasterize and to
+  intersect, and the representation essentially all hardware is built
+  around.
+edges:
+  - rel: part-of
+    to: surface-representation

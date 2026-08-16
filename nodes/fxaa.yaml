@@ -1,0 +1,16 @@
+title: Fast Approximate Anti-Aliasing
+cluster: antialiasing
+year: 2009
+aka: [FXAA]
+summary: >
+  A single-pass luminance-gradient filter tuned to be almost free. Blurs
+  some genuine detail, and shipped nearly everywhere because it needs
+  nothing from the renderer but a finished frame.
+refs:
+  - title: FXAA
+    authors: Lottes
+    year: 2009
+edges:
+  - rel: approximates
+    to: mlaa
+    why: one heuristic pass instead of real pattern classification

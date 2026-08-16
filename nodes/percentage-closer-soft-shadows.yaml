@@ -1,0 +1,15 @@
+title: Percentage-Closer Soft Shadows
+cluster: shadows
+year: 2005
+aka: [PCSS]
+summary: >
+  Searches for blockers first and sizes the PCF kernel by how far away
+  they are, so shadows sharpen near contact and soften with distance.
+refs:
+  - title: Percentage-Closer Soft Shadows
+    authors: Fernando
+    year: 2005
+edges:
+  - rel: extends
+    to: percentage-closer-filtering
+    why: kernel width from blocker distance gives contact hardening

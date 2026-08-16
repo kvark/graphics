@@ -1,0 +1,15 @@
+title: Dual Contouring
+cluster: geometry
+year: 2002
+summary: >
+  Places one vertex per cell by solving a least-squares fit to the surface
+  normals it intersects, which lets it reproduce sharp creases that
+  corner-sign tables average away.
+refs:
+  - title: Dual Contouring of Hermite Data
+    authors: Ju, Losasso, Schaefer, Warren
+    year: 2002
+edges:
+  - rel: corrects
+    to: marching-cubes
+    why: corner sign tables cannot reproduce sharp edges

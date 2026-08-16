@@ -1,0 +1,7 @@
+title: Scattering
+cluster: foundations
+summary: >
+  Light redirected inside a medium rather than at a surface boundary.
+edges:
+  - rel: part-of
+    to: light-transport

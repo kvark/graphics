@@ -1,0 +1,15 @@
+title: Watertight Ray-Triangle Intersection
+cluster: geometry
+year: 2013
+summary: >
+  Reorders the arithmetic so that a ray crossing an edge shared by two
+  triangles is guaranteed to hit exactly one of them, closing the pinhole
+  leaks that rounding otherwise produces.
+refs:
+  - title: Watertight Ray/Triangle Intersection
+    authors: Woop, Benthin, Wald
+    year: 2013
+edges:
+  - rel: corrects
+    to: moller-trumbore
+    why: rounding lets rays leak through shared edges

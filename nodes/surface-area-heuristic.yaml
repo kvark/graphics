@@ -1,0 +1,16 @@
+title: Surface Area Heuristic
+cluster: geometry
+year: 1990
+aka: [SAH]
+summary: >
+  Chooses each split by estimating traversal cost from the probability a
+  random ray hits each child, which is proportional to its surface area.
+  Still the quality baseline for acceleration structure builds.
+refs:
+  - title: Heuristics for Ray Tracing Using Space Subdivision
+    authors: MacDonald, Booth
+    year: 1990
+edges:
+  - rel: corrects
+    to: bvh
+    why: median splits ignore the actual cost of traversal

@@ -1,0 +1,16 @@
+title: Smith Masking-Shadowing
+cluster: materials
+year: 1967
+summary: >
+  Derives the fraction of microfacets visible from a given direction from
+  the normal distribution itself, rather than being an independent
+  invented function. Consistency with D is what makes it the standard
+  choice.
+refs:
+  - title: Geometrical Shadowing of a Random Rough Surface
+    authors: Smith
+    year: 1967
+    url: https://ieeexplore.ieee.org/document/1138991
+edges:
+  - rel: part-of
+    to: microfacet-model

@@ -1,0 +1,18 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml
+      # Fails on unknown relations, edges pointing at missing nodes, a `why`
+      # missing where one is required, or a README that was not regenerated.
+      - run: python3 tools/build.py --check

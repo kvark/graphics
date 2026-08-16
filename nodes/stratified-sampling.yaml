@@ -1,0 +1,10 @@
+title: Stratified Sampling
+cluster: sampling
+summary: >
+  Partition the domain and take one sample per cell, so samples cannot
+  clump. Cheap, and effective in low dimensions before the number of
+  strata explodes.
+edges:
+  - rel: corrects
+    to: monte-carlo-integration
+    why: independent random samples clump and leave gaps

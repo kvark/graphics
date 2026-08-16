@@ -1,0 +1,11 @@
+title: Supersampling
+cluster: antialiasing
+aka: [SSAA]
+summary: >
+  Render at higher resolution and downsample. Correct by construction, and
+  linearly expensive in both shading and bandwidth, which is why
+  everything below exists.
+edges:
+  - rel: corrects
+    to: rasterization
+    why: point-sampled coverage aliases on every edge

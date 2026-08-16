@@ -1,0 +1,16 @@
+title: Plenoxels
+cluster: neural
+year: 2022
+summary: >
+  Optimizes a sparse voxel grid of spherical harmonic coefficients with no
+  network at all, matching NeRF quality and demonstrating that the neural
+  part was never the essential ingredient.
+refs:
+  - title: "Plenoxels: Radiance Fields without Neural Networks"
+    authors: Fridovich-Keil, Yu, Tancik, Chen, Recht, Kanazawa
+    year: 2022
+    url: https://arxiv.org/abs/2112.05131
+edges:
+  - rel: corrects
+    to: nerf
+    why: a sparse grid works too; the network was not the point

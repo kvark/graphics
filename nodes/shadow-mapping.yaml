@@ -1,0 +1,16 @@
+title: Shadow Mapping
+cluster: shadows
+year: 1978
+summary: >
+  Renders depth from the light's point of view, then compares each shaded
+  point against it. Image-based, so cost is independent of geometric
+  complexity, and every artifact it has traces back to that finite
+  resolution.
+refs:
+  - title: Casting Curved Shadows on Curved Surfaces
+    authors: Williams
+    year: 1978
+edges:
+  - rel: requires
+    to: rasterization
+    why: the depth image comes from an ordinary raster pass

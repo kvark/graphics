@@ -1,0 +1,20 @@
+title: GGX / Trowbridge-Reitz
+cluster: materials
+year: 2007
+aka: [Trowbridge-Reitz, GTR2]
+summary: >
+  A microfacet normal distribution with a much longer tail than Beckmann.
+  The tail is the whole point: it reproduces the soft, wide falloff around
+  highlights that measured materials show and Beckmann clips off.
+refs:
+  - title: Microfacet Models for Refraction through Rough Surfaces
+    authors: Walter, Marschner, Li, Torrance
+    year: 2007
+    url: http://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf
+edges:
+  - rel: specializes
+    to: microfacet-model
+    why: supplies a long-tailed slope distribution as D
+  - rel: alternative-to
+    to: beckmann
+    why: longer tail fits measured materials better

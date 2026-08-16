@@ -1,0 +1,17 @@
+title: Neural Radiance Fields
+cluster: neural
+year: 2020
+aka: [NeRF]
+summary: >
+  Fits an MLP mapping position and direction to density and colour, then
+  renders it by volumetric ray marching. Optimizing a radiance field
+  directly against photographs sidestepped reconstruction entirely.
+refs:
+  - title: "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"
+    authors: Mildenhall, Srinivasan, Tancik, Barron, Ramamoorthi, Ng
+    year: 2020
+    url: https://arxiv.org/abs/2003.08934
+edges:
+  - rel: specializes
+    to: radiative-transfer-equation
+    why: an MLP supplies density and colour along the ray

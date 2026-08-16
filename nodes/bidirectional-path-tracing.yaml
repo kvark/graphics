@@ -1,0 +1,22 @@
+title: Bidirectional Path Tracing
+cluster: light-transport
+year: 1993
+aka: [BDPT]
+summary: >
+  Trace a subpath from the camera and another from a light, then connect
+  every pair of vertices. Finds paths that neither direction would find
+  alone, such as a room lit only through a narrow doorway.
+refs:
+  - title: Bi-Directional Path Tracing
+    authors: Lafortune, Willems
+    year: 1993
+  - title: Bidirectional Estimators for Light Transport
+    authors: Veach, Guibas
+    year: 1994
+edges:
+  - rel: extends
+    to: path-tracing
+    why: also grows a subpath from the light side
+  - rel: requires
+    to: multiple-importance-sampling
+    why: the same path is built many ways and must be weighted

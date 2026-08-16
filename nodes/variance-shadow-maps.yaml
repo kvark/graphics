@@ -1,0 +1,16 @@
+title: Variance Shadow Maps
+cluster: shadows
+year: 2006
+aka: [VSM]
+summary: >
+  Stores depth and squared depth so that Chebyshev's inequality bounds the
+  occluded fraction. The map becomes linearly filterable, so it can be
+  blurred and mipmapped like an ordinary texture.
+refs:
+  - title: Variance Shadow Maps
+    authors: Donnelly, Lauritzen
+    year: 2006
+edges:
+  - rel: corrects
+    to: percentage-closer-filtering
+    why: PCF cost grows with filter width; this prefilters
