@@ -5,6 +5,7 @@ the schema lives in exactly one place.
 """
 
 import re
+import textwrap
 from pathlib import Path
 
 import yaml
@@ -133,33 +134,32 @@ def members_of(nodes, cluster_id):
     return sorted(nid for nid, n in nodes.items() if n.get("cluster") == cluster_id)
 
 
-def mermaid_id(node_id):
-    return re.sub(r"[^A-Za-z0-9]", "_", node_id)
-
-
 def clean(text, limit=None):
-    """Flatten to a single line safe to embed in a mermaid label."""
+    """Flatten to a single line, optionally truncated."""
     text = re.sub(r"\s+", " ", str(text)).strip().replace('"', "").replace("|", "/")
     if limit and len(text) > limit:
         text = text[: limit - 1].rstrip() + "…"
     return text
 
 
-def diagram(nodes, members, click=None, direction="LR", click_target="_blank",
-            focus=None):
-    """Mermaid source for `members` plus any nodes they link to.
+def dot_label(text, width):
+    """Wrap for a DOT label. \\n is a centred line break in DOT."""
+    body = " ".join(str(text).split()).replace("\\", "").replace('"', "'")
+    return "\\n".join(textwrap.wrap(body, width)) or body
 
-    Returns (source, relations). `relations` lists the relation of each edge in
-    the order they are declared, which is the order mermaid indexes its link
-    paths by, so a caller can colour them afterwards.
 
-    Returned unfenced; callers wrap it for markdown or HTML as needed.
-    `click` maps a node id to a URL, or returns None for no link.
+def dot_source(nodes, members, url=None, focus=None, rankdir="LR"):
+    """Graphviz DOT for `members` plus any nodes they link to.
+
+    No colours are emitted. Every node and edge carries a class instead, so the
+    page's own stylesheet paints them and one SVG serves both light and dark.
+
+    `url` maps a node id to a link target; graphviz turns that into a real
+    anchor, so clicking a node works with scripting disabled.
     `focus` keeps only edges touching that node, so a neighbourhood view does
     not also draw every unrelated edge its neighbours happen to have.
     """
     members = set(members)
-    lines = [f"graph {direction};"]
     edges, external = [], set()
 
     for nid in sorted(members):
@@ -173,27 +173,39 @@ def diagram(nodes, members, click=None, direction="LR", click_target="_blank",
                 external.add(to)
             edges.append((nid, edge, to))
 
+    out = [
+        "digraph G {",
+        f"  rankdir={rankdir};",
+        '  bgcolor="transparent";',
+        "  nodesep=0.30; ranksep=0.90; splines=spline; pad=0.15;",
+        '  node [shape=box, style="rounded", fontname="Helvetica", fontsize=11,'
+        ' margin="0.17,0.10", height=0.36, penwidth=1.0];',
+        '  edge [fontname="Helvetica", fontsize=9, arrowsize=0.65, penwidth=1.2];',
+    ]
+
     for nid in sorted(members) + sorted(external):
-        lines.append(f'    {mermaid_id(nid)}["{clean(nodes[nid]["title"])}"];')
-        url = click(nid) if click else None
-        if url:
-            lines.append(f'    click {mermaid_id(nid)} "{url}" {click_target};')
+        classes = ["n"]
+        if nid in external:
+            classes.append("ext")
+        if nid == focus:
+            classes.append("focus")
+        attrs = [
+            f'label="{dot_label(nodes[nid]["title"], 21)}"',
+            f'class="{" ".join(classes)}"',
+        ]
+        target = url(nid) if url else None
+        if target:
+            attrs += [f'URL="{target}"', 'target="_self"']
+        out.append(f'  "{nid}" [{", ".join(attrs)}];')
 
     for src, edge, dst in edges:
-        # Taxonomy edges carry no reason, so an unlabelled arrow says as much.
-        why = edge.get("why")
-        arrow = f'-->|"{clean(why, 58)}"|' if why else "-->"
-        lines.append(f"    {mermaid_id(src)} {arrow} {mermaid_id(dst)};")
+        attrs = [f'class="e e-{edge["rel"]}"']
+        if edge.get("why"):
+            attrs.append(f'label="{dot_label(edge["why"], 26)}"')
+        out.append(f'  "{src}" -> "{dst}" [{", ".join(attrs)}];')
 
-    if external:
-        # Stroke only, no fill or text colour: those come from the mermaid theme,
-        # which differs between the light and dark renderings of the same page.
-        lines.append("    classDef ext stroke:#888,stroke-dasharray:5 3;")
-        lines.append(
-            f"    class {','.join(mermaid_id(n) for n in sorted(external))} ext;"
-        )
-
-    return "\n".join(lines), [edge["rel"] for _, edge, _ in edges]
+    out.append("}")
+    return "\n".join(out)
 
 
 def anchors(node):

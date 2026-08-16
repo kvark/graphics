@@ -71,6 +71,11 @@ depends on — with the second relation in each family drawn dashed. Eight hues
 would have been simpler, but eight cannot be told apart reliably under colour
 vision deficiency, and four plus a line pattern can.
 
+Layout is done by graphviz at build time and the result is inlined as SVG, so a
+page carries no diagramming library: it renders before any script runs, and the
+node links are real anchors that work with scripting off. Search (<kbd>/</kbd>)
+highlights matches in the diagram and offers them as a jump list.
+
 The site is published automatically on every push to `main`.
 
 ## Querying
@@ -109,8 +114,10 @@ working in the same area do not collide.
 ```console
 $ python3 tools/check.py           # validate; CI runs exactly this
 $ python3 tools/site.py            # build the site locally into site/
-$ python3 tools/site.py --vendor   # ...with mermaid bundled, as CI publishes it
 ```
+
+Building the site needs graphviz (`apt-get install graphviz`); validating and
+querying do not.
 
 An edge whose `why` could be swapped onto any other pair of nodes is not
 carrying its weight. "improves on it" is not a reason; "photon count is capped

@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
 """Generate the static site published to GitHub Pages.
 
-    python3 tools/site.py              # diagrams load mermaid from a CDN
-    python3 tools/site.py --vendor     # download mermaid into the output instead
-    python3 tools/site.py --out DIR
+    python3 tools/site.py [--out DIR]
 
-Everything is derived from nodes/*.yaml. The site is a convenience view: the
-YAML files remain the canonical artifact, readable with no tooling at all.
+Diagrams are laid out by graphviz at build time and inlined as SVG, so a page
+ships no diagramming library at all: it is a few KB of markup that renders
+before any script runs. Graphviz emits real anchors for node links, so the
+graph is navigable with scripting disabled; the script only adds pan, zoom
+and search on top.
 
-CI publishes with --vendor so the deployed site has no external dependency.
-If mermaid fails to load for any reason the diagrams degrade to their source
-text, which is still readable, rather than to empty boxes.
+Requires `dot` on PATH (Debian/Ubuntu: apt-get install graphviz).
 """
 
 import html
 import json
 import shutil
-import ssl
+import subprocess
 import sys
 import urllib.parse
-import urllib.request
 from pathlib import Path
 
 from graph import (
@@ -27,18 +25,12 @@ from graph import (
     RELATIONS,
     Problem,
     clean,
-    diagram,
+    dot_source,
     incoming,
     load_all,
     members_of,
 )
 
-# Pinned: a floating major version can change rendering under us with no commit.
-# The UMD bundle, not the ESM entry point: the latter lazy-loads sibling chunks
-# (flowDiagram-*.mjs among them), so vendoring a single file only works here.
-MERMAID_VERSION = "11.4.1"
-MERMAID_FILE = "mermaid.min.js"
-MERMAID_CDN = f"https://cdn.jsdelivr.net/npm/mermaid@{MERMAID_VERSION}/dist/{MERMAID_FILE}"
 REPO = "https://github.com/kvark/graphics"
 
 # Relation colouring.
@@ -51,10 +43,10 @@ REPO = "https://github.com/kvark/graphics"
 # and the two members of each family are told apart by line pattern — the
 # second channel — rather than by a fifth hue nobody could reliably name.
 FAMILIES = {
-    "supersede":  ("supersedes",     "#2a78d6", "#3987e5"),
-    "structure":  ("classifies",     "#008300", "#008300"),
+    "supersede": ("supersedes", "#2a78d6", "#3987e5"),
+    "structure": ("classifies", "#008300", "#008300"),
     "substitute": ("substitutes for", "#e87ba4", "#d55181"),
-    "support":    ("depends on",     "#eda100", "#c98500"),
+    "support": ("depends on", "#eda100", "#c98500"),
 }
 
 # rel -> (family, dashed)
@@ -69,54 +61,17 @@ RELATION_STYLE = {
     "validates": ("support", True),
 }
 
-
-def relation_css():
-    """Colour rules for edges and legend swatches, from one mapping."""
-    out = [":root {"]
-    out += [f"  --fam-{k}: {light};" for k, (_, light, _) in FAMILIES.items()]
-    out.append("}")
-    out.append('@media (prefers-color-scheme: dark) { :root {')
-    out += [f"  --fam-{k}: {dark};" for k, (_, _, dark) in FAMILIES.items()]
-    out.append("} }")
-    for rel, (family, dashed) in RELATION_STYLE.items():
-        dash = " stroke-dasharray: 7 5 !important;" if dashed else ""
-        out.append(
-            f".diagram svg path.flowchart-link.e-{rel} "
-            f"{{ stroke: var(--fam-{family}) !important;{dash} }}"
-        )
-        border = "dashed" if dashed else "solid"
-        out.append(
-            f".legend .r-{rel} {{ border-top-color: var(--fam-{family}); "
-            f"border-top-style: {border}; }}"
-        )
-        # Tie the chips on a node page back to the colours in the diagram.
-        out.append(f".rel.k-{rel} {{ border-left: 3px solid var(--fam-{family}); }}")
-    return "\n".join(out)
-
-
-def legend():
-    items = []
-    for family, (reads, _, _) in FAMILIES.items():
-        members = [r for r, (f, _) in RELATION_STYLE.items() if f == family]
-        names = " · ".join(
-            f'<span class="ln"><i class="r-{r}"></i>{esc(r)}</span>' for r in members
-        )
-        items.append(f'<li><b>{esc(reads)}</b>{names}</li>')
-    return (
-        '<ul class="legend">' + "".join(items) + "</ul>"
-        '<p class="legend-note">Colour is the family; a dashed line is the second '
-        "member of it.</p>"
-    )
-
 STYLE = """
 :root {
   --bg: #fbfbfa; --fg: #1a1a19; --muted: #6b6b66; --line: #e2e2dd;
   --card: #ffffff; --accent: #7a4b2a; --code: #f2f2ee;
+  --node-fill: #f7f7f4; --node-line: #cfcfc7; --edge-line: #b0b0a8;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #16171a; --fg: #e6e6e3; --muted: #9a9a94; --line: #2c2e33;
     --card: #1d1f23; --accent: #d79a6a; --code: #23252a;
+    --node-fill: #262930; --node-line: #3f434c; --edge-line: #565b66;
   }
 }
 * { box-sizing: border-box; }
@@ -127,10 +82,10 @@ body {
 .wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1.25rem 5rem; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
-nav { border-bottom: 1px solid var(--line); margin-bottom: 2rem; padding-bottom: .75rem;
-      font-size: .9rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
-nav .home { font-weight: 600; }
-nav .sp { flex: 1; }
+nav { border-bottom: 1px solid var(--line); margin-bottom: 1.75rem;
+      padding-bottom: .75rem; font-size: .9rem; display: flex; gap: 1rem;
+      align-items: center; }
+nav .home { font-weight: 600; white-space: nowrap; }
 h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 .4rem; }
 h2 { font-size: 1.25rem; margin: 2.5rem 0 .5rem; }
 h3 { font-size: 1rem; margin: 1.75rem 0 .5rem; text-transform: uppercase;
@@ -153,32 +108,68 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
        background: var(--code); color: var(--muted); margin-right: .5rem;
        font-family: ui-monospace, monospace; }
 .why { color: var(--muted); display: block; margin-top: .15rem; font-size: .92rem; }
-.diagram { position: relative; background: var(--card); border: 1px solid var(--line);
-           border-radius: 8px; padding: 1rem; margin: 1rem 0 2rem; overflow: auto; }
+
+/* ---- search ---- */
+.find { position: relative; flex: 1; max-width: 26rem; }
+#q { width: 100%; padding: .42rem .7rem; font-size: .92rem; border-radius: 6px;
+     border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+#q:focus { outline: none; border-color: var(--accent); }
+#hits { position: absolute; z-index: 20; left: 0; right: 0; top: 2.3rem;
+        background: var(--card); border: 1px solid var(--line); border-radius: 7px;
+        list-style: none; margin: 0; padding: .25rem; max-height: 60vh;
+        overflow-y: auto; display: none; box-shadow: 0 8px 26px rgba(0,0,0,.14); }
+#hits.open { display: block; }
+#hits li { padding: .35rem .5rem; border-radius: 5px; cursor: pointer;
+           display: flex; gap: .5rem; align-items: baseline; }
+#hits li.sel, #hits li:hover { background: var(--code); }
+#hits .c { color: var(--muted); font-size: .78rem; margin-left: auto; }
+#hits .none { color: var(--muted); cursor: default; }
+kbd { font: .72rem ui-monospace, monospace; border: 1px solid var(--line);
+      border-bottom-width: 2px; border-radius: 4px; padding: 0 .3em; color: var(--muted); }
+
+/* ---- figures ---- */
+.figure { margin: .75rem 0 2rem; }
 /* Break out of the text column: a 29-node graph needs the whole window. */
-.diagram.wide { width: min(97vw, 1700px); margin-left: calc(50% - min(48.5vw, 850px)); }
-/* Only once pan/zoom is live does the box become a fixed viewport. Without JS
-   it stays auto-height and scrollable, so nothing is ever clipped away. */
-.diagram.pz { overflow: hidden; height: 62vh; min-height: 24rem; cursor: grab;
-              user-select: none; -webkit-user-select: none;
-              touch-action: none; }
-.diagram.wide.pz { height: 80vh; }
+.figure.wide { width: min(97vw, 1700px); margin-left: calc(50% - min(48.5vw, 850px)); }
+.fig-head { display: flex; align-items: center; gap: .75rem; margin-bottom: .4rem;
+            font-size: .78rem; color: var(--muted); }
+.fig-head .hint { flex: 1; }
+.found { font-variant-numeric: tabular-nums; }
+.found.on { color: var(--accent); }
+.diagram { position: relative; background: var(--card); border: 1px solid var(--line);
+           border-radius: 8px; padding: .75rem; overflow: auto; }
+/* Only once pan/zoom is live does the box become a fixed viewport. Without it
+   the svg simply sits at its natural size and the page scrolls. */
+.diagram.pz { overflow: hidden; min-height: 9rem; cursor: grab;
+              user-select: none; -webkit-user-select: none; touch-action: none; }
 .diagram.pz.grabbing { cursor: grabbing; }
 .diagram.pz svg { width: 100%; height: 100%; max-width: none; display: block; }
 .diagram:fullscreen { height: 100vh; width: 100vw; margin: 0; border-radius: 0; }
-.tools { position: absolute; top: .5rem; right: .5rem; z-index: 2; display: none;
-         gap: .25rem; }
-.diagram.pz .tools { display: flex; }
-.tools button { font: 600 .8rem/1 ui-monospace, monospace; color: var(--muted);
+.tools { display: none; gap: .25rem; }
+.figure.ready .tools { display: flex; }
+.tools button { font: 600 .78rem/1 ui-monospace, monospace; color: var(--muted);
                 background: var(--bg); border: 1px solid var(--line);
-                border-radius: 5px; padding: .4rem .55rem; cursor: pointer; }
+                border-radius: 5px; padding: .35rem .5rem; cursor: pointer; }
 .tools button:hover { color: var(--fg); border-color: var(--muted); }
-/* Until mermaid replaces it, this is the diagram source. Keep it legible:
-   if the library never loads, the page degrades to readable text. */
-pre.mermaid { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-              font-size: .78rem; line-height: 1.5; color: var(--muted);
-              white-space: pre; }
-pre.mermaid[data-processed] { color: inherit; }
+
+/* ---- the graph itself ---- */
+.diagram svg { font-family: Helvetica, Arial, sans-serif; }
+.diagram svg .graph > polygon { fill: none; stroke: none; }
+.diagram svg .node > path, .diagram svg .node > polygon {
+  fill: var(--node-fill); stroke: var(--node-line); }
+.diagram svg .node text { fill: var(--fg); }
+.diagram svg .node a:hover > path { stroke: var(--accent); stroke-width: 1.8; }
+.diagram svg .node.ext > path { stroke-dasharray: 5 3; fill: none; }
+.diagram svg .node.focus > path { stroke: var(--accent); stroke-width: 2.2; }
+.diagram svg .edge > path { stroke: var(--edge-line); fill: none; }
+.diagram svg .edge > polygon { fill: var(--edge-line); stroke: var(--edge-line); }
+.diagram svg .edge text { fill: var(--muted); }
+.diagram svg a { text-decoration: none; }
+.diagram svg .node, .diagram svg .edge { transition: opacity .14s ease; }
+.diagram svg .node.dim, .diagram svg .edge.dim { opacity: .12; }
+.diagram svg .node.hit > path { stroke: var(--accent); stroke-width: 2.4; }
+.diagram svg .node.hit text { font-weight: bold; }
+
 .legend { list-style: none; padding: 0; margin: 0 0 .35rem; display: flex;
           flex-wrap: wrap; gap: .3rem 1.6rem; font-size: .82rem; color: var(--muted); }
 .legend li { display: flex; align-items: baseline; gap: .5rem; }
@@ -190,123 +181,215 @@ pre.mermaid[data-processed] { color: inherit; }
 .refs { list-style: none; padding: 0; }
 .refs li { padding: .4rem 0; color: var(--muted); font-size: .92rem; }
 .refs .t { color: var(--fg); }
-#q { width: 100%; padding: .6rem .8rem; font-size: 1rem; border-radius: 6px;
-     border: 1px solid var(--line); background: var(--card); color: var(--fg); }
-#results { list-style: none; padding: 0; margin: .75rem 0 0; }
-#results li { padding: .3rem 0; }
-#results .c { color: var(--muted); font-size: .85rem; }
 .stat { display: flex; gap: 2rem; flex-wrap: wrap; margin: 0 0 2rem; }
 .stat b { display: block; font-size: 1.5rem; }
 .stat span { color: var(--muted); font-size: .8rem; text-transform: uppercase;
              letter-spacing: .06em; }
 footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line);
          color: var(--muted); font-size: .85rem; }
+@media (max-width: 640px) {
+  nav .repo { display: none; }
+  .figure.wide { width: 100%; margin-left: 0; }
+}
 """
 
-
-PANZOOM = """
+SCRIPT = r"""
 (function () {
-  // Tag each link path with its relation. Mermaid suffixes every link id with
-  // the edge's declaration index, which is the order data-rels is written in.
-  function paint(box) {
-    var rels = (box.getAttribute('data-rels') || '').split(',');
-    if (!rels[0]) return;
-    box.querySelectorAll('path.flowchart-link').forEach(function (p) {
-      var m = /_(\\d+)$/.exec(p.id || '');
-      if (m && rels[+m[1]]) p.classList.add('e-' + rels[+m[1]]);
-    });
+var IDX = __INDEX__, UP = "__UP__";
+
+/* ---------- pan & zoom ---------- */
+function setupFigure(fig) {
+  var box = fig.querySelector('.diagram'), svg = box && box.querySelector('svg');
+  if (!svg) return null;
+  var raw = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+  if (raw.length !== 4 || !raw[2]) return null;
+  var home = raw.slice(), vb = raw.slice();
+
+  svg.removeAttribute('width');
+  svg.removeAttribute('height');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  box.classList.add('pz');
+  fig.classList.add('ready');
+
+  function apply() { svg.setAttribute('viewBox', vb.join(' ')); }
+  function fit() {
+    if (document.fullscreenElement === box) { box.style.height = '100vh'; return; }
+    var inner = box.clientWidth - 24;
+    var ideal = inner * home[3] / home[2] + 24;
+    box.style.height = Math.round(Math.max(150, Math.min(ideal, innerHeight * 0.86))) + 'px';
   }
+  function zoom(f, cx, cy) {
+    var w = vb[2] * f;
+    if (w < home[2] / 60 || w > home[2] * 20) return;
+    vb[0] = cx - (cx - vb[0]) * f; vb[1] = cy - (cy - vb[1]) * f;
+    vb[2] = w; vb[3] = vb[3] * f; apply();
+  }
+  function at(e) {
+    var r = svg.getBoundingClientRect();
+    return [vb[0] + (e.clientX - r.left) / r.width * vb[2],
+            vb[1] + (e.clientY - r.top) / r.height * vb[3]];
+  }
+  fit();
+  addEventListener('resize', fit);
+  document.addEventListener('fullscreenchange', fit);
 
-  function setup(box) {
-    var svg = box.querySelector('svg');
-    if (!svg) return;
-    paint(box);
-    var raw = (svg.getAttribute('viewBox') || '').split(/[\\s,]+/).map(Number);
-    if (raw.length !== 4 || !raw[2]) return;
-    var home = raw.slice(), vb = raw.slice();
+  box.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var p = at(e);
+    zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, p[0], p[1]);
+  }, { passive: false });
 
-    svg.removeAttribute('width');
-    svg.removeAttribute('height');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    box.classList.add('pz');
+  var drag = null, moved = 0;
+  svg.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0) return;
+    drag = { x: e.clientX, y: e.clientY }; moved = 0;
+    box.classList.add('grabbing');
+  });
+  /* Tracked on window, not via setPointerCapture: capturing the pointer
+     retargets the following click and would break the node links. */
+  addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var r = svg.getBoundingClientRect();
+    moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
+    vb[0] -= (e.clientX - drag.x) * vb[2] / r.width;
+    vb[1] -= (e.clientY - drag.y) * vb[3] / r.height;
+    drag.x = e.clientX; drag.y = e.clientY; apply();
+  });
+  function release() { drag = null; box.classList.remove('grabbing'); }
+  addEventListener('pointerup', release);
+  addEventListener('pointercancel', release);
+  /* A drag that happens to end on a node must not also follow its link. */
+  svg.addEventListener('click', function (e) {
+    if (moved > 6) { e.stopPropagation(); e.preventDefault(); }
+    moved = 0;
+  }, true);
 
-    // Match the box to the graph's own aspect rather than a fixed height:
-    // these graphs are wide and short, and a tall box just letterboxes them.
-    function fit() {
-      if (document.fullscreenElement === box) { box.style.height = '100vh'; return; }
-      var inner = box.clientWidth - 32;
-      var ideal = inner * home[3] / home[2] + 32;
-      var cap = window.innerHeight * 0.85;
-      box.style.height = Math.round(Math.max(320, Math.min(ideal, cap))) + 'px';
-    }
-    fit();
-    window.addEventListener('resize', fit);
-    document.addEventListener('fullscreenchange', fit);
-
-    function apply() { svg.setAttribute('viewBox', vb.join(' ')); }
-    function zoom(f, cx, cy) {
-      var w = vb[2] * f;
-      if (w < home[2] / 50 || w > home[2] * 15) return;
-      vb[0] = cx - (cx - vb[0]) * f;
-      vb[1] = cy - (cy - vb[1]) * f;
-      vb[2] = w; vb[3] = vb[3] * f;
-      apply();
-    }
-    function at(e) {
-      var r = svg.getBoundingClientRect();
-      return [vb[0] + (e.clientX - r.left) / r.width * vb[2],
-              vb[1] + (e.clientY - r.top) / r.height * vb[3]];
-    }
-
-    box.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      var p = at(e);
-      zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, p[0], p[1]);
-    }, { passive: false });
-
-    var drag = null, moved = 0;
-    svg.addEventListener('pointerdown', function (e) {
-      if (e.button !== 0) return;
-      drag = { x: e.clientX, y: e.clientY };
-      moved = 0;
-      box.classList.add('grabbing');
+  fig.querySelectorAll('[data-act]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var a = btn.getAttribute('data-act');
+      var cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2;
+      if (a === 'in') zoom(1 / 1.4, cx, cy);
+      else if (a === 'out') zoom(1.4, cx, cy);
+      else if (a === 'reset') { vb = home.slice(); apply(); fit(); }
+      else if (document.fullscreenElement) document.exitFullscreen();
+      else if (box.requestFullscreen) box.requestFullscreen();
     });
-    // Tracked on window, not via setPointerCapture: capturing the pointer
-    // retargets the following click to the svg, which would stop mermaid's
-    // per-node click handlers from ever firing.
-    window.addEventListener('pointermove', function (e) {
-      if (!drag) return;
-      var r = svg.getBoundingClientRect();
-      moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
-      vb[0] -= (e.clientX - drag.x) * vb[2] / r.width;
-      vb[1] -= (e.clientY - drag.y) * vb[3] / r.height;
-      drag.x = e.clientX; drag.y = e.clientY;
-      apply();
-    });
-    function release() { drag = null; box.classList.remove('grabbing'); }
-    window.addEventListener('pointerup', release);
-    window.addEventListener('pointercancel', release);
-    // A drag that happens to end on a node must not also navigate to it.
-    svg.addEventListener('click', function (e) {
-      if (moved > 6) { e.stopPropagation(); e.preventDefault(); }
-      moved = 0;
-    }, true);
+  });
 
-    box.querySelectorAll('[data-act]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var act = btn.getAttribute('data-act');
-        var cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2;
-        if (act === 'in') zoom(1 / 1.4, cx, cy);
-        else if (act === 'out') zoom(1.4, cx, cy);
-        else if (act === 'reset') { vb = home.slice(); apply(); }
-        else if (document.fullscreenElement) document.exitFullscreen();
-        else if (box.requestFullscreen) box.requestFullscreen();
+  return {
+    svg: svg,
+    frame: function (els) {
+      if (!els.length) return;
+      var r = svg.getBoundingClientRect();
+      var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      els.forEach(function (el) {
+        var b = el.getBoundingClientRect();
+        x0 = Math.min(x0, b.left); y0 = Math.min(y0, b.top);
+        x1 = Math.max(x1, b.right); y1 = Math.max(y1, b.bottom);
       });
-    });
-  }
-  window.__diagrams = function () {
-    document.querySelectorAll('.diagram').forEach(setup);
+      var tx = function (c) { return vb[0] + (c - r.left) / r.width * vb[2]; };
+      var ty = function (c) { return vb[1] + (c - r.top) / r.height * vb[3]; };
+      var a = tx(x0), b2 = ty(y0), c = tx(x1), d = ty(y1);
+      var pad = Math.max(c - a, d - b2) * 0.4 + 30;
+      vb = [a - pad, b2 - pad, (c - a) + 2 * pad, (d - b2) + 2 * pad];
+      apply();
+    }
   };
+}
+
+/* ---------- search ---------- */
+var figures = [], q, list, sel = -1, shown = [];
+
+function highlight(term) {
+  figures.forEach(function (f) {
+    var nodes = f.api.svg.querySelectorAll('g.node'), found = [];
+    nodes.forEach(function (n) {
+      var hit = term && (n.textContent || '').toLowerCase().indexOf(term) >= 0;
+      n.classList.toggle('hit', !!hit);
+      n.classList.toggle('dim', !!term && !hit);
+      if (hit) found.push(n);
+    });
+    f.api.svg.querySelectorAll('g.edge').forEach(function (e) {
+      e.classList.toggle('dim', !!term);
+    });
+    var out = f.fig.querySelector('[data-found]');
+    if (out) {
+      out.textContent = term ? found.length + ' of ' + nodes.length + ' shown' : '';
+      out.classList.toggle('on', !!term && found.length > 0);
+    }
+    f.found = found;
+  });
+}
+
+function render(term) {
+  shown = term
+    ? IDX.filter(function (n) { return n.hay.indexOf(term) >= 0; }).slice(0, 12)
+    : [];
+  sel = -1;
+  if (!term) { list.className = ''; list.innerHTML = ''; return; }
+  list.className = 'open';
+  list.innerHTML = shown.length
+    ? shown.map(function (n, i) {
+        return '<li data-i="' + i + '"><span>' + n[1] +
+               '</span><span class="c">' + n[2] + '</span></li>';
+      }).join('')
+    : '<li class="none">no matches</li>';
+}
+
+function go(i) {
+  if (shown[i]) location.href = UP + 'n/' + shown[i][0] + '.html';
+}
+
+function init() {
+  IDX.forEach(function (n) {
+    n.hay = (n[0] + ' ' + n[1] + ' ' + n[2] + ' ' + (n[3] || '')).toLowerCase();
+  });
+
+  document.querySelectorAll('.figure').forEach(function (fig) {
+    var api = setupFigure(fig);
+    if (api) figures.push({ fig: fig, api: api, found: [] });
+  });
+
+  q = document.getElementById('q');
+  list = document.getElementById('hits');
+  if (!q) return;
+
+  q.addEventListener('input', function () {
+    var term = q.value.trim().toLowerCase();
+    highlight(term);
+    render(term);
+  });
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; highlight(''); render(''); q.blur(); }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!shown.length) return;
+      sel = (sel + (e.key === 'ArrowDown' ? 1 : shown.length - 1)) % shown.length;
+      [].forEach.call(list.children, function (li, i) {
+        li.classList.toggle('sel', i === sel);
+      });
+    } else if (e.key === 'Enter') {
+      if (sel >= 0) { go(sel); return; }
+      /* No row picked: frame what matched in the diagram instead. */
+      var f = figures.filter(function (x) { return x.found.length; })[0];
+      if (f) { f.api.frame(f.found); list.className = ''; }
+      else if (shown.length) go(0);
+    }
+  });
+  list.addEventListener('click', function (e) {
+    var li = e.target.closest('li[data-i]');
+    if (li) go(+li.getAttribute('data-i'));
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.find')) list.className = '';
+  });
+  addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+}
+
+if (document.readyState !== 'loading') init();
+else document.addEventListener('DOMContentLoaded', init);
 })();
 """
 
@@ -315,11 +398,80 @@ def esc(text):
     return html.escape(str(text), quote=True)
 
 
-def page(title, body, depth, mermaid_src, script=""):
+def relation_css():
+    """Colour rules for edges and legend swatches, from one mapping."""
+    out = [":root {"]
+    out += [f"  --fam-{k}: {light};" for k, (_, light, _) in FAMILIES.items()]
+    out.append("}")
+    out.append("@media (prefers-color-scheme: dark) { :root {")
+    out += [f"  --fam-{k}: {dark};" for k, (_, _, dark) in FAMILIES.items()]
+    out.append("} }")
+    for rel, (family, dashed) in RELATION_STYLE.items():
+        var = f"var(--fam-{family})"
+        out.append(f".diagram svg .e-{rel} > path {{ stroke: {var};"
+                   + (" stroke-dasharray: 7 5;" if dashed else "") + " }")
+        out.append(
+            f".diagram svg .e-{rel} > polygon {{ fill: {var}; stroke: {var}; }}"
+        )
+        border = "dashed" if dashed else "solid"
+        out.append(f".legend .r-{rel} {{ border-top-color: {var}; "
+                   f"border-top-style: {border}; }}")
+        # Tie the chips on a node page back to the colours in the diagram.
+        out.append(f".rel.k-{rel} {{ border-left: 3px solid {var}; }}")
+    return "\n".join(out)
+
+
+def legend():
+    items = []
+    for family, (reads, _, _) in FAMILIES.items():
+        members = [r for r, (f, _) in RELATION_STYLE.items() if f == family]
+        names = " · ".join(
+            f'<span class="ln"><i class="r-{r}"></i>{esc(r)}</span>' for r in members
+        )
+        items.append(f"<li><b>{esc(reads)}</b>{names}</li>")
+    return (
+        '<ul class="legend">' + "".join(items) + "</ul>"
+        '<p class="legend-note">Colour is the family; a dashed line is the second '
+        "member of it.</p>"
+    )
+
+
+def render_svg(dot_text):
+    """Lay out with graphviz and return inlineable SVG."""
+    try:
+        done = subprocess.run(
+            ["dot", "-Tsvg"], input=dot_text, capture_output=True, text=True, check=True
+        )
+    except FileNotFoundError:
+        raise Problem("graphviz not found; install it (apt-get install graphviz)")
+    except subprocess.CalledProcessError as exc:
+        raise Problem(f"graphviz failed: {exc.stderr.strip()}")
+    svg = done.stdout
+    return svg[svg.index("<svg"):]
+
+
+def fig(svg, wide=False):
+    cls = "figure wide" if wide else "figure"
+    # Controls sit above the box, not floating inside it, where they used to
+    # cover whichever node the layout happened to put in the corner.
+    return (
+        f'<div class="{cls}">'
+        '<div class="fig-head">'
+        '<span class="hint">Drag to pan · scroll to zoom · click a node to open it</span>'
+        '<span class="found" data-found></span>'
+        '<div class="tools">'
+        '<button data-act="out" title="Zoom out">&minus;</button>'
+        '<button data-act="in" title="Zoom in">+</button>'
+        '<button data-act="reset" title="Reset view">reset</button>'
+        '<button data-act="full" title="Fullscreen">&#9974;</button>'
+        "</div></div>"
+        f'<div class="diagram">{svg}</div></div>'
+    )
+
+
+def page(title, body, depth, index):
     up = "../" * depth
-    # Page scripts are emitted before, and separately from, mermaid: a failure
-    # to load the library must not take search down with it.
-    extra = f"<script>{script}</script>" if script else ""
+    script = SCRIPT.replace("__INDEX__", index).replace("__UP__", up)
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -332,49 +484,23 @@ def page(title, body, depth, mermaid_src, script=""):
 <div class="wrap">
 <nav>
   <a class="home" href="{up}index.html">graphics</a>
-  <span class="sp"></span>
-  <a href="{REPO}">source</a>
+  <div class="find">
+    <input id="q" type="search" placeholder="Search nodes — press /"
+           autocomplete="off" spellcheck="false" aria-label="Search nodes">
+    <ul id="hits"></ul>
+  </div>
+  <a class="repo" href="{REPO}">source</a>
 </nav>
 {body}
 <footer>
-Generated from <code>nodes/*.yaml</code> by <code>tools/site.py</code>.
-The YAML files are the canonical form — this site is a view of them.
+Laid out by graphviz from <code>nodes/*.yaml</code>. The YAML files are the
+canonical form — this site is a view of them.
 </footer>
 </div>
-{extra}
-<script>{PANZOOM}</script>
-<script src="{mermaid_src}"></script>
-<script>
-if (window.mermaid) {{
-  mermaid.initialize({{
-    startOnLoad: false,
-    theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'neutral',
-    securityLevel: 'loose',
-    flowchart: {{ curve: 'basis', useMaxWidth: false }}
-  }});
-  // Explicit run rather than startOnLoad: pan/zoom needs the rendered svg,
-  // and this gives a promise to hang that on.
-  mermaid.run().then(window.__diagrams).catch(function (e) {{ console.error(e); }});
-}}
-</script>
+<script>{script}</script>
 </body>
 </html>
 """
-
-
-def fig(rendered, wide=False):
-    source, rels = rendered
-    tools = (
-        '<div class="tools">'
-        '<button data-act="out" title="Zoom out">&minus;</button>'
-        '<button data-act="in" title="Zoom in">+</button>'
-        '<button data-act="reset" title="Reset view">reset</button>'
-        '<button data-act="full" title="Fullscreen">&#9974;</button>'
-        "</div>"
-    )
-    cls = "diagram wide" if wide else "diagram"
-    return (f'<div class="{cls}" data-rels="{esc(",".join(rels))}">{tools}'
-            f'<pre class="mermaid">{esc(source)}</pre></div>')
 
 
 def node_link(nid, nodes, depth):
@@ -415,7 +541,7 @@ def edge_items(rows):
     )
 
 
-def render_node(nid, nodes, clusters, backlinks, mermaid_src):
+def render_node(nid, nodes, clusters, backlinks, index):
     node = nodes[nid]
     titles = {c[0]: c[1] for c in clusters}
 
@@ -438,10 +564,9 @@ def render_node(nid, nodes, clusters, backlinks, mermaid_src):
     neighbours.update(src for src, _ in backlinks[nid])
     if len(neighbours) > 1:
         out.append(legend())
-        out.append(fig(diagram(
-            nodes, neighbours, click=lambda n: f"../n/{n}.html",
-            click_target="_self", focus=nid,
-        )))
+        out.append(fig(render_svg(dot_source(
+            nodes, neighbours, url=lambda n: f"../n/{n}.html", focus=nid,
+        ))))
 
     outgoing = [
         (e["rel"], f'{RELATIONS[e["rel"]][0]} {node_link(e["to"], nodes, 1)}', e.get("why"))
@@ -459,14 +584,12 @@ def render_node(nid, nodes, clusters, backlinks, mermaid_src):
         out.append(f'<h3>Referenced by</h3><ul class="edges">{edge_items(inbound)}</ul>')
 
     out.append(render_refs(node))
-    return page(node["title"], "\n".join(out), 1, mermaid_src)
+    return page(node["title"], "\n".join(out), 1, index)
 
 
-def render_cluster(cid, title, blurb, nodes, mermaid_src):
+def render_cluster(cid, title, blurb, nodes, index):
     members = members_of(nodes, cid)
-    source = diagram(
-        nodes, members, click=lambda n: f"../n/{n}.html", click_target="_self"
-    )
+    svg = render_svg(dot_source(nodes, members, url=lambda n: f"../n/{n}.html"))
     cards = "".join(
         f'<div class="card"><h4>{node_link(nid, nodes, 1)}</h4>'
         f'<p>{esc(clean(nodes[nid]["summary"], 150))}'
@@ -475,31 +598,17 @@ def render_cluster(cid, title, blurb, nodes, mermaid_src):
     )
     body = (
         f"<h1>{esc(title)}</h1>"
-        f'<p class="lede">{esc(blurb)} '
-        "<em>Drag to pan, scroll to zoom, click a node to open it.</em></p>"
+        f'<p class="lede">{esc(blurb)}</p>'
         f"{legend()}"
-        f"{fig(source, wide=True)}"
+        f"{fig(svg, wide=True)}"
         f'<h2>{len(members)} nodes</h2><div class="cards">{cards}</div>'
     )
-    return page(title, body, 1, mermaid_src)
+    return page(title, body, 1, index)
 
 
-def render_index(nodes, clusters, mermaid_src):
+def render_index(nodes, clusters, index):
     edge_count = sum(len(n.get("edges") or []) for n in nodes.values())
     ref_count = sum(len(n.get("refs") or []) for n in nodes.values())
-
-    index = [
-        {
-            "i": nid,
-            "t": node["title"],
-            "c": node["cluster"],
-            "s": clean(node["summary"], 120),
-            "k": " ".join(
-                [nid, node["title"]] + (node.get("aka") or []) + (node.get("tags") or [])
-            ).lower(),
-        }
-        for nid, node in sorted(nodes.items())
-    ]
 
     cards = "".join(
         f'<div class="card"><h4><a href="c/{cid}.html">{esc(title)}</a></h4>'
@@ -507,9 +616,8 @@ def render_index(nodes, clusters, mermaid_src):
         for cid, title, blurb in clusters
         if members_of(nodes, cid)
     )
-
-    legend = "".join(
-        f'<li><span class="rel">{esc(rel)}</span>{esc(reads)} the target'
+    legend_rows = "".join(
+        f'<li><span class="rel k-{esc(rel)}">{esc(rel)}</span>{esc(reads)} the target'
         + ("" if required else " <em>(no reason required)</em>")
         + "</li>"
         for rel, (reads, required) in RELATIONS.items()
@@ -519,7 +627,7 @@ def render_index(nodes, clusters, mermaid_src):
 <h1>A knowledge graph of computer graphics</h1>
 <p class="lede">Where the edges carry the reasons. Most maps of a field give you
 the nodes; what is almost never written down is why one technique leads to the
-next — and that is the part this collects.</p>
+next — and that is the part this collects. Press <kbd>/</kbd> to search.</p>
 
 <div class="stat">
   <div><b>{len(nodes)}</b><span>nodes</span></div>
@@ -528,45 +636,15 @@ next — and that is the part this collects.</p>
   <div><b>{len(clusters)}</b><span>clusters</span></div>
 </div>
 
-<input id="q" type="search" placeholder="Search nodes — try ggx, fresnel, denoise"
-       autocomplete="off" spellcheck="false">
-<ul id="results"></ul>
-
 <h2>Clusters</h2>
 <div class="cards">{cards}</div>
 
 <h2>Relations</h2>
 <p class="lede">A closed vocabulary. Every edge but <code>part-of</code> must say
 why — an edge without a reason is rejected by CI.</p>
-<ul class="edges">{legend}</ul>
+<ul class="edges">{legend_rows}</ul>
 """
-
-    script = """
-var NODES = %s;
-var q = document.getElementById('q'), out = document.getElementById('results');
-q.addEventListener('input', function () {
-  var v = q.value.trim().toLowerCase();
-  if (!v) { out.innerHTML = ''; return; }
-  out.innerHTML = NODES
-    .filter(function (n) { return n.k.indexOf(v) >= 0 || n.s.toLowerCase().indexOf(v) >= 0; })
-    .slice(0, 40)
-    .map(function (n) {
-      return '<li><a href="n/' + n.i + '.html">' + n.t + '</a> <span class="c">' + n.c + '</span></li>';
-    })
-    .join('') || '<li class="c">no matches</li>';
-});
-""" % json.dumps(index, separators=(",", ":"))
-
-    return page("graphics — a knowledge graph", body, 0, mermaid_src, script=script)
-
-
-def fetch(url):
-    ctx = ssl.create_default_context()
-    bundle = Path("/root/.ccr/ca-bundle.crt")
-    if bundle.exists():
-        ctx.load_verify_locations(str(bundle))
-    with urllib.request.urlopen(url, context=ctx, timeout=90) as response:
-        return response.read()
+    return page("graphics — a knowledge graph", body, 0, index)
 
 
 def main():
@@ -574,7 +652,6 @@ def main():
     out_dir = ROOT / "site"
     if "--out" in argv:
         out_dir = Path(argv[argv.index("--out") + 1]).resolve()
-    vendor = "--vendor" in argv
 
     try:
         nodes, clusters = load_all()
@@ -582,42 +659,39 @@ def main():
         print(f"error: {exc}", file=sys.stderr)
         return 1
 
+    # Compact search index, inlined on every page. The haystack is built in the
+    # browser rather than shipped: it is the same text again, times 174 pages.
+    index = json.dumps([
+        [nid, node["title"], node["cluster"]]
+        + ([" ".join(node["aka"])] if node.get("aka") else [])
+        for nid, node in sorted(nodes.items())
+    ], separators=(",", ":"))
+
     if out_dir.exists():
         shutil.rmtree(out_dir)
     (out_dir / "n").mkdir(parents=True)
     (out_dir / "c").mkdir(parents=True)
 
-    mermaid_rel = MERMAID_CDN
-    if vendor:
-        try:
-            payload = fetch(MERMAID_CDN)
-        except Exception as exc:  # network is the only thing that can fail here
-            print(f"error: could not vendor mermaid: {exc}", file=sys.stderr)
-            return 1
-        (out_dir / "vendor").mkdir()
-        (out_dir / "vendor" / MERMAID_FILE).write_bytes(payload)
-        mermaid_rel = f"vendor/{MERMAID_FILE}"
-        print(f"vendored mermaid {MERMAID_VERSION} ({len(payload) // 1024} KiB)")
-
-    def src(depth):
-        return ("../" * depth + mermaid_rel) if vendor else MERMAID_CDN
-
     backlinks = incoming(nodes)
 
-    (out_dir / "style.css").write_text(STYLE.strip() + "\n" + relation_css() + "\n")
-    (out_dir / ".nojekyll").write_text("")
-    (out_dir / "index.html").write_text(render_index(nodes, clusters, src(0)))
+    try:
+        (out_dir / "style.css").write_text(STYLE.strip() + "\n" + relation_css() + "\n")
+        (out_dir / ".nojekyll").write_text("")
+        (out_dir / "index.html").write_text(render_index(nodes, clusters, index))
 
-    for cid, title, blurb in clusters:
-        if members_of(nodes, cid):
-            (out_dir / "c" / f"{cid}.html").write_text(
-                render_cluster(cid, title, blurb, nodes, src(1))
+        for cid, title, blurb in clusters:
+            if members_of(nodes, cid):
+                (out_dir / "c" / f"{cid}.html").write_text(
+                    render_cluster(cid, title, blurb, nodes, index)
+                )
+
+        for nid in nodes:
+            (out_dir / "n" / f"{nid}.html").write_text(
+                render_node(nid, nodes, clusters, backlinks, index)
             )
-
-    for nid in nodes:
-        (out_dir / "n" / f"{nid}.html").write_text(
-            render_node(nid, nodes, clusters, backlinks, src(1))
-        )
+    except Problem as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
 
     # The whole graph as one file, for anyone who wants to query it elsewhere.
     (out_dir / "graph.json").write_text(json.dumps({

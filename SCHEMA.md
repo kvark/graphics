@@ -98,7 +98,6 @@ python3 tools/kg.py path lambert diffuse-layering
 python3 tools/kg.py search fresnel
 python3 tools/kg.py stats
 python3 tools/site.py             # build the GitHub Pages site into site/
-python3 tools/site.py --vendor    # ...bundling mermaid, as the deploy does
 ```
 
 All three read the graph through `tools/graph.py`, which owns the schema —
