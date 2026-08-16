@@ -9,21 +9,8 @@
 
 import sys
 from collections import Counter, deque
-from pathlib import Path
 
-import yaml
-
-ROOT = Path(__file__).resolve().parent.parent
-NODES_DIR = ROOT / "nodes"
-
-
-def load():
-    nodes = {}
-    for path in sorted(NODES_DIR.glob("*.yaml")):
-        node = yaml.safe_load(path.read_text())
-        node["id"] = path.stem
-        nodes[path.stem] = node
-    return nodes
+from graph import incoming, load_nodes
 
 
 def adjacency(nodes):
@@ -87,15 +74,10 @@ def cmd_show(nodes, args):
             why = f"  — {edge['why']}" if edge.get("why") else ""
             print(f"    --{edge['rel']}--> {edge['to']}{why}")
 
-    incoming = [
-        (other, edge)
-        for other, onode in sorted(nodes.items())
-        for edge in onode.get("edges") or []
-        if edge.get("to") == nid
-    ]
-    if incoming:
+    backlinks = incoming(nodes)[nid]
+    if backlinks:
         print("\n  incoming:")
-        for other, edge in incoming:
+        for other, edge in backlinks:
             why = f"  — {edge['why']}" if edge.get("why") else ""
             print(f"    {other} --{edge['rel']}-->{why}")
 
@@ -188,13 +170,11 @@ def cmd_stats(nodes, args):
     for rel, count in rels.most_common():
         print(f"  {rel:<20} {count:>4}")
 
+    backlinks = incoming(nodes)
     orphans = sorted(
         nid
         for nid in nodes
-        if not (nodes[nid].get("edges") or [])
-        and not any(
-            e.get("to") == nid for n in nodes.values() for e in n.get("edges") or []
-        )
+        if not (nodes[nid].get("edges") or []) and not backlinks[nid]
     )
     if orphans:
         print(f"\nunconnected: {', '.join(orphans)}")
@@ -218,7 +198,7 @@ def main():
     if len(args) - 1 < arity:
         print(f"'{args[0]}' needs {arity} argument(s)", file=sys.stderr)
         return 1
-    return handler(load(), args[1:])
+    return handler(load_nodes(), args[1:])
 
 
 if __name__ == "__main__":

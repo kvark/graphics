@@ -1,0 +1,51 @@
+name: pages
+
+# Publishes the browsable graph to GitHub Pages on every push to the default
+# branch. Requires Settings -> Pages -> Source: "GitHub Actions" to be enabled
+# once, by hand; until that is done this workflow fails at the deploy step.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml
+
+      # Same validation the push check runs: a graph that fails it is not published.
+      - run: python3 tools/build.py --check
+
+      # --vendor bundles mermaid into the artifact, so the published site
+      # makes no external requests at runtime.
+      - run: python3 tools/site.py --vendor --out site
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
