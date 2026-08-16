@@ -1,6 +1,6 @@
 """Loading, validation and diagram rendering for the node graph.
 
-Shared by build.py (README), kg.py (queries) and site.py (GitHub Pages) so
+Shared by check.py (validation), kg.py (queries) and site.py (the site) so
 the schema lives in exactly one place.
 """
 
@@ -149,6 +149,10 @@ def diagram(nodes, members, click=None, direction="LR", click_target="_blank",
             focus=None):
     """Mermaid source for `members` plus any nodes they link to.
 
+    Returns (source, relations). `relations` lists the relation of each edge in
+    the order they are declared, which is the order mermaid indexes its link
+    paths by, so a caller can colour them afterwards.
+
     Returned unfenced; callers wrap it for markdown or HTML as needed.
     `click` maps a node id to a URL, or returns None for no link.
     `focus` keeps only edges touching that node, so a neighbourhood view does
@@ -189,7 +193,7 @@ def diagram(nodes, members, click=None, direction="LR", click_target="_blank",
             f"    class {','.join(mermaid_id(n) for n in sorted(external))} ext;"
         )
 
-    return "\n".join(lines)
+    return "\n".join(lines), [edge["rel"] for _, edge, _ in edges]
 
 
 def anchors(node):
