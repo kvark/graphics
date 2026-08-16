@@ -5,10 +5,12 @@ summary: >
   Replaces Phong's reflection vector with the half vector between light
   and view. Cheaper, and the resulting highlight elongates at grazing
   angles the way real ones do.
+wikipedia: https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model
 refs:
   - title: Models of Light Reflection for Computer Synthesized Pictures
     authors: Blinn
     year: 1977
+    url: https://doi.org/10.1145/965141.563893
 edges:
   - rel: corrects
     to: phong

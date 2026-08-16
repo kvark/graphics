@@ -10,6 +10,7 @@ refs:
   - title: Heuristics for Ray Tracing Using Space Subdivision
     authors: MacDonald, Booth
     year: 1990
+    url: https://doi.org/10.1007/bf01911006
 edges:
   - rel: corrects
     to: bvh

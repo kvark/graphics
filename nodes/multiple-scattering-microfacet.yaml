@@ -9,6 +9,7 @@ refs:
   - title: Multiple-Scattering Microfacet BSDFs with the Smith Model
     authors: "Heitz, Hanika, d'Eon, Dachsbacher"
     year: 2016
+    url: https://doi.org/10.1145/2897824.2925943
 edges:
   - rel: corrects
     to: smith-masking

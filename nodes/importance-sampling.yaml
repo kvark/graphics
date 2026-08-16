@@ -4,6 +4,7 @@ summary: >
   Draw samples proportional to how much they contribute and divide by that
   density. Same expected value, far less variance, and the foundation
   every practical estimator in rendering is built on.
+wikipedia: https://en.wikipedia.org/wiki/Importance_sampling
 edges:
   - rel: corrects
     to: monte-carlo-integration

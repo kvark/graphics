@@ -6,6 +6,7 @@ summary: >
   Estimates per-pixel variance from the temporal history and drives the
   spatial filter width from it, so converged regions stay sharp while
   noisy ones are blurred hard.
+wikipedia: https://en.wikipedia.org/wiki/Noise_reduction
 refs:
   - title: "Spatiotemporal Variance-Guided Filtering: Real-Time Reconstruction for Path-Traced Global Illumination"
     authors: Schied et al.

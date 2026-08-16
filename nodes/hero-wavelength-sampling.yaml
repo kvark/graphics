@@ -9,6 +9,7 @@ refs:
   - title: Hero Wavelength Spectral Sampling
     authors: Wilkie, Nawaz, Droske, Weidlich, Hanika
     year: 2014
+    url: https://doi.org/10.1111/cgf.12419
 edges:
   - rel: corrects
     to: spectral-rendering

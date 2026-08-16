@@ -10,6 +10,7 @@ refs:
   - title: Interactive Reconstruction of Monte Carlo Image Sequences using a Recurrent Denoising Autoencoder
     authors: Chaitanya et al.
     year: 2017
+    url: https://doi.org/10.1145/3072959.3073601
 edges:
   - rel: alternative-to
     to: svgf

@@ -4,6 +4,7 @@ summary: >
   Terminate a path with some probability and divide the survivors by the
   survival probability. Bounds path length without the bias that a hard
   depth cutoff introduces.
+wikipedia: https://en.wikipedia.org/wiki/Russian_roulette
 edges:
   - rel: corrects
     to: path-tracing

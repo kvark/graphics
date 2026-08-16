@@ -5,10 +5,12 @@ summary: >
   Solves the rendering equation by tracing random walks from the camera
   and averaging their contributions. Unbiased and simple, and the baseline
   every other transport algorithm is measured against.
+wikipedia: https://en.wikipedia.org/wiki/Path_tracing
 refs:
   - title: The Rendering Equation
     authors: Kajiya
     year: 1986
+    url: https://doi.org/10.1145/280811.280987
 edges:
   - rel: specializes
     to: rendering-equation

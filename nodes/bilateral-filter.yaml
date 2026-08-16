@@ -3,6 +3,7 @@ cluster: denoising
 summary: >
   Weights a blur by similarity in depth, normal and colour as well as
   distance, so it smooths within a surface but not across its boundaries.
+wikipedia: https://en.wikipedia.org/wiki/Bilateral_filter
 edges:
   - rel: corrects
     to: monte-carlo-integration

@@ -5,10 +5,12 @@ summary: >
   An empirical specular lobe: the cosine between the reflection vector and
   the view, raised to a power. No physical basis, but it was the first
   shading model cheap enough to be ubiquitous.
+wikipedia: https://en.wikipedia.org/wiki/Phong_reflection_model
 refs:
   - title: Illumination for Computer Generated Pictures
     authors: Phong
     year: 1975
+    url: https://doi.org/10.1145/280811.280980
 edges:
   - rel: specializes
     to: specular-reflection

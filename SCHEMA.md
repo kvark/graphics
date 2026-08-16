@@ -39,8 +39,19 @@ edges:
 | `year` | no | year the idea was introduced |
 | `aka` | no | alternate names, for search |
 | `tags` | no | free-form, not validated |
-| `refs` | no | primary sources; the first one becomes the diagram's click-through link |
+| `wikipedia` | no | full URL of a background article |
+| `refs` | no | primary sources |
 | `edges` | no | typed relations to other nodes |
+
+**Every node must have at least one link out** — a `ref` with a `url`, or a
+`wikipedia` article, or both. A node with neither fails validation. The point is
+that a reader can check a claim against something outside this repository rather
+than trusting a summary written here; a `corrects` edge is only worth having if
+the paper it points at can be read.
+
+Prefer the primary source. Wikipedia is the fallback for ideas that never had
+one paper — radiance, rasterization, tone mapping — and for nodes whose source
+is a course or a talk with no stable URL.
 
 ## Edges
 

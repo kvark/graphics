@@ -9,6 +9,7 @@ refs:
   - title: A Reflectance Model for Computer Graphics
     authors: Cook, Torrance
     year: 1982
+    url: https://doi.org/10.1145/965161.806819
 edges:
   - rel: specializes
     to: microfacet-model

@@ -4,10 +4,12 @@ year: 1974
 summary: >
   Assigns surface parameters from an image indexed by per-vertex
   coordinates, decoupling material detail from geometric density.
+wikipedia: https://en.wikipedia.org/wiki/Texture_mapping
 refs:
   - title: Computer Display of Curved Surfaces
     authors: Catmull
     year: 1974
+    url: https://doi.org/10.1145/280811.280920
 edges:
   - rel: requires
     to: polygon-mesh

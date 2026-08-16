@@ -5,6 +5,7 @@ summary: >
   Applies a small kernel repeatedly with exponentially increasing sample
   spacing, reaching a wide filter in a few passes instead of one enormous
   kernel.
+wikipedia: https://en.wikipedia.org/wiki/Stationary_wavelet_transform
 refs:
   - title: Edge-Avoiding A-Trous Wavelet Transform for Fast Global Illumination Filtering
     authors: Dammertz, Sewtz, Hanika, Lensch

@@ -5,6 +5,7 @@ summary: >
   Reorders the arithmetic so that a ray crossing an edge shared by two
   triangles is guaranteed to hit exactly one of them, closing the pinhole
   leaks that rounding otherwise produces.
+wikipedia: https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 refs:
   - title: Watertight Ray/Triangle Intersection
     authors: Woop, Benthin, Wald

@@ -5,10 +5,12 @@ summary: >
   States outgoing radiance at a point as emission plus the integral of
   incoming radiance weighted by the BSDF. Unified the previously separate
   ray tracing and radiosity traditions as approximations of one integral.
+wikipedia: https://en.wikipedia.org/wiki/Rendering_equation
 refs:
   - title: The Rendering Equation
     authors: Kajiya
     year: 1986
+    url: https://doi.org/10.1145/280811.280987
 edges:
   - rel: part-of
     to: light-transport

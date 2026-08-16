@@ -8,6 +8,7 @@ refs:
   - title: A Data-Driven Reflectance Model
     authors: Matusik, Pfister, Brand, McMillan
     year: 2003
+    url: https://doi.org/10.1145/1201775.882343
 edges:
   - rel: validates
     to: brdf

@@ -9,6 +9,7 @@ refs:
   - title: Theory for Off-Specular Reflection From Roughened Surfaces
     authors: Torrance, Sparrow
     year: 1967
+    url: https://doi.org/10.1364/josa.57.001105
 edges:
   - rel: part-of
     to: microfacet-model

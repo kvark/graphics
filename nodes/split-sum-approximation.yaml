@@ -5,6 +5,7 @@ summary: >
   Factors the specular IBL integral into a prefiltered radiance lookup
   times a precomputed BRDF response table. Both halves fit in textures,
   which is what made physically based specular affordable in real time.
+wikipedia: https://en.wikipedia.org/wiki/Image-based_lighting
 refs:
   - title: Real Shading in Unreal Engine 4
     authors: Karis

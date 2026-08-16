@@ -6,10 +6,12 @@ summary: >
   Adds proper pattern classification, sharper edge detection and optional
   multi-sample or temporal inputs, recovering the detail that cheap
   morphological filters blur away.
+wikipedia: https://en.wikipedia.org/wiki/Spatial_anti-aliasing
 refs:
   - title: "SMAA: Enhanced Subpixel Morphological Antialiasing"
     authors: Jimenez, Echevarria, Sousa, Gutierrez
     year: 2012
+    url: https://doi.org/10.1111/j.1467-8659.2012.03014.x
 edges:
   - rel: corrects
     to: mlaa

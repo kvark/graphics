@@ -4,6 +4,7 @@ summary: >
   Maps unbounded scene radiance into the range a display can emit. Every
   renderer needs one, and the choice of curve is as much a look decision
   as a technical one.
+wikipedia: https://en.wikipedia.org/wiki/Tone_mapping
 edges:
   - rel: requires
     to: linear-workflow

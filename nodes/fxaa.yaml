@@ -6,6 +6,7 @@ summary: >
   A single-pass luminance-gradient filter tuned to be almost free. Blurs
   some genuine detail, and shipped nearly everywhere because it needs
   nothing from the renderer but a finished frame.
+wikipedia: https://en.wikipedia.org/wiki/Fast_approximate_anti-aliasing
 refs:
   - title: FXAA
     authors: Lottes

@@ -9,6 +9,7 @@ refs:
   - title: Stochastic Progressive Photon Mapping
     authors: Hachisuka, Jensen
     year: 2009
+    url: https://doi.org/10.1145/1661412.1618487
 edges:
   - rel: corrects
     to: progressive-photon-mapping

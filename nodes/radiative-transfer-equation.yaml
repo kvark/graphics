@@ -5,6 +5,7 @@ summary: >
   The volumetric counterpart of the rendering equation, describing how
   radiance changes along a ray through absorption, out-scattering, in-
   scattering and emission.
+wikipedia: https://en.wikipedia.org/wiki/Radiative_transfer
 edges:
   - rel: extends
     to: rendering-equation

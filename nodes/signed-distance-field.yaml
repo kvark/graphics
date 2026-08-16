@@ -5,6 +5,7 @@ summary: >
   Stores distance to the nearest surface, negative inside. Booleans,
   offsets and blends become arithmetic on the field, and the distance
   value itself is a safe step length for tracing.
+wikipedia: https://en.wikipedia.org/wiki/Signed_distance_function
 edges:
   - rel: part-of
     to: surface-representation

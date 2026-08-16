@@ -2,6 +2,7 @@ title: Reflection
 cluster: foundations
 summary: >
   Light leaving a surface on the same side it arrived from.
+wikipedia: https://en.wikipedia.org/wiki/Reflection_%28physics%29
 edges:
   - rel: part-of
     to: light-transport

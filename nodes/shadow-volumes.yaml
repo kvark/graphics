@@ -5,10 +5,12 @@ summary: >
   Extrudes silhouette edges away from the light and uses the stencil
   buffer to count entries and exits. Geometrically exact, with no
   resolution artifacts, but fill-rate cost scales badly.
+wikipedia: https://en.wikipedia.org/wiki/Shadow_volume
 refs:
   - title: Shadow Algorithms for Computer Graphics
     authors: Crow
     year: 1977
+    url: https://doi.org/10.1145/965141.563901
 edges:
   - rel: alternative-to
     to: shadow-mapping

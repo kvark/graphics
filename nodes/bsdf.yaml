@@ -5,6 +5,7 @@ summary: >
   A BRDF and a BTDF taken together, defined over the whole sphere rather
   than the upper hemisphere, so that one function describes both sides of
   a surface.
+wikipedia: https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function
 edges:
   - rel: extends
     to: brdf

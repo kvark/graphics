@@ -5,6 +5,7 @@ summary: >
   Splits the view frustum by depth and gives each slice its own shadow
   map, so texel density roughly tracks screen-space size instead of being
   wasted on the far distance.
+wikipedia: https://en.wikipedia.org/wiki/Shadow_mapping
 edges:
   - rel: corrects
     to: shadow-mapping

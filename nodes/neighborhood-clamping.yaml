@@ -4,6 +4,7 @@ summary: >
   Constrains the reprojected history to the colour range of the current
   frame's neighbouring pixels, so a history sample that no longer
   describes this surface is pulled back into range.
+wikipedia: https://en.wikipedia.org/wiki/Temporal_anti-aliasing
 edges:
   - rel: corrects
     to: taa

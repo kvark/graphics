@@ -5,6 +5,7 @@ summary: >
   Replaces random points with deterministic low-discrepancy sequences that
   cover the domain more evenly, improving the convergence rate on smooth
   integrands beyond the inverse square root.
+wikipedia: https://en.wikipedia.org/wiki/Quasi-Monte_Carlo_method
 edges:
   - rel: alternative-to
     to: monte-carlo-integration

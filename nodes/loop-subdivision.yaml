@@ -4,6 +4,7 @@ year: 1987
 summary: >
   The triangle counterpart of Catmull-Clark, built on box splines, for
   pipelines whose base meshes are triangular rather than quad.
+wikipedia: https://en.wikipedia.org/wiki/Loop_subdivision_surface
 refs:
   - title: Smooth Subdivision Surfaces Based on Triangles
     authors: Loop

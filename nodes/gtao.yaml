@@ -6,6 +6,7 @@ summary: >
   Reformulates horizon-based occlusion with the correct cosine weighting
   and normalization so it converges to reference ambient occlusion instead
   of a darker look that needs artist compensation.
+wikipedia: https://en.wikipedia.org/wiki/Ambient_occlusion
 refs:
   - title: Practical Real-Time Strategies for Accurate Indirect Occlusion
     authors: Jimenez, Wu, Pesce, Jarabo

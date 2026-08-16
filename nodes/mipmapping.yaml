@@ -5,10 +5,12 @@ summary: >
   Stores a prefiltered pyramid and picks the level matching the screen-
   space footprint, turning texture minification from a sampling problem
   into a lookup.
+wikipedia: https://en.wikipedia.org/wiki/Mipmap
 refs:
   - title: Pyramidal Parametrics
     authors: Williams
     year: 1983
+    url: https://doi.org/10.1145/280811.280977
 edges:
   - rel: corrects
     to: texture-mapping

@@ -5,6 +5,7 @@ summary: >
   Renders below display resolution and reconstructs the full frame from
   jittered history, treating anti-aliasing and upscaling as the same
   reconstruction problem.
+wikipedia: https://en.wikipedia.org/wiki/Deep_Learning_Super_Sampling
 edges:
   - rel: extends
     to: taa

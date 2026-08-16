@@ -5,6 +5,7 @@ summary: >
   A single artist-facing parameter set, all normalized to zero-to-one,
   fitted against measured data. Its influence is mostly social: it made
   one vocabulary of material parameters near-universal across renderers.
+wikipedia: https://en.wikipedia.org/wiki/Physically_based_rendering
 refs:
   - title: Physically Based Shading at Disney
     authors: Burley

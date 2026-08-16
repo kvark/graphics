@@ -9,6 +9,7 @@ refs:
   - title: Moment Shadow Mapping
     authors: Peters, Klein
     year: 2015
+    url: https://doi.org/10.1145/2699276.2699277
 edges:
   - rel: corrects
     to: variance-shadow-maps

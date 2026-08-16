@@ -5,6 +5,7 @@ summary: >
   Sorts primitives along a Morton curve and builds the hierarchy from the
   resulting bit patterns, which parallelizes perfectly and rebuilds in
   milliseconds at some cost in tree quality.
+wikipedia: https://en.wikipedia.org/wiki/Bounding_volume_hierarchy
 refs:
   - title: Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees
     authors: Karras

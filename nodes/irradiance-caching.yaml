@@ -9,6 +9,7 @@ refs:
   - title: A Ray Tracing Solution for Diffuse Interreflection
     authors: Ward, Rubinstein, Clear
     year: 1988
+    url: https://doi.org/10.1145/1401132.1401224
 edges:
   - rel: corrects
     to: path-tracing

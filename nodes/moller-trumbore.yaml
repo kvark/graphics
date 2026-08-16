@@ -5,10 +5,12 @@ summary: >
   Solves for barycentric coordinates directly with a scalar triple
   product, needing no precomputed plane equation and therefore no per-
   triangle storage.
+wikipedia: https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 refs:
   - title: Fast, Minimum Storage Ray-Triangle Intersection
     authors: Moller, Trumbore
     year: 1997
+    url: https://doi.org/10.1145/1198555.1198746
 edges:
   - rel: specializes
     to: ray-triangle-intersection

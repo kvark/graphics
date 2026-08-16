@@ -6,6 +6,7 @@ summary: >
   colour and rasterizes them sorted by depth. Explicit primitives and a
   rasterizer instead of ray marching an implicit field, which is what
   makes it real time.
+wikipedia: https://en.wikipedia.org/wiki/Gaussian_splatting
 refs:
   - title: 3D Gaussian Splatting for Real-Time Radiance Field Rendering
     authors: Kerbl, Kopanas, Leimkuhler, Drettakis

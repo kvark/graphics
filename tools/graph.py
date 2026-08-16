@@ -26,7 +26,7 @@ RELATIONS = {
 }
 
 REQUIRED_FIELDS = ("title", "cluster", "summary")
-KNOWN_FIELDS = REQUIRED_FIELDS + ("year", "aka", "tags", "refs", "edges")
+KNOWN_FIELDS = REQUIRED_FIELDS + ("year", "aka", "tags", "wikipedia", "refs", "edges")
 
 
 class Problem(Exception):
@@ -74,6 +74,13 @@ def validate(nodes, clusters):
         for ref in node.get("refs") or []:
             if not ref.get("title"):
                 errors.append(f"{where}: a ref has no title")
+
+        # Every node has to be anchored to something outside this repo, so a
+        # reader can check the claim rather than take the summary on trust.
+        if not anchors(node):
+            errors.append(
+                f"{where}: no anchor — needs a 'wikipedia' link or a ref with a url"
+            )
 
         seen = set()
         for edge in node.get("edges") or []:
@@ -185,8 +192,15 @@ def diagram(nodes, members, click=None, direction="LR", click_target="_blank",
     return "\n".join(lines)
 
 
+def anchors(node):
+    """Every external link for a node: primary sources first, then background."""
+    urls = [r["url"] for r in node.get("refs") or [] if r.get("url")]
+    if node.get("wikipedia"):
+        urls.append(node["wikipedia"])
+    return urls
+
+
 def primary_url(node):
-    for ref in node.get("refs") or []:
-        if ref.get("url"):
-            return ref["url"]
-    return None
+    """The best single link for a node: a source if it has one, else background."""
+    found = anchors(node)
+    return found[0] if found else None

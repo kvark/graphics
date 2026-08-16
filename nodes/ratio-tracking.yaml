@@ -9,6 +9,7 @@ refs:
   - title: Residual Ratio Tracking for Estimating Attenuation in Participating Media
     authors: Novak, Selle, Jarosz
     year: 2014
+    url: https://doi.org/10.1145/2661229.2661292
 edges:
   - rel: corrects
     to: delta-tracking

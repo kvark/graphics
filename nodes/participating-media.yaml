@@ -3,6 +3,7 @@ cluster: volumetrics
 summary: >
   Volumes that absorb, emit and scatter light along a ray rather than only
   at surfaces: smoke, fog, clouds, skin interiors.
+wikipedia: https://en.wikipedia.org/wiki/Volume_rendering
 edges:
   - rel: part-of
     to: scattering

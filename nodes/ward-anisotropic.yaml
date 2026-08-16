@@ -9,6 +9,7 @@ refs:
   - title: Measuring and Modeling Anisotropic Reflection
     authors: Ward
     year: 1992
+    url: https://doi.org/10.1145/142920.134078
 edges:
   - rel: extends
     to: specular-reflection

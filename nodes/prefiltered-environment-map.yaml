@@ -4,6 +4,7 @@ summary: >
   Convolves the environment map against the BRDF lobe ahead of time,
   storing successively rougher versions in mip levels so a runtime lookup
   replaces a runtime integral.
+wikipedia: https://en.wikipedia.org/wiki/Reflection_mapping
 edges:
   - rel: approximates
     to: image-based-lighting

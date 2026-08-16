@@ -6,10 +6,12 @@ summary: >
   Finds edge patterns in the finished image and reconstructs a coverage
   estimate from their shape, adding anti-aliasing entirely as a post-
   process.
+wikipedia: https://en.wikipedia.org/wiki/Morphological_antialiasing
 refs:
   - title: Morphological Antialiasing
     authors: Reshetov
     year: 2009
+    url: https://doi.org/10.1145/1572769.1572787
 edges:
   - rel: alternative-to
     to: msaa

@@ -4,6 +4,7 @@ summary: >
   Uses the radical inverse in a different prime base for each dimension.
   Simple and progressive, but correlations between high dimensions show up
   as visible structure.
+wikipedia: https://en.wikipedia.org/wiki/Halton_sequence
 edges:
   - rel: specializes
     to: quasi-monte-carlo

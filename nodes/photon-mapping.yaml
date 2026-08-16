@@ -5,10 +5,12 @@ summary: >
   Trace particles from the lights, store their hits in a spatial
   structure, then estimate radiance at camera hit points by density
   estimation over nearby photons. Biased but consistent.
+wikipedia: https://en.wikipedia.org/wiki/Photon_mapping
 refs:
   - title: Global Illumination using Photon Maps
     authors: Jensen
     year: 1996
+    url: https://doi.org/10.1007/978-3-7091-7484-5_3
 edges:
   - rel: corrects
     to: path-tracing

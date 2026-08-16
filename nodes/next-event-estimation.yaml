@@ -5,6 +5,7 @@ summary: >
   At every path vertex, additionally sample a point on a light and trace a
   shadow ray to it, rather than waiting for the random walk to wander onto
   an emitter by chance.
+wikipedia: https://en.wikipedia.org/wiki/Path_tracing
 edges:
   - rel: corrects
     to: path-tracing

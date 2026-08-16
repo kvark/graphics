@@ -4,6 +4,7 @@ summary: >
   A base-two low-discrepancy construction with good high-dimensional
   properties and very fast incremental evaluation, which is why renderers
   reach for it first.
+wikipedia: https://en.wikipedia.org/wiki/Sobol_sequence
 edges:
   - rel: specializes
     to: quasi-monte-carlo

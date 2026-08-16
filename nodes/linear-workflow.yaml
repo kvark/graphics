@@ -5,6 +5,7 @@ summary: >
   linear space, and encode once on output. Blending or filtering encoded
   values is simply wrong arithmetic, and the errors show up as dark
   fringes.
+wikipedia: https://en.wikipedia.org/wiki/Gamma_correction
 edges:
   - rel: requires
     to: srgb

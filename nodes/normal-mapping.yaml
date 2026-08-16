@@ -4,6 +4,7 @@ summary: >
   Stores the perturbed normal directly in a tangent-space texture instead
   of deriving it from height differences, which removes the derivative
   computation and allows normals baked from a high-resolution mesh.
+wikipedia: https://en.wikipedia.org/wiki/Normal_mapping
 edges:
   - rel: specializes
     to: bump-mapping

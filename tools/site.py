@@ -18,6 +18,7 @@ import json
 import shutil
 import ssl
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -85,8 +86,26 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
        background: var(--code); color: var(--muted); margin-right: .5rem;
        font-family: ui-monospace, monospace; }
 .why { color: var(--muted); display: block; margin-top: .15rem; font-size: .92rem; }
-.diagram { background: var(--card); border: 1px solid var(--line); border-radius: 8px;
-           padding: 1rem; margin: 1rem 0 2rem; overflow-x: auto; }
+.diagram { position: relative; background: var(--card); border: 1px solid var(--line);
+           border-radius: 8px; padding: 1rem; margin: 1rem 0 2rem; overflow: auto; }
+/* Break out of the text column: a 29-node graph needs the whole window. */
+.diagram.wide { width: min(97vw, 1700px); margin-left: calc(50% - min(48.5vw, 850px)); }
+/* Only once pan/zoom is live does the box become a fixed viewport. Without JS
+   it stays auto-height and scrollable, so nothing is ever clipped away. */
+.diagram.pz { overflow: hidden; height: 62vh; min-height: 24rem; cursor: grab;
+              user-select: none; -webkit-user-select: none;
+              touch-action: none; }
+.diagram.wide.pz { height: 80vh; }
+.diagram.pz.grabbing { cursor: grabbing; }
+.diagram.pz svg { width: 100%; height: 100%; max-width: none; display: block; }
+.diagram:fullscreen { height: 100vh; width: 100vw; margin: 0; border-radius: 0; }
+.tools { position: absolute; top: .5rem; right: .5rem; z-index: 2; display: none;
+         gap: .25rem; }
+.diagram.pz .tools { display: flex; }
+.tools button { font: 600 .8rem/1 ui-monospace, monospace; color: var(--muted);
+                background: var(--bg); border: 1px solid var(--line);
+                border-radius: 5px; padding: .4rem .55rem; cursor: pointer; }
+.tools button:hover { color: var(--fg); border-color: var(--muted); }
 /* Until mermaid replaces it, this is the diagram source. Keep it legible:
    if the library never loads, the page degrades to readable text. */
 pre.mermaid { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -107,6 +126,101 @@ pre.mermaid[data-processed] { color: inherit; }
              letter-spacing: .06em; }
 footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line);
          color: var(--muted); font-size: .85rem; }
+"""
+
+
+PANZOOM = """
+(function () {
+  function setup(box) {
+    var svg = box.querySelector('svg');
+    if (!svg) return;
+    var raw = (svg.getAttribute('viewBox') || '').split(/[\\s,]+/).map(Number);
+    if (raw.length !== 4 || !raw[2]) return;
+    var home = raw.slice(), vb = raw.slice();
+
+    svg.removeAttribute('width');
+    svg.removeAttribute('height');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    box.classList.add('pz');
+
+    // Match the box to the graph's own aspect rather than a fixed height:
+    // these graphs are wide and short, and a tall box just letterboxes them.
+    function fit() {
+      if (document.fullscreenElement === box) { box.style.height = '100vh'; return; }
+      var inner = box.clientWidth - 32;
+      var ideal = inner * home[3] / home[2] + 32;
+      var cap = window.innerHeight * 0.85;
+      box.style.height = Math.round(Math.max(320, Math.min(ideal, cap))) + 'px';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    document.addEventListener('fullscreenchange', fit);
+
+    function apply() { svg.setAttribute('viewBox', vb.join(' ')); }
+    function zoom(f, cx, cy) {
+      var w = vb[2] * f;
+      if (w < home[2] / 50 || w > home[2] * 15) return;
+      vb[0] = cx - (cx - vb[0]) * f;
+      vb[1] = cy - (cy - vb[1]) * f;
+      vb[2] = w; vb[3] = vb[3] * f;
+      apply();
+    }
+    function at(e) {
+      var r = svg.getBoundingClientRect();
+      return [vb[0] + (e.clientX - r.left) / r.width * vb[2],
+              vb[1] + (e.clientY - r.top) / r.height * vb[3]];
+    }
+
+    box.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var p = at(e);
+      zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, p[0], p[1]);
+    }, { passive: false });
+
+    var drag = null, moved = 0;
+    svg.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      drag = { x: e.clientX, y: e.clientY };
+      moved = 0;
+      box.classList.add('grabbing');
+    });
+    // Tracked on window, not via setPointerCapture: capturing the pointer
+    // retargets the following click to the svg, which would stop mermaid's
+    // per-node click handlers from ever firing.
+    window.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var r = svg.getBoundingClientRect();
+      moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
+      vb[0] -= (e.clientX - drag.x) * vb[2] / r.width;
+      vb[1] -= (e.clientY - drag.y) * vb[3] / r.height;
+      drag.x = e.clientX; drag.y = e.clientY;
+      apply();
+    });
+    function release() { drag = null; box.classList.remove('grabbing'); }
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+    // A drag that happens to end on a node must not also navigate to it.
+    svg.addEventListener('click', function (e) {
+      if (moved > 6) { e.stopPropagation(); e.preventDefault(); }
+      moved = 0;
+    }, true);
+
+    box.querySelectorAll('[data-act]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var act = btn.getAttribute('data-act');
+        var cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2;
+        if (act === 'in') zoom(1 / 1.4, cx, cy);
+        else if (act === 'out') zoom(1.4, cx, cy);
+        else if (act === 'reset') { vb = home.slice(); apply(); }
+        else if (document.fullscreenElement) document.exitFullscreen();
+        else if (box.requestFullscreen) box.requestFullscreen();
+      });
+    });
+  }
+  window.__diagrams = function () {
+    document.querySelectorAll('.diagram').forEach(setup);
+  };
+})();
 """
 
 
@@ -141,15 +255,19 @@ The YAML files are the canonical form — this site is a view of them.
 </footer>
 </div>
 {extra}
+<script>{PANZOOM}</script>
 <script src="{mermaid_src}"></script>
 <script>
 if (window.mermaid) {{
   mermaid.initialize({{
-    startOnLoad: true,
+    startOnLoad: false,
     theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'neutral',
     securityLevel: 'loose',
-    flowchart: {{ curve: 'basis', useMaxWidth: true }}
+    flowchart: {{ curve: 'basis', useMaxWidth: false }}
   }});
+  // Explicit run rather than startOnLoad: pan/zoom needs the rendered svg,
+  // and this gives a promise to hang that on.
+  mermaid.run().then(window.__diagrams).catch(function (e) {{ console.error(e); }});
 }}
 </script>
 </body>
@@ -157,8 +275,18 @@ if (window.mermaid) {{
 """
 
 
-def fig(source):
-    return f'<div class="diagram"><pre class="mermaid">{esc(source)}</pre></div>'
+def fig(source, wide=False):
+    tools = (
+        '<div class="tools">'
+        '<button data-act="out" title="Zoom out">&minus;</button>'
+        '<button data-act="in" title="Zoom in">+</button>'
+        '<button data-act="reset" title="Reset view">reset</button>'
+        '<button data-act="full" title="Fullscreen">&#9974;</button>'
+        "</div>"
+    )
+    cls = "diagram wide" if wide else "diagram"
+    return (f'<div class="{cls}">{tools}'
+            f'<pre class="mermaid">{esc(source)}</pre></div>')
 
 
 def node_link(nid, nodes, depth):
@@ -168,7 +296,8 @@ def node_link(nid, nodes, depth):
 
 def render_refs(node):
     refs = node.get("refs") or []
-    if not refs:
+    wiki = node.get("wikipedia")
+    if not refs and not wiki:
         return ""
     items = []
     for ref in refs:
@@ -181,6 +310,11 @@ def render_refs(node):
         if ref.get("url"):
             line += f' · <a href="{esc(ref["url"])}">link</a>'
         items.append(f"<li>{line}</li>")
+    if wiki:
+        article = urllib.parse.unquote(wiki.rsplit("/", 1)[-1]).replace("_", " ")
+        items.append(
+            f'<li>Background — <a href="{esc(wiki)}">{esc(article)}</a> on Wikipedia</li>'
+        )
     return f'<h3>References</h3><ul class="refs">{"".join(items)}</ul>'
 
 
@@ -252,8 +386,9 @@ def render_cluster(cid, title, blurb, nodes, mermaid_src):
     )
     body = (
         f"<h1>{esc(title)}</h1>"
-        f'<p class="lede">{esc(blurb)}</p>'
-        f"{fig(source)}"
+        f'<p class="lede">{esc(blurb)} '
+        "<em>Drag to pan, scroll to zoom, click a node to open it.</em></p>"
+        f"{fig(source, wide=True)}"
         f'<h2>{len(members)} nodes</h2><div class="cards">{cards}</div>'
     )
     return page(title, body, 1, mermaid_src)

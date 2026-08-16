@@ -4,6 +4,7 @@ summary: >
   Caps individual sample contributions at a threshold. Biased,
   unapologetically so: a single sample thousands of times brighter than
   its neighbours will not average out in any practical sample count.
+wikipedia: https://en.wikipedia.org/wiki/Variance_reduction
 edges:
   - rel: corrects
     to: monte-carlo-integration

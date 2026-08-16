@@ -10,6 +10,7 @@ refs:
   - title: Progressive Photon Mapping
     authors: Hachisuka, Ogaki, Jensen
     year: 2008
+    url: https://doi.org/10.1145/1457515.1409083
 edges:
   - rel: corrects
     to: photon-mapping

@@ -10,6 +10,7 @@ refs:
   - title: Spatiotemporal Reservoir Resampling for Real-Time Ray Tracing with Dynamic Direct Lighting
     authors: Bitterli, Wyman, Pharr, Rayfield, Jarosz, Novak
     year: 2020
+    url: https://doi.org/10.1145/3386569.3392481
 edges:
   - rel: specializes
     to: resampled-importance-sampling

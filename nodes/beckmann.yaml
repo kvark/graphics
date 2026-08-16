@@ -4,6 +4,7 @@ summary: >
   A Gaussian distribution of microfacet slopes, derived from physical
   optics. Its tail falls off quickly, so highlights end more abruptly than
   measured materials do.
+wikipedia: https://en.wikipedia.org/wiki/Specular_highlight
 edges:
   - rel: specializes
     to: microfacet-model

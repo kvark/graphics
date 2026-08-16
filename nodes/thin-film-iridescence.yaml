@@ -5,10 +5,12 @@ summary: >
   Models wave interference in a coating a few wavelengths thick, which
   makes reflectance shift with angle and produces the colours of soap
   films, oil slicks and anodized metal.
+wikipedia: https://en.wikipedia.org/wiki/Thin-film_interference
 refs:
   - title: A Practical Extension to Microfacet Theory for the Modeling of Varying Iridescence
     authors: Belcour, Barla
     year: 2017
+    url: https://doi.org/10.1145/3072959.3073620
 edges:
   - rel: extends
     to: fresnel

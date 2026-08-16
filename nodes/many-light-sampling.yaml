@@ -10,6 +10,7 @@ refs:
   - title: Importance Sampling of Many Lights with Adaptive Tree Splitting
     authors: Conty Estevez, Kulla
     year: 2018
+    url: https://doi.org/10.1145/3084363.3085028
 edges:
   - rel: corrects
     to: instant-radiosity

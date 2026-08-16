@@ -4,6 +4,7 @@ summary: >
   Bakes static indirect lighting into textures parameterized over
   surfaces. Still the highest-quality option for static geometry, at the
   cost of build time and unique UVs.
+wikipedia: https://en.wikipedia.org/wiki/Lightmap
 edges:
   - rel: approximates
     to: radiosity

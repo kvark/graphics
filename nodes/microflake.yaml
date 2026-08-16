@@ -5,10 +5,12 @@ summary: >
   Applies microfacet reasoning to volumes: the medium is filled with
   oriented flakes rather than isotropic particles, so anisotropic
   materials like cloth and fur can be rendered as media.
+wikipedia: https://en.wikipedia.org/wiki/Radiative_transfer
 refs:
   - title: A Radiative Transfer Framework for Rendering Materials with Anisotropic Structure
     authors: Jakob, Arbree, Moon, Bala, Marschner
     year: 2010
+    url: https://doi.org/10.1145/1833349.1778790
 edges:
   - rel: extends
     to: phase-function

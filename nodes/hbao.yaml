@@ -9,6 +9,7 @@ refs:
   - title: Image-Space Horizon-Based Ambient Occlusion
     authors: Bavoil, Sainz, Dimitrov
     year: 2008
+    url: https://doi.org/10.1145/1401032.1401061
 edges:
   - rel: corrects
     to: ssao

@@ -5,6 +5,7 @@ summary: >
   visible pixel exactly once in a full-screen pass. Decouples lighting
   cost from scene complexity, at the price of bandwidth and awkward
   transparency.
+wikipedia: https://en.wikipedia.org/wiki/Deferred_shading
 edges:
   - rel: alternative-to
     to: forward-shading

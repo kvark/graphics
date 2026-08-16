@@ -5,10 +5,12 @@ summary: >
   Chooses per-pixel sample seeds so that the residual error is high-
   frequency across the screen. The error is not smaller, but the eye and
   any subsequent filter both handle it far better than white noise.
+wikipedia: https://en.wikipedia.org/wiki/Colors_of_noise
 refs:
   - title: A Low-Discrepancy Sampler that Distributes Monte Carlo Errors as a Blue Noise in Screen Space
     authors: Heitz, Belcour, Chizhov, Lucas, Iehl, Ostromoukhov
     year: 2019
+    url: https://doi.org/10.1145/3306307.3328191
 edges:
   - rel: corrects
     to: monte-carlo-integration

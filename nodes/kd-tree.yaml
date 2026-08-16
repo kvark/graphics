@@ -4,6 +4,7 @@ summary: >
   Recursively splits space rather than objects with axis-aligned planes.
   Nodes never overlap, which makes traversal tight, but primitives
   straddling a plane must be referenced twice.
+wikipedia: https://en.wikipedia.org/wiki/K-d_tree
 edges:
   - rel: alternative-to
     to: bvh

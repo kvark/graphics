@@ -4,6 +4,7 @@ summary: >
   The general idea that a frame is one sample of a continuously moving
   signal, so previous frames are usable samples if you can find the
   corresponding point.
+wikipedia: https://en.wikipedia.org/wiki/Spatial_anti-aliasing
 edges:
   - rel: approximates
     to: supersampling

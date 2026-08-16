@@ -5,10 +5,12 @@ summary: >
   A simple rational curve that maps zero to zero and infinity to one, so
   nothing ever clips. Desaturates highlights and leaves images looking
   flat, but it is the reference everyone starts from.
+wikipedia: https://en.wikipedia.org/wiki/Tone_mapping
 refs:
   - title: Photographic Tone Reproduction for Digital Images
     authors: Reinhard, Stark, Shirley, Ferwerda
     year: 2002
+    url: https://doi.org/10.1145/3596711.3596781
 edges:
   - rel: specializes
     to: tone-mapping
