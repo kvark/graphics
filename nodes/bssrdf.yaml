@@ -7,10 +7,12 @@ summary: >
   than assuming both happen at the same place. Necessary for skin, marble
   and milk, where the transport distance is visible at normal viewing
   scale.
+wikipedia: https://en.wikipedia.org/wiki/Subsurface_scattering
 refs:
   - title: A Practical Model for Subsurface Light Transport
     authors: Jensen, Marschner, Levoy, Hanrahan
     year: 2001
+    url: https://doi.org/10.1145/3596711.3596747
 edges:
   - rel: extends
     to: bsdf

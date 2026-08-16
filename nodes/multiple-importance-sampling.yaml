@@ -10,6 +10,7 @@ refs:
   - title: Optimally Combining Sampling Techniques for Monte Carlo Rendering
     authors: Veach, Guibas
     year: 1995
+    url: https://doi.org/10.1145/218380.218498
 edges:
   - rel: corrects
     to: next-event-estimation

@@ -4,6 +4,7 @@ aka: [LOD]
 summary: >
   Swaps in coarser geometry as an object shrinks on screen, keeping
   triangle density roughly constant in screen space.
+wikipedia: https://en.wikipedia.org/wiki/Level_of_detail_%28computer_graphics%29
 edges:
   - rel: corrects
     to: rasterization

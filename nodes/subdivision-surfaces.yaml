@@ -4,6 +4,7 @@ summary: >
   Defines a smooth limit surface as the result of infinitely refining a
   control mesh, giving a single representation that is both editable at
   low resolution and smooth at render time.
+wikipedia: https://en.wikipedia.org/wiki/Subdivision_surface
 edges:
   - rel: part-of
     to: surface-representation

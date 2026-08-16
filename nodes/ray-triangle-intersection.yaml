@@ -3,6 +3,7 @@ cluster: geometry
 summary: >
   The innermost operation of every ray tracer, so constant factors and
   numerical robustness here dominate both performance and correctness.
+wikipedia: https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 edges:
   - rel: requires
     to: polygon-mesh

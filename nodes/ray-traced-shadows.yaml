@@ -4,6 +4,7 @@ summary: >
   Traces a ray toward the light per shaded point. No resolution, bias or
   cascade artifacts at all, replaced by sampling noise and a per-pixel
   tracing cost.
+wikipedia: https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
 edges:
   - rel: alternative-to
     to: shadow-mapping

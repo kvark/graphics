@@ -2,6 +2,7 @@ title: Scattering
 cluster: foundations
 summary: >
   Light redirected inside a medium rather than at a surface boundary.
+wikipedia: https://en.wikipedia.org/wiki/Scattering
 edges:
   - rel: part-of
     to: light-transport

@@ -4,3 +4,4 @@ summary: >
   Estimate an integral by averaging the integrand over random samples
   divided by their density. Converges as the inverse square root of sample
   count regardless of dimensionality, which is why it wins in path space.
+wikipedia: https://en.wikipedia.org/wiki/Monte_Carlo_integration

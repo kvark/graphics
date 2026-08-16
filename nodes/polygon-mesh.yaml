@@ -4,6 +4,7 @@ summary: >
   Vertices, edges and faces. Explicit, cheap to rasterize and to
   intersect, and the representation essentially all hardware is built
   around.
+wikipedia: https://en.wikipedia.org/wiki/Polygon_mesh
 edges:
   - rel: part-of
     to: surface-representation

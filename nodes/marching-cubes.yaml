@@ -5,10 +5,12 @@ summary: >
   Extracts a triangle mesh from a scalar field by table lookup on the sign
   pattern at each cell's corners. The reason volume data can be handed to
   ordinary triangle pipelines.
+wikipedia: https://en.wikipedia.org/wiki/Marching_cubes
 refs:
   - title: "Marching Cubes: A High Resolution 3D Surface Construction Algorithm"
     authors: Lorensen, Cline
     year: 1987
+    url: https://doi.org/10.1145/37402.37422
 edges:
   - rel: alternative-to
     to: sphere-tracing

@@ -5,6 +5,7 @@ summary: >
   Bins lights into screen tiles or view-space froxels so each pixel
   iterates only the lights that can reach it, making thousands of local
   lights affordable.
+wikipedia: https://en.wikipedia.org/wiki/Deferred_shading
 refs:
   - title: Clustered Deferred and Forward Shading
     authors: Olsson, Billeter, Assarsson

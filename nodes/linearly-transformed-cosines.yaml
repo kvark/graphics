@@ -10,6 +10,7 @@ refs:
   - title: Real-Time Polygonal-Light Shading with Linearly Transformed Cosines
     authors: Heitz, Dupuy, Hill, Neubelt
     year: 2016
+    url: https://doi.org/10.1145/2897824.2925895
 edges:
   - rel: approximates
     to: microfacet-model

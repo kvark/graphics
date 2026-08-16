@@ -4,6 +4,7 @@ summary: >
   Transports light at wavelengths rather than as RGB triples. Required for
   dispersion, fluorescence and correct metamerism under unusual
   illuminants, where RGB gives an answer that is simply the wrong colour.
+wikipedia: https://en.wikipedia.org/wiki/Spectral_rendering
 edges:
   - rel: corrects
     to: linear-workflow

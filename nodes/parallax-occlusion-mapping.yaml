@@ -5,10 +5,12 @@ summary: >
   Ray-marches the height field in tangent space so texture features shift
   with view angle and occlude each other, recovering the parallax that
   normals alone cannot express.
+wikipedia: https://en.wikipedia.org/wiki/Parallax_mapping
 refs:
   - title: Dynamic Parallax Occlusion Mapping with Approximate Soft Shadows
     authors: Tatarchuk
     year: 2006
+    url: https://doi.org/10.1145/1111411.1111423
 edges:
   - rel: corrects
     to: normal-mapping

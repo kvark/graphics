@@ -4,6 +4,7 @@ aka: [IBL, Environment lighting]
 summary: >
   Uses a captured or rendered environment map as the light source, so that
   ambient light carries the colour and directionality of a real location.
+wikipedia: https://en.wikipedia.org/wiki/Image-based_lighting
 edges:
   - rel: approximates
     to: rendering-equation

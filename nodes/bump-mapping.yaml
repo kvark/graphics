@@ -5,10 +5,12 @@ summary: >
   Perturbs the shading normal from a height texture without moving any
   geometry. Almost free, and its limits are visible the moment a
   silhouette or a self-shadow is involved.
+wikipedia: https://en.wikipedia.org/wiki/Bump_mapping
 refs:
   - title: Simulation of Wrinkled Surfaces
     authors: Blinn
     year: 1978
+    url: https://doi.org/10.1145/280811.280982
 edges:
   - rel: approximates
     to: displacement-mapping

@@ -6,6 +6,7 @@ summary: >
   majorant so distances can be sampled analytically, then randomly rejects
   the fictitious collisions. Unbiased with no need to invert the optical
   depth.
+wikipedia: https://en.wikipedia.org/wiki/Volume_rendering
 edges:
   - rel: corrects
     to: volumetric-path-tracing

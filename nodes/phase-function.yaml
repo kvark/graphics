@@ -3,6 +3,7 @@ cluster: volumetrics
 summary: >
   The volumetric analogue of a BRDF: the angular distribution of light
   after a single scattering event in a medium.
+wikipedia: https://en.wikipedia.org/wiki/Phase_curve_%28astronomy%29
 edges:
   - rel: part-of
     to: participating-media

@@ -4,6 +4,7 @@ summary: >
   A scalar factor for how much of the hemisphere above a point is blocked
   by nearby geometry, multiplied into ambient light. Not physically
   justified, but it restores the contact darkening flat ambient loses.
+wikipedia: https://en.wikipedia.org/wiki/Ambient_occlusion
 edges:
   - rel: approximates
     to: rendering-equation

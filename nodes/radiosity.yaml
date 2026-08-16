@@ -6,10 +6,12 @@ summary: >
   factors for diffuse interreflection. View-independent, so the solution
   can be walked through in real time, but it cannot represent specular
   transport.
+wikipedia: https://en.wikipedia.org/wiki/Radiosity_%28computer_graphics%29
 refs:
   - title: Modeling the Interaction of Light Between Diffuse Surfaces
     authors: Goral, Torrance, Greenberg, Battaile
     year: 1984
+    url: https://doi.org/10.1145/280811.280985
 edges:
   - rel: specializes
     to: rendering-equation

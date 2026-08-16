@@ -10,6 +10,7 @@ refs:
   - title: A Simple and Robust Mutation Strategy for the Metropolis Light Transport Algorithm
     authors: Kelemen, Szirmay-Kalos, Antal, Csonka
     year: 2002
+    url: https://doi.org/10.1111/1467-8659.t01-1-00703
 edges:
   - rel: corrects
     to: metropolis-light-transport

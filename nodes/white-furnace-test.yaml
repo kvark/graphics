@@ -4,6 +4,7 @@ summary: >
   Render a material under uniform unit illumination with no absorption. A
   conserving, non-absorbing BSDF disappears against the background;
   anything visible is energy the model is losing or inventing.
+wikipedia: https://en.wikipedia.org/wiki/Conservation_of_energy
 edges:
   - rel: validates
     to: energy-conservation

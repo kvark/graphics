@@ -4,3 +4,4 @@ tags: [root]
 summary: >
   How a surface is stored before anything is rendered: explicitly as
   primitives, or implicitly as a function whose zero set is the surface.
+wikipedia: https://en.wikipedia.org/wiki/3D_modeling

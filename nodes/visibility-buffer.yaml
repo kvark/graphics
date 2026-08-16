@@ -5,6 +5,7 @@ summary: >
   Stores only a triangle id per pixel and refetches attributes during
   shading, trading arithmetic for a dramatic reduction in the memory
   traffic a fat G-buffer costs.
+wikipedia: https://en.wikipedia.org/wiki/Deferred_shading
 refs:
   - title: "The Visibility Buffer: A Cache-Friendly Approach to Deferred Shading"
     authors: Burns, Hunt

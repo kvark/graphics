@@ -5,10 +5,12 @@ summary: >
   Projects distant lighting onto low-order spherical harmonics. Nine
   coefficients reproduce diffuse irradiance from any environment to within
   a percent, because the cosine lobe is itself a strong low-pass filter.
+wikipedia: https://en.wikipedia.org/wiki/Spherical_harmonics
 refs:
   - title: An Efficient Representation for Irradiance Environment Maps
     authors: Ramamoorthi, Hanrahan
     year: 2001
+    url: https://doi.org/10.1145/383259.383317
 edges:
   - rel: approximates
     to: image-based-lighting

@@ -3,6 +3,7 @@ cluster: materials
 summary: >
   Light that enters a surface, scatters under it and re-emerges in a broad
   distribution largely independent of the incoming direction.
+wikipedia: https://en.wikipedia.org/wiki/Diffuse_reflection
 edges:
   - rel: part-of
     to: reflection

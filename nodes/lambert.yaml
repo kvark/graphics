@@ -4,6 +4,7 @@ summary: >
   A constant BRDF: outgoing radiance is the same in every direction, so
   the surface looks equally bright from any viewpoint. Cheap, reciprocal,
   and the default diffuse term almost everywhere.
+wikipedia: https://en.wikipedia.org/wiki/Lambertian_reflectance
 edges:
   - rel: specializes
     to: diffuse-reflection

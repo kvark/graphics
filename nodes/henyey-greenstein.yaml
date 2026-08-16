@@ -5,10 +5,12 @@ summary: >
   A one-parameter phase function, originally fitted to interstellar dust,
   whose single anisotropy value spans strong forward through isotropic to
   backward scattering. Cheap to evaluate and to sample.
+wikipedia: https://en.wikipedia.org/wiki/Henyey%E2%80%93Greenstein_phase_function
 refs:
   - title: Diffuse Radiation in the Galaxy
     authors: Henyey, Greenstein
     year: 1941
+    url: https://doi.org/10.1086/144246
 edges:
   - rel: specializes
     to: phase-function

@@ -4,6 +4,7 @@ summary: >
   Samples directions with density proportional to the cosine of the angle
   from the normal, cancelling the geometry term in the rendering equation
   exactly.
+wikipedia: https://en.wikipedia.org/wiki/Lambert%27s_cosine_law
 edges:
   - rel: specializes
     to: importance-sampling

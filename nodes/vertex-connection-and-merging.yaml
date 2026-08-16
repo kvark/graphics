@@ -10,9 +10,11 @@ refs:
   - title: Light Transport Simulation with Vertex Connection and Merging
     authors: Georgiev, Krivanek, Davidovic, Slusallek
     year: 2012
+    url: https://doi.org/10.1145/2366145.2366211
   - title: Progressive Expectation-Maximization for Hierarchical Volumetric Photon Mapping
     authors: Hachisuka, Pantaleoni, Jensen
     year: 2012
+    url: https://doi.org/10.1111/j.1467-8659.2011.01988.x
 edges:
   - rel: extends
     to: bidirectional-path-tracing

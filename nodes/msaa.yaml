@@ -4,6 +4,7 @@ summary: >
   Samples coverage and depth at several points per pixel but shades only
   once per covered primitive, which fixes geometric edges at a fraction of
   the cost and does nothing for shader aliasing.
+wikipedia: https://en.wikipedia.org/wiki/Multisample_anti-aliasing
 edges:
   - rel: approximates
     to: supersampling

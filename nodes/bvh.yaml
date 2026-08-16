@@ -5,6 +5,7 @@ summary: >
   A tree of nested bounding boxes over primitives. Handles unevenly
   distributed geometry gracefully, refits cheaply under animation, and is
   what ray tracing hardware implements.
+wikipedia: https://en.wikipedia.org/wiki/Bounding_volume_hierarchy
 edges:
   - rel: corrects
     to: whitted-ray-tracing

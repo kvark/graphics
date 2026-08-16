@@ -5,10 +5,12 @@ summary: >
   Moves surface points along the normal by a stored height, producing
   detail that occludes itself and changes the silhouette because the
   geometry really moved.
+wikipedia: https://en.wikipedia.org/wiki/Displacement_mapping
 refs:
   - title: Generalized Stochastic Subdivision
     authors: Cook
     year: 1984
+    url: https://doi.org/10.1145/35068.35069
 edges:
   - rel: extends
     to: texture-mapping

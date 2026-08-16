@@ -5,6 +5,7 @@ summary: >
   Ray-marches the depth buffer to find reflected surfaces. Convincing
   while the reflected geometry is on screen, and falls back to an
   environment map the moment it is not.
+wikipedia: https://en.wikipedia.org/wiki/Reflection_%28computer_graphics%29
 edges:
   - rel: approximates
     to: specular-reflection

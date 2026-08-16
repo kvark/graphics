@@ -6,10 +6,12 @@ summary: >
   Ratio of outgoing radiance to incoming irradiance for a pair of
   directions. The formalism that lets a material be specified
   independently of the transport algorithm that uses it.
+wikipedia: https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function
 refs:
   - title: Directional Reflectance and Emissivity of an Opaque Surface
     authors: Nicodemus
     year: 1965
+    url: https://doi.org/10.21236/ad0463473
 edges:
   - rel: part-of
     to: reflection

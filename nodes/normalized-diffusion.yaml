@@ -10,6 +10,7 @@ refs:
   - title: Approximate Reflectance Profiles for Efficient Subsurface Scattering
     authors: Christensen, Burley
     year: 2015
+    url: https://doi.org/10.1145/2775280.2792555
 edges:
   - rel: corrects
     to: dipole-diffusion

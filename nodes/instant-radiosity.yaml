@@ -6,10 +6,12 @@ summary: >
   Represents indirect illumination by scattering a set of virtual point
   lights from the light sources, turning a bounce integral into ordinary
   direct lighting from many small lights.
+wikipedia: https://en.wikipedia.org/wiki/Radiosity_%28computer_graphics%29
 refs:
   - title: Instant Radiosity
     authors: Keller
     year: 1997
+    url: https://doi.org/10.1145/258734.258769
 edges:
   - rel: approximates
     to: rendering-equation

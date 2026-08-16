@@ -5,10 +5,12 @@ summary: >
   Marches along a ray by exactly the distance value at each point, which
   can never overshoot the surface. Renders implicit geometry without ever
   tessellating it.
+wikipedia: https://en.wikipedia.org/wiki/Ray_marching
 refs:
   - title: "Sphere Tracing: A Geometric Method for the Antialiased Ray Tracing of Implicit Surfaces"
     authors: Hart
     year: 1996
+    url: https://doi.org/10.1007/s003710050084
 edges:
   - rel: requires
     to: signed-distance-field

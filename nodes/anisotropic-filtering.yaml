@@ -3,6 +3,7 @@ cluster: antialiasing
 summary: >
   Takes several mip samples along the direction the footprint is
   stretched, instead of choosing one level from its widest extent.
+wikipedia: https://en.wikipedia.org/wiki/Anisotropic_filtering
 edges:
   - rel: corrects
     to: mipmapping

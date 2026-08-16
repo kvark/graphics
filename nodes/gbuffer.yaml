@@ -3,6 +3,7 @@ cluster: real-time-shading
 summary: >
   The set of screen-space textures holding albedo, normal, roughness and
   depth between the geometry pass and the lighting pass.
+wikipedia: https://en.wikipedia.org/wiki/Deferred_shading
 edges:
   - rel: part-of
     to: deferred-shading

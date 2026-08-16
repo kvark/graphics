@@ -9,6 +9,7 @@ refs:
   - title: "ReSTIR GI: Path Resampling for Real-Time Path Tracing"
     authors: Ouyang, Liu, Kettunen, Pharr, Pantaleoni
     year: 2021
+    url: https://doi.org/10.1111/cgf.14378
 edges:
   - rel: extends
     to: restir

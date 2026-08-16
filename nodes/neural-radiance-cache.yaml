@@ -9,6 +9,7 @@ refs:
   - title: Real-time Neural Radiance Caching for Path Tracing
     authors: Muller, Rousselle, Novak, Keller
     year: 2021
+    url: https://doi.org/10.1145/3450626.3459812
 edges:
   - rel: extends
     to: path-tracing

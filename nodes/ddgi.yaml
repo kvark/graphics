@@ -6,6 +6,7 @@ summary: >
   Stores filtered depth alongside irradiance at each probe and weights
   probe contributions by a visibility test, so a probe on the far side of
   a wall stops contributing.
+wikipedia: https://en.wikipedia.org/wiki/Global_illumination
 refs:
   - title: Dynamic Diffuse Global Illumination with Ray-Traced Irradiance Fields
     authors: Majercik, Guertin, Nowrouzezahrai, McGuire

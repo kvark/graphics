@@ -5,10 +5,12 @@ summary: >
   Places one vertex per cell by solving a least-squares fit to the surface
   normals it intersects, which lets it reproduce sharp creases that
   corner-sign tables average away.
+wikipedia: https://en.wikipedia.org/wiki/Isosurface
 refs:
   - title: Dual Contouring of Hermite Data
     authors: Ju, Losasso, Schaefer, Warren
     year: 2002
+    url: https://doi.org/10.1145/566570.566586
 edges:
   - rel: corrects
     to: marching-cubes

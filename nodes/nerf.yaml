@@ -6,6 +6,7 @@ summary: >
   Fits an MLP mapping position and direction to density and colour, then
   renders it by volumetric ray marching. Optimizing a radiance field
   directly against photographs sidestepped reconstruction entirely.
+wikipedia: https://en.wikipedia.org/wiki/Neural_radiance_field
 refs:
   - title: "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis"
     authors: Mildenhall, Srinivasan, Tancik, Barron, Ramamoorthi, Ng

@@ -4,6 +4,7 @@ summary: >
   Shade each fragment as its triangle is rasterized, looping over lights
   inside the shader. Simple and MSAA-friendly, but cost is paid again for
   every fragment later overdrawn.
+wikipedia: https://en.wikipedia.org/wiki/Shading
 edges:
   - rel: specializes
     to: rasterization

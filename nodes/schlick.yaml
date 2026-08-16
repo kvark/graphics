@@ -5,6 +5,7 @@ summary: >
   Approximates Fresnel reflectance as a fifth-power interpolation between
   normal incidence reflectance and one. Accurate enough for dielectrics
   and cheap enough for a pixel shader.
+wikipedia: https://en.wikipedia.org/wiki/Schlick%27s_approximation
 refs:
   - title: An Inexpensive BRDF Model for Physically-based Rendering
     authors: Schlick

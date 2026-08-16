@@ -3,6 +3,7 @@ cluster: foundations
 summary: >
   Light crossing into a medium with a different index of refraction,
   bending by Snell's law and changing radiance by the squared IOR ratio.
+wikipedia: https://en.wikipedia.org/wiki/Refraction
 edges:
   - rel: part-of
     to: light-transport

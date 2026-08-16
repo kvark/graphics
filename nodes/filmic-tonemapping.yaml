@@ -5,6 +5,7 @@ summary: >
   An S-shaped curve with a toe and shoulder fitted to photographic film
   response, which holds saturation in the highlights where a simple ratio
   curve washes out.
+wikipedia: https://en.wikipedia.org/wiki/Tone_mapping
 refs:
   - title: "Uncharted 2: HDR Lighting"
     authors: Hable

@@ -6,6 +6,7 @@ summary: >
   The BSDF factors into a normal distribution D, a Fresnel term F and a
   masking-shadowing term G, and nearly every modern material model is an
   instance of it.
+wikipedia: https://en.wikipedia.org/wiki/Specular_highlight
 refs:
   - title: Microfacet Models for Refraction through Rough Surfaces
     authors: Walter, Marschner, Li, Torrance

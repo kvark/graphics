@@ -5,6 +5,7 @@ summary: >
   Estimates occlusion by sampling the depth buffer around each pixel,
   making ambient occlusion fully dynamic and independent of scene
   complexity.
+wikipedia: https://en.wikipedia.org/wiki/Screen_space_ambient_occlusion
 refs:
   - title: "Finding Next Gen: CryEngine 2"
     authors: Mittring

@@ -5,6 +5,7 @@ summary: >
   Models a diffuse surface as a distribution of Lambertian V-cavities,
   which produces the flat, backscattering look of rough materials such as
   clay, concrete and the full moon.
+wikipedia: https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model
 refs:
   - title: "Generalization of Lambert's Reflectance Model"
     authors: Oren, Nayar

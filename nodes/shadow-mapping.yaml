@@ -6,10 +6,12 @@ summary: >
   point against it. Image-based, so cost is independent of geometric
   complexity, and every artifact it has traces back to that finite
   resolution.
+wikipedia: https://en.wikipedia.org/wiki/Shadow_mapping
 refs:
   - title: Casting Curved Shadows on Curved Surfaces
     authors: Williams
     year: 1978
+    url: https://doi.org/10.1145/280811.280975
 edges:
   - rel: requires
     to: rasterization

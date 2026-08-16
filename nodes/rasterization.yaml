@@ -4,6 +4,7 @@ summary: >
   Projects primitives to the screen and fills the pixels they cover. Cost
   scales with primitives times coverage, and visibility comes free from a
   depth buffer.
+wikipedia: https://en.wikipedia.org/wiki/Rasterisation
 edges:
   - rel: requires
     to: polygon-mesh

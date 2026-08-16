@@ -5,6 +5,7 @@ summary: >
   directions are swapped. Bidirectional algorithms depend on it: without
   it, a path built from the light differs from the same path built from
   the camera.
+wikipedia: https://en.wikipedia.org/wiki/Helmholtz_reciprocity
 edges:
   - rel: validates
     to: bsdf

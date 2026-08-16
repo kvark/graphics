@@ -5,6 +5,7 @@ summary: >
   Precomputes the directional albedo a single-scattering microfacet BRDF
   loses and adds a fitted lobe back to make up the difference. Far cheaper
   than a random walk and close enough for production.
+wikipedia: https://en.wikipedia.org/wiki/Specular_highlight
 refs:
   - title: Revisiting Physically Based Shading at Imageworks
     authors: Kulla, Conty

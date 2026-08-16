@@ -9,6 +9,7 @@ refs:
   - title: Percentage-Closer Soft Shadows
     authors: Fernando
     year: 2005
+    url: https://doi.org/10.1145/1187112.1187153
 edges:
   - rel: extends
     to: percentage-closer-filtering

@@ -5,6 +5,7 @@ summary: >
   Jitters the projection each frame and blends the reprojected history,
   giving supersampled quality at one sample per pixel. Now the default,
   and the source of most complaints about modern image softness.
+wikipedia: https://en.wikipedia.org/wiki/Temporal_anti-aliasing
 edges:
   - rel: specializes
     to: antialiasing-over-time

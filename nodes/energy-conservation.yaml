@@ -3,6 +3,7 @@ cluster: foundations
 summary: >
   A surface may not reflect more energy than it receives. Violating it
   makes multi-bounce renders diverge into brightness rather than settle.
+wikipedia: https://en.wikipedia.org/wiki/Conservation_of_energy
 edges:
   - rel: validates
     to: bsdf

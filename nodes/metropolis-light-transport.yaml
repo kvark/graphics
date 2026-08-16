@@ -6,6 +6,7 @@ summary: >
   Once a path reaching the light is found, mutate it locally and accept
   mutations with a Metropolis-Hastings rule, so effort concentrates where
   transport actually happens instead of restarting blindly.
+wikipedia: https://en.wikipedia.org/wiki/Metropolis_light_transport
 refs:
   - title: Metropolis Light Transport
     authors: Veach, Guibas

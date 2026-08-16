@@ -5,10 +5,12 @@ summary: >
   Generalizes bicubic B-spline refinement to meshes of arbitrary topology.
   The standard modelling surface in film, and the reason quad topology is
   the convention it is.
+wikipedia: https://en.wikipedia.org/wiki/Catmull%E2%80%93Clark_subdivision_surface
 refs:
   - title: Recursively Generated B-Spline Surfaces on Arbitrary Topological Meshes
     authors: Catmull, Clark
     year: 1978
+    url: https://doi.org/10.1145/280811.280992
 edges:
   - rel: specializes
     to: subdivision-surfaces

@@ -4,6 +4,7 @@ summary: >
   A standardized colour management pipeline with defined working spaces
   and a reference rendering transform, so that the same render matches
   across displays and facilities.
+wikipedia: https://en.wikipedia.org/wiki/Academy_Color_Encoding_System
 edges:
   - rel: extends
     to: filmic-tonemapping

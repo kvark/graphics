@@ -3,6 +3,7 @@ cluster: materials
 summary: >
   Light reflected about the surface normal, concentrated in a lobe whose
   width is set by how rough the interface is.
+wikipedia: https://en.wikipedia.org/wiki/Specular_reflection
 edges:
   - rel: part-of
     to: reflection

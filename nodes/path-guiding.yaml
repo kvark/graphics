@@ -9,6 +9,7 @@ refs:
   - title: Practical Path Guiding for Efficient Light-Transport Simulation
     authors: Muller, Gross, Novak
     year: 2017
+    url: https://doi.org/10.1111/cgf.13227
 edges:
   - rel: corrects
     to: path-tracing
