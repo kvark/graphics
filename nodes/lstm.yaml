@@ -1,0 +1,13 @@
+title: LSTM
+cluster: sequence-models
+year: 1997
+aka: [Long short-term memory]
+summary: >
+  Adds a cell state with multiplicative gates controlling what is written,
+  kept and read. The gates give the gradient a route through time that
+  neither vanishes nor explodes.
+wikipedia: https://en.wikipedia.org/wiki/Long_short-term_memory
+edges:
+  - rel: corrects
+    to: recurrent-network
+    why: gradients vanish or explode over long sequences

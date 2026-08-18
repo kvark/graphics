@@ -34,7 +34,7 @@ edges:
 | field | required | notes |
 |---|---|---|
 | `title` | yes | human-readable name, used as the diagram label |
-| `cluster` | yes | must appear in [`clusters.yaml`](clusters.yaml); groups nodes into diagrams |
+| `cluster` | yes | must appear in [`clusters.yaml`](clusters.yaml); groups nodes into diagrams. Each cluster names a domain in [`domains.yaml`](domains.yaml) — nodes never name a domain directly |
 | `summary` | yes | one or two sentences, prose |
 | `year` | no | year the idea was introduced |
 | `aka` | no | alternate names, for search |

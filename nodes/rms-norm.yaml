@@ -1,0 +1,17 @@
+title: RMS Normalization
+cluster: learning
+year: 2019
+aka: [RMSNorm]
+summary: >
+  Drops the mean-subtraction step and rescales by the root mean square
+  alone. Matches LayerNorm's quality, which is the finding: the re-
+  centring was never doing the work.
+refs:
+  - title: Root Mean Square Layer Normalization
+    authors: Zhang, Sennrich
+    year: 2019
+    url: https://arxiv.org/abs/1910.07467
+edges:
+  - rel: corrects
+    to: layer-normalization
+    why: re-centring costs time and contributes nothing measurable

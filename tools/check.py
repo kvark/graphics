@@ -16,13 +16,14 @@ from graph import Problem, load_all
 
 def main():
     try:
-        nodes, clusters = load_all()
+        nodes, clusters, domains = load_all()
     except Problem as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 
     edges = sum(len(n.get("edges") or []) for n in nodes.values())
-    print(f"ok: {len(nodes)} nodes, {edges} edges, {len(clusters)} clusters")
+    print(f"ok: {len(nodes)} nodes, {edges} edges, "
+          f"{len(clusters)} clusters, {len(domains)} domains")
     return 0
 
 

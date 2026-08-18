@@ -1,0 +1,18 @@
+title: Batch Normalization
+cluster: learning
+year: 2015
+aka: [BatchNorm]
+summary: >
+  Normalise each activation across the batch, then rescale by learned
+  parameters. Allowed much higher learning rates, which is what made very
+  deep networks trainable in practice.
+wikipedia: https://en.wikipedia.org/wiki/Batch_normalization
+refs:
+  - title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift"
+    authors: Ioffe, Szegedy
+    year: 2015
+    url: https://arxiv.org/abs/1502.03167
+edges:
+  - rel: corrects
+    to: stochastic-gradient-descent
+    why: "each layer's input distribution shifts as earlier layers update"

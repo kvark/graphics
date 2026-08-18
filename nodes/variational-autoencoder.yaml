@@ -1,0 +1,18 @@
+title: Variational Autoencoder
+cluster: generative
+year: 2013
+aka: [VAE]
+summary: >
+  Learns an encoder to a latent distribution and a decoder back, trained
+  on a lower bound of the likelihood. Gives a latent space you can
+  interpolate in, at the cost of blurry samples.
+wikipedia: https://en.wikipedia.org/wiki/Variational_autoencoder
+refs:
+  - title: Auto-Encoding Variational Bayes
+    authors: Kingma, Welling
+    year: 2013
+    url: https://arxiv.org/abs/1312.6114
+edges:
+  - rel: requires
+    to: monte-carlo-integration
+    why: the bound is estimated by sampling the latent

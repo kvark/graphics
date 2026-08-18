@@ -17,3 +17,6 @@ edges:
   - rel: alternative-to
     to: irradiance-caching
     why: a learned cache instead of an interpolated one
+  - rel: requires
+    to: stochastic-gradient-descent
+    why: the cache is trained online, while rendering

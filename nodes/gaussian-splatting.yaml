@@ -19,3 +19,6 @@ edges:
   - rel: requires
     to: rasterization
     why: the speed comes from sorted alpha-blended splatting
+  - rel: requires
+    to: stochastic-gradient-descent
+    why: the primitives are fitted to photographs by gradient descent

@@ -1,0 +1,16 @@
+title: FlashAttention
+cluster: sequence-models
+year: 2022
+summary: >
+  Tiles attention so the score matrix is never written to memory,
+  recomputing it in fast on-chip storage instead. Exact, not approximate:
+  the same result, bounded by arithmetic rather than bandwidth.
+refs:
+  - title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+    authors: Dao, Fu, Ermon, Rudra, Re
+    year: 2022
+    url: https://arxiv.org/abs/2205.14135
+edges:
+  - rel: corrects
+    to: attention
+    why: it is memory-bandwidth bound, not compute bound

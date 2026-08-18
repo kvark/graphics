@@ -1,0 +1,16 @@
+title: Classifier-Free Guidance
+cluster: generative
+year: 2022
+summary: >
+  Trains one model both conditioned and unconditioned, then extrapolates
+  away from the unconditional prediction at sampling time. Buys prompt
+  adherence for a little diversity, with no second model.
+refs:
+  - title: Classifier-Free Diffusion Guidance
+    authors: Ho, Salimans
+    year: 2022
+    url: https://arxiv.org/abs/2207.12598
+edges:
+  - rel: corrects
+    to: diffusion-model
+    why: conditioning alone is too weak to follow a prompt

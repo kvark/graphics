@@ -1,0 +1,7 @@
+title: Gradient Descent
+cluster: learning
+summary: >
+  Step downhill along the negative gradient. Everything below is a
+  modification of this one idea, made to survive contact with real
+  objectives.
+wikipedia: https://en.wikipedia.org/wiki/Gradient_descent

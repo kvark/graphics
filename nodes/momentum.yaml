@@ -1,0 +1,12 @@
+title: Momentum
+cluster: learning
+year: 1964
+summary: >
+  Accumulate a running average of past gradients and step along that.
+  Damps the oscillation across a narrow valley while accelerating along
+  its floor.
+wikipedia: https://en.wikipedia.org/wiki/Stochastic_gradient_descent
+edges:
+  - rel: corrects
+    to: stochastic-gradient-descent
+    why: plain SGD oscillates across ravines and crawls along them

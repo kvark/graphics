@@ -15,3 +15,6 @@ edges:
   - rel: alternative-to
     to: svgf
     why: learns the filter from data instead of hand-tuned weights
+  - rel: requires
+    to: backpropagation
+    why: the filter is learned from noisy and converged pairs

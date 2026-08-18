@@ -1,0 +1,8 @@
+title: Recurrent Network
+cluster: sequence-models
+aka: [RNN]
+summary: >
+  Carry a hidden state forward one step at a time. The natural shape for
+  sequences, and the source of every problem the rest of this cluster
+  fixes.
+wikipedia: https://en.wikipedia.org/wiki/Recurrent_neural_network
