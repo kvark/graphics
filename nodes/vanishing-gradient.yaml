@@ -1,0 +1,10 @@
+title: Vanishing Gradient
+cluster: learning
+summary: >
+  Repeated multiplication by factors below one drives the gradient toward
+  zero as it travels back through layers or time steps, so early
+  parameters stop moving.
+wikipedia: https://en.wikipedia.org/wiki/Vanishing_gradient_problem
+edges:
+  - rel: part-of
+    to: backpropagation

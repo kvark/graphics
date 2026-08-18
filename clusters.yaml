@@ -110,3 +110,8 @@
   domain: ai
   title: Reinforcement Learning
   blurb: Learning from a reward signal rather than from labelled answers.
+
+- id: distributed
+  domain: ai
+  title: Distributed Training
+  blurb: Splitting a model and its optimizer state across devices once neither fits on one.

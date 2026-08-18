@@ -1,0 +1,11 @@
+title: Data Parallelism
+cluster: distributed
+summary: >
+  Every device holds a full replica and processes a slice of the batch,
+  then the gradients are summed. The simplest way to scale, and it stops
+  working when one replica no longer fits.
+wikipedia: https://en.wikipedia.org/wiki/Data_parallelism
+edges:
+  - rel: requires
+    to: all-reduce
+    why: gradients must be summed across replicas every step

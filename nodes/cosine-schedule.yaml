@@ -1,0 +1,16 @@
+title: Cosine Learning-Rate Schedule
+cluster: learning
+year: 2016
+summary: >
+  Anneals the step size along a cosine from its peak to near zero,
+  optionally restarting. The default decay shape, largely because it has
+  no knobs worth tuning.
+refs:
+  - title: "SGDR: Stochastic Gradient Descent with Warm Restarts"
+    authors: Loshchilov, Hutter
+    year: 2016
+    url: https://arxiv.org/abs/1608.03983
+edges:
+  - rel: extends
+    to: learning-rate-warmup
+    why: anneals after the ramp instead of holding the rate

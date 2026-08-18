@@ -1,0 +1,11 @@
+title: Early Stopping
+cluster: learning
+summary: >
+  Halts training when held-out loss stops improving. The cheapest
+  regulariser there is, and it needs a validation split you are not
+  otherwise using.
+wikipedia: https://en.wikipedia.org/wiki/Early_stopping
+edges:
+  - rel: alternative-to
+    to: weight-decay
+    why: stops before overfitting rather than penalising capacity

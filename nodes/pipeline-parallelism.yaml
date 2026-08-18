@@ -1,0 +1,16 @@
+title: Pipeline Parallelism
+cluster: distributed
+year: 2018
+summary: >
+  Assigns consecutive layers to different devices and streams micro-
+  batches through them. Communication is only at stage boundaries, at the
+  cost of bubbles while the pipeline fills and drains.
+refs:
+  - title: "GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism"
+    authors: Huang et al.
+    year: 2018
+    url: https://arxiv.org/abs/1811.06965
+edges:
+  - rel: alternative-to
+    to: tensor-parallelism
+    why: splits between layers rather than inside one

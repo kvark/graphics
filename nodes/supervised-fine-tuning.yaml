@@ -1,0 +1,18 @@
+title: Supervised Fine-Tuning
+cluster: language
+year: 2021
+aka: [SFT, Instruction tuning]
+summary: >
+  Continues next-token training on curated demonstrations of the behaviour
+  wanted. Cheap, stable, and bounded by how well the desired behaviour can
+  be written down.
+wikipedia: https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning)
+refs:
+  - title: Finetuned Language Models Are Zero-Shot Learners
+    authors: Wei et al.
+    year: 2021
+    url: https://arxiv.org/abs/2109.01652
+edges:
+  - rel: extends
+    to: autoregressive-language-model
+    why: trains on demonstrations of the behaviour wanted

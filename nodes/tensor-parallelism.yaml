@@ -1,0 +1,16 @@
+title: Tensor Parallelism
+cluster: distributed
+year: 2019
+summary: >
+  Splits individual weight matrices across devices so one layer is
+  computed jointly. Communication lands inside every layer, so it wants
+  the fastest interconnect available.
+refs:
+  - title: "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism"
+    authors: Shoeybi et al.
+    year: 2019
+    url: https://arxiv.org/abs/1909.08053
+edges:
+  - rel: corrects
+    to: data-parallelism
+    why: one replica of the model must still fit on one device

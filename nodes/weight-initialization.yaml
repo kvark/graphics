@@ -1,0 +1,8 @@
+title: Weight Initialization
+cluster: learning
+year: 2010
+summary: >
+  Chooses the starting variance so activations neither shrink nor blow up
+  as they propagate. A deep network started wrong does not train slowly;
+  it does not train.
+wikipedia: https://en.wikipedia.org/wiki/Weight_initialization

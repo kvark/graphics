@@ -1,0 +1,7 @@
+title: All-Reduce
+cluster: distributed
+summary: >
+  A collective that sums a tensor across every participant and returns the
+  result to all of them. Ring and tree schedules make its cost depend on
+  interconnect bandwidth rather than device count.
+wikipedia: https://en.wikipedia.org/wiki/Collective_operation

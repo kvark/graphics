@@ -1,0 +1,17 @@
+title: Trust Region Policy Optimization
+cluster: reinforcement
+year: 2015
+aka: [TRPO]
+summary: >
+  Constrains each update so the KL divergence between the old and new
+  policy stays inside a trust region, giving a monotonic improvement
+  guarantee at the cost of a second-order solve every step.
+refs:
+  - title: Trust Region Policy Optimization
+    authors: Schulman, Levine, Abbeel, Jordan, Moritz
+    year: 2015
+    url: https://arxiv.org/abs/1502.05477
+edges:
+  - rel: corrects
+    to: policy-gradient
+    why: a parameter-space step moves the policy unpredictably
