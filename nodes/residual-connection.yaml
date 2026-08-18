@@ -1,0 +1,18 @@
+title: Residual Connection
+cluster: learning
+year: 2015
+aka: [ResNet, Skip connection]
+summary: >
+  Add a layer's input to its output so the layer only has to learn a
+  correction. Gradients then reach early layers along a path that does not
+  attenuate, and depth stops being a liability.
+wikipedia: https://en.wikipedia.org/wiki/Residual_neural_network
+refs:
+  - title: Deep Residual Learning for Image Recognition
+    authors: He, Zhang, Ren, Sun
+    year: 2015
+    url: https://arxiv.org/abs/1512.03385
+edges:
+  - rel: corrects
+    to: backpropagation
+    why: gradients vanish through a deep stack of layers

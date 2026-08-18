@@ -16,3 +16,6 @@ edges:
   - rel: specializes
     to: radiative-transfer-equation
     why: an MLP supplies density and colour along the ray
+  - rel: requires
+    to: stochastic-gradient-descent
+    why: the field is fitted to photographs by gradient descent

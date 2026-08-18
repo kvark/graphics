@@ -1,0 +1,13 @@
+title: Stochastic Gradient Descent
+cluster: learning
+year: 1951
+aka: [SGD]
+summary: >
+  Estimate the gradient from a small batch instead of the whole dataset.
+  The estimate is noisy, and that noise turns out to help escape sharp
+  minima as well as making each step affordable.
+wikipedia: https://en.wikipedia.org/wiki/Stochastic_gradient_descent
+edges:
+  - rel: corrects
+    to: gradient-descent
+    why: a full-batch gradient costs the entire dataset per step

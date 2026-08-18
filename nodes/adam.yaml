@@ -1,0 +1,16 @@
+title: Adam
+cluster: learning
+year: 2014
+summary: >
+  Keeps running averages of both the gradient and its square, giving every
+  parameter its own step size. The default optimiser almost everywhere,
+  mostly because it needs so little tuning.
+refs:
+  - title: "Adam: A Method for Stochastic Optimization"
+    authors: Kingma, Ba
+    year: 2014
+    url: https://arxiv.org/abs/1412.6980
+edges:
+  - rel: extends
+    to: momentum
+    why: adds a per-parameter step size from the second moment

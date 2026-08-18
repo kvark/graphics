@@ -31,7 +31,8 @@ from graph import (
     members_of,
 )
 
-REPO = "https://github.com/kvark/graphics"
+REPO = "https://github.com/kvark/aitia"
+DOMAIN_NAME = "aitia.dev"
 
 # Relation colouring.
 #
@@ -183,6 +184,7 @@ kbd { font: .72rem ui-monospace, monospace; border: 1px solid var(--line);
 .refs .t { color: var(--fg); }
 .stat { display: flex; gap: 2rem; flex-wrap: wrap; margin: 0 0 2rem; }
 .stat b { display: block; font-size: 1.5rem; }
+.count { font-weight: 400; font-size: .8rem; color: var(--muted); }
 .stat span { color: var(--muted); font-size: .8rem; text-transform: uppercase;
              letter-spacing: .06em; }
 footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line);
@@ -483,7 +485,7 @@ def page(title, body, depth, index):
 <body>
 <div class="wrap">
 <nav>
-  <a class="home" href="{up}index.html">graphics</a>
+  <a class="home" href="{up}index.html">aitia</a>
   <div class="find">
     <input id="q" type="search" placeholder="Search nodes — press /"
            autocomplete="off" spellcheck="false" aria-label="Search nodes">
@@ -541,12 +543,17 @@ def edge_items(rows):
     )
 
 
-def render_node(nid, nodes, clusters, backlinks, index):
+def render_node(nid, nodes, clusters, domains, backlinks, index):
     node = nodes[nid]
-    titles = {c[0]: c[1] for c in clusters}
+    titles = {c["id"]: c["title"] for c in clusters}
+    domains_by_cluster = {c["id"]: c["domain"] for c in clusters}
 
     meta = [f'<a href="../c/{node["cluster"]}.html">'
             f'{esc(titles.get(node["cluster"], node["cluster"]))}</a>']
+    did = domains_by_cluster.get(node["cluster"])
+    dom = next((d for d in domains if d["id"] == did), None)
+    if dom:
+        meta.insert(0, f'<a href="../index.html#{esc(did)}">{esc(dom["title"])}</a>')
     if node.get("year"):
         meta.append(esc(node["year"]))
     if node.get("aka"):
@@ -587,7 +594,9 @@ def render_node(nid, nodes, clusters, backlinks, index):
     return page(node["title"], "\n".join(out), 1, index)
 
 
-def render_cluster(cid, title, blurb, nodes, index):
+def render_cluster(cluster, nodes, domains, index):
+    cid, title, blurb = cluster["id"], cluster["title"], cluster["blurb"]
+    dom = next(d for d in domains if d["id"] == cluster["domain"])
     members = members_of(nodes, cid)
     svg = render_svg(dot_source(nodes, members, url=lambda n: f"../n/{n}.html"))
     cards = "".join(
@@ -597,6 +606,8 @@ def render_cluster(cid, title, blurb, nodes, index):
         for nid in sorted(members, key=lambda n: (nodes[n].get("year") or 9999, n))
     )
     body = (
+        f'<p class="meta"><a href="../index.html#{esc(dom["id"])}">'
+        f'{esc(dom["title"])}</a></p>'
         f"<h1>{esc(title)}</h1>"
         f'<p class="lede">{esc(blurb)}</p>'
         f"{legend()}"
@@ -606,16 +617,29 @@ def render_cluster(cid, title, blurb, nodes, index):
     return page(title, body, 1, index)
 
 
-def render_index(nodes, clusters, index):
+def render_index(nodes, clusters, domains, index):
     edge_count = sum(len(n.get("edges") or []) for n in nodes.values())
     ref_count = sum(len(n.get("refs") or []) for n in nodes.values())
 
-    cards = "".join(
-        f'<div class="card"><h4><a href="c/{cid}.html">{esc(title)}</a></h4>'
-        f"<p>{esc(blurb)} — {len(members_of(nodes, cid))} nodes</p></div>"
-        for cid, title, blurb in clusters
-        if members_of(nodes, cid)
-    )
+    sections = []
+    for dom in domains:
+        mine = [c for c in clusters
+                if c["domain"] == dom["id"] and members_of(nodes, c["id"])]
+        if not mine:
+            continue
+        count = sum(len(members_of(nodes, c["id"])) for c in mine)
+        cards = "".join(
+            f'<div class="card"><h4><a href="c/{c["id"]}.html">{esc(c["title"])}</a></h4>'
+            f'<p>{esc(c["blurb"])} — {len(members_of(nodes, c["id"]))} nodes</p></div>'
+            for c in mine
+        )
+        sections.append(
+            f'<h2 id="{esc(dom["id"])}">{esc(dom["title"])} '
+            f'<span class="count">{count} nodes</span></h2>'
+            f'<p class="lede">{esc(dom["blurb"])}</p>'
+            f'<div class="cards">{cards}</div>'
+        )
+    cards = "".join(sections)
     legend_rows = "".join(
         f'<li><span class="rel k-{esc(rel)}">{esc(rel)}</span>{esc(reads)} the target'
         + ("" if required else " <em>(no reason required)</em>")
@@ -624,27 +648,27 @@ def render_index(nodes, clusters, index):
     )
 
     body = f"""
-<h1>A knowledge graph of computer graphics</h1>
-<p class="lede">Where the edges carry the reasons. Most maps of a field give you
-the nodes; what is almost never written down is why one technique leads to the
-next — and that is the part this collects. Press <kbd>/</kbd> to search.</p>
+<h1>aitia</h1>
+<p class="lede"><em>aitia</em> (αἰτία) is Greek for <em>cause</em> — the answer to
+"why". A knowledge graph in which the edges carry the reasons: most maps of a
+field give you the nodes, but what is almost never written down is why one idea
+leads to the next. Press <kbd>/</kbd> to search.</p>
 
 <div class="stat">
   <div><b>{len(nodes)}</b><span>nodes</span></div>
   <div><b>{edge_count}</b><span>typed edges</span></div>
   <div><b>{ref_count}</b><span>references</span></div>
-  <div><b>{len(clusters)}</b><span>clusters</span></div>
+  <div><b>{len(domains)}</b><span>domains</span></div>
 </div>
 
-<h2>Clusters</h2>
-<div class="cards">{cards}</div>
+{cards}
 
 <h2>Relations</h2>
 <p class="lede">A closed vocabulary. Every edge but <code>part-of</code> must say
 why — an edge without a reason is rejected by CI.</p>
 <ul class="edges">{legend_rows}</ul>
 """
-    return page("graphics — a knowledge graph", body, 0, index)
+    return page("aitia — a knowledge graph of reasons", body, 0, index)
 
 
 def main():
@@ -654,7 +678,7 @@ def main():
         out_dir = Path(argv[argv.index("--out") + 1]).resolve()
 
     try:
-        nodes, clusters = load_all()
+        nodes, clusters, domains = load_all()
     except Problem as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
@@ -677,17 +701,22 @@ def main():
     try:
         (out_dir / "style.css").write_text(STYLE.strip() + "\n" + relation_css() + "\n")
         (out_dir / ".nojekyll").write_text("")
-        (out_dir / "index.html").write_text(render_index(nodes, clusters, index))
+        # Pages reads the custom domain from this file in the artifact. The
+        # output directory is rebuilt from scratch every run, so it has to be
+        # emitted here or the domain silently reverts on the next deploy.
+        (out_dir / "CNAME").write_text(DOMAIN_NAME + "\n")
+        (out_dir / "index.html").write_text(
+            render_index(nodes, clusters, domains, index))
 
-        for cid, title, blurb in clusters:
-            if members_of(nodes, cid):
-                (out_dir / "c" / f"{cid}.html").write_text(
-                    render_cluster(cid, title, blurb, nodes, index)
+        for cluster in clusters:
+            if members_of(nodes, cluster["id"]):
+                (out_dir / "c" / f"{cluster['id']}.html").write_text(
+                    render_cluster(cluster, nodes, domains, index)
                 )
 
         for nid in nodes:
             (out_dir / "n" / f"{nid}.html").write_text(
-                render_node(nid, nodes, clusters, backlinks, index)
+                render_node(nid, nodes, clusters, domains, backlinks, index)
             )
     except Problem as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -699,11 +728,12 @@ def main():
             nid: {k: v for k, v in node.items() if not k.startswith("_")}
             for nid, node in sorted(nodes.items())
         },
-        "clusters": [{"id": c, "title": t, "blurb": b} for c, t, b in clusters],
+        "domains": domains,
+        "clusters": clusters,
         "relations": {r: reads for r, (reads, _) in RELATIONS.items()},
     }, indent=2))
 
-    pages = 1 + len(nodes) + sum(1 for c in clusters if members_of(nodes, c[0]))
+    pages = 1 + len(nodes) + sum(1 for c in clusters if members_of(nodes, c["id"]))
     print(f"ok: {pages} pages -> {out_dir}")
     return 0
 

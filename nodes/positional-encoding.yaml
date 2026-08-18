@@ -1,0 +1,15 @@
+title: Positional Encoding
+cluster: sequence-models
+year: 2017
+summary: >
+  Injects each token's position into its representation, since attention
+  alone sees an unordered set. Sinusoidal at first, later usually learned
+  or applied as a rotation.
+refs:
+  - title: Attention Is All You Need
+    authors: Vaswani et al.
+    year: 2017
+    url: https://arxiv.org/abs/1706.03762
+edges:
+  - rel: part-of
+    to: transformer

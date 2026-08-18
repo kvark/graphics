@@ -1,0 +1,21 @@
+title: Diffusion Model
+cluster: generative
+year: 2020
+aka: [DDPM]
+summary: >
+  Learns to reverse a gradual noising process, generating by denoising
+  repeatedly from pure noise. Trades sampling speed for stable training
+  and far better mode coverage than adversarial methods.
+wikipedia: https://en.wikipedia.org/wiki/Diffusion_model
+refs:
+  - title: Denoising Diffusion Probabilistic Models
+    authors: Ho, Jain, Abbeel
+    year: 2020
+    url: https://arxiv.org/abs/2006.11239
+edges:
+  - rel: alternative-to
+    to: generative-adversarial-network
+    why: a stable objective instead of a minimax game that collapses
+  - rel: extends
+    to: neural-denoising
+    why: denoises repeatedly, from pure noise, to synthesise

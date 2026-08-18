@@ -1,0 +1,18 @@
+title: Generative Adversarial Network
+cluster: generative
+year: 2014
+aka: [GAN]
+summary: >
+  Trains a generator against a discriminator that tries to tell real from
+  fake. Produces sharp samples, and the minimax objective is notoriously
+  unstable and prone to collapsing onto a few modes.
+wikipedia: https://en.wikipedia.org/wiki/Generative_adversarial_network
+refs:
+  - title: Generative Adversarial Networks
+    authors: Goodfellow et al.
+    year: 2014
+    url: https://arxiv.org/abs/1406.2661
+edges:
+  - rel: alternative-to
+    to: variational-autoencoder
+    why: an adversarial critic instead of a likelihood bound

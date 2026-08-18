@@ -1,0 +1,19 @@
+title: Latent Diffusion
+cluster: generative
+year: 2021
+summary: >
+  Runs the diffusion process in the compressed latent space of an
+  autoencoder rather than on pixels. The reason text-to-image generation
+  fits on consumer hardware.
+refs:
+  - title: High-Resolution Image Synthesis with Latent Diffusion Models
+    authors: Rombach, Blattmann, Lorenz, Esser, Ommer
+    year: 2021
+    url: https://arxiv.org/abs/2112.10752
+edges:
+  - rel: corrects
+    to: diffusion-model
+    why: denoising at pixel resolution is prohibitively expensive
+  - rel: requires
+    to: variational-autoencoder
+    why: the latent space it works in comes from one

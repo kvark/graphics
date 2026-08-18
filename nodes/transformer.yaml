@@ -1,0 +1,23 @@
+title: Transformer
+cluster: sequence-models
+year: 2017
+summary: >
+  Drops recurrence entirely and stacks self-attention with feed-forward
+  layers. Because no step waits on the previous one, the whole sequence
+  trains in parallel, which is what let model size scale.
+wikipedia: https://en.wikipedia.org/wiki/Transformer_(deep_learning)
+refs:
+  - title: Attention Is All You Need
+    authors: Vaswani et al.
+    year: 2017
+    url: https://arxiv.org/abs/1706.03762
+edges:
+  - rel: corrects
+    to: lstm
+    why: recurrence forbids parallelism across sequence positions
+  - rel: requires
+    to: attention
+    why: it is the only operation left that mixes positions
+  - rel: requires
+    to: layer-normalization
+    why: the residual stack does not converge without it

@@ -1,50 +1,77 @@
-# Diagram groupings. Order here is the order of sections in the README.
-# A node's `cluster` field must name one of these ids.
+# Diagram groupings. A node's `cluster` field must name one of these ids,
+# and every cluster names the domain it belongs to (see domains.yaml).
 
 - id: foundations
+  domain: graphics
   title: Foundations
   blurb: The quantities everything else is defined in terms of.
 
 - id: light-transport
+  domain: graphics
   title: Light Transport
   blurb: Algorithms that solve the rendering equation, and the estimators they are built from.
 
 - id: materials
+  domain: graphics
   title: Materials and BSDFs
   blurb: Models for what a surface does to light that hits it.
 
 - id: volumetrics
+  domain: graphics
   title: Participating Media
   blurb: Transport through a volume rather than across a surface.
 
 - id: sampling
+  domain: shared
   title: Sampling
   blurb: Where to put the samples, and how the error is distributed when you cannot afford enough of them.
 
 - id: real-time-shading
+  domain: graphics
   title: Real-Time Shading
   blurb: Getting a usable approximation of the above inside a frame budget.
 
 - id: shadows
+  domain: graphics
   title: Shadows
   blurb: Visibility from the light, and the artifacts of every way of caching it.
 
 - id: antialiasing
+  domain: graphics
   title: Anti-Aliasing and Filtering
   blurb: Reconstruction, in space and over time.
 
 - id: denoising
+  domain: graphics
   title: Denoising
   blurb: Trading variance for bias so that low sample counts are shippable.
 
 - id: geometry
+  domain: graphics
   title: Geometry and Intersection
   blurb: Representing surfaces and finding where a ray meets them.
 
 - id: color
+  domain: graphics
   title: Color and Tone
   blurb: Turning radiance into pixels a display can show.
 
 - id: neural
+  domain: graphics
   title: Neural Representations
   blurb: Learned scene representations, and their reconstruction lineage.
+
+- id: learning
+  domain: ai
+  title: Training and Optimisation
+  blurb: How the weights actually get set, and what each step of that lineage fixed.
+
+- id: sequence-models
+  domain: ai
+  title: Sequence Models
+  blurb: Carrying information across a sequence, and the successive removal of bottlenecks.
+
+- id: generative
+  domain: ai
+  title: Generative Models
+  blurb: Learning to sample from a distribution rather than to label one.

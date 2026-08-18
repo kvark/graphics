@@ -1,0 +1,18 @@
+title: Layer Normalization
+cluster: learning
+year: 2016
+aka: [LayerNorm]
+summary: >
+  Normalise across the features of a single example rather than across the
+  batch, so the computation for one input never depends on which other
+  inputs it was batched with.
+wikipedia: https://en.wikipedia.org/wiki/Normalization_(machine_learning)
+refs:
+  - title: Layer Normalization
+    authors: Ba, Kiros, Hinton
+    year: 2016
+    url: https://arxiv.org/abs/1607.06450
+edges:
+  - rel: corrects
+    to: batch-normalization
+    why: batch statistics make training and inference disagree

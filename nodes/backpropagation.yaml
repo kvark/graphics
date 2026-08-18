@@ -1,0 +1,12 @@
+title: Backpropagation
+cluster: learning
+year: 1986
+summary: >
+  Reverse-mode differentiation over the network graph: one backward pass
+  yields the gradient with respect to every parameter, at roughly the cost
+  of the forward pass.
+wikipedia: https://en.wikipedia.org/wiki/Backpropagation
+edges:
+  - rel: requires
+    to: gradient-descent
+    why: it supplies the gradient the update step consumes

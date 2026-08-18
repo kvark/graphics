@@ -1,0 +1,24 @@
+# Top-level grouping. A cluster belongs to exactly one domain.
+#
+# The point of keeping several domains in one graph is the edges *between*
+# them: a technique in one field correcting or depending on one in another is
+# the most interesting thing this collection can record. Domains that never
+# link to each other would be better off as separate repositories.
+
+- id: shared
+  title: Shared Foundations
+  blurb: >
+    Mathematical ground that more than one field stands on. A concept belongs
+    here once a second domain needs it, not before.
+
+- id: graphics
+  title: Computer Graphics
+  blurb: >
+    Rendering: how light is transported, what surfaces do to it, and how any
+    of that is made to fit in a frame budget.
+
+- id: ai
+  title: AI and Machine Learning
+  blurb: >
+    Training and architecture: the lineage of optimisers, normalisation,
+    sequence models and generative methods.

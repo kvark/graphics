@@ -13,6 +13,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 NODES_DIR = ROOT / "nodes"
 CLUSTERS_FILE = ROOT / "clusters.yaml"
+DOMAINS_FILE = ROOT / "domains.yaml"
 
 # rel -> (reads-as, why-required)
 RELATIONS = {
@@ -34,9 +35,19 @@ class Problem(Exception):
     pass
 
 
+def load_domains():
+    return [
+        {"id": d["id"], "title": d["title"], "blurb": (d.get("blurb") or "").strip()}
+        for d in yaml.safe_load(DOMAINS_FILE.read_text())
+    ]
+
+
 def load_clusters():
-    data = yaml.safe_load(CLUSTERS_FILE.read_text())
-    return [(c["id"], c["title"], c.get("blurb", "")) for c in data]
+    return [
+        {"id": c["id"], "domain": c["domain"], "title": c["title"],
+         "blurb": (c.get("blurb") or "").strip()}
+        for c in yaml.safe_load(CLUSTERS_FILE.read_text())
+    ]
 
 
 def load_nodes():
@@ -53,9 +64,17 @@ def load_nodes():
     return nodes
 
 
-def validate(nodes, clusters):
+def validate(nodes, clusters, domains):
     errors = []
-    cluster_ids = {c[0] for c in clusters}
+    cluster_ids = {c["id"] for c in clusters}
+    domain_ids = {d["id"] for d in domains}
+
+    for cluster in clusters:
+        if cluster["domain"] not in domain_ids:
+            errors.append(
+                f"clusters.yaml: cluster '{cluster['id']}' names unknown "
+                f"domain '{cluster['domain']}'"
+            )
 
     for nid, node in sorted(nodes.items()):
         where = node["_path"]
@@ -110,14 +129,15 @@ def validate(nodes, clusters):
 
 def load_all():
     """Load and validate, raising Problem with every error found."""
+    domains = load_domains()
     clusters = load_clusters()
     nodes = load_nodes()
-    errors = validate(nodes, clusters)
+    errors = validate(nodes, clusters, domains)
     if errors:
         raise Problem(
             f"{len(errors)} problem(s):\n  " + "\n  ".join(errors)
         )
-    return nodes, clusters
+    return nodes, clusters, domains
 
 
 def incoming(nodes):
@@ -132,6 +152,17 @@ def incoming(nodes):
 
 def members_of(nodes, cluster_id):
     return sorted(nid for nid, n in nodes.items() if n.get("cluster") == cluster_id)
+
+
+def clusters_of(clusters, domain_id):
+    return [c for c in clusters if c["domain"] == domain_id]
+
+
+def domain_of(clusters, cluster_id):
+    for cluster in clusters:
+        if cluster["id"] == cluster_id:
+            return cluster["domain"]
+    return None
 
 
 def clean(text, limit=None):

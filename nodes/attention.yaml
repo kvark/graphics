@@ -1,0 +1,17 @@
+title: Attention
+cluster: sequence-models
+year: 2014
+summary: >
+  Compute a weighted sum over all positions, with weights from a learned
+  compatibility score. Every position can reach every other in one hop,
+  regardless of distance.
+wikipedia: https://en.wikipedia.org/wiki/Attention_(machine_learning)
+refs:
+  - title: Neural Machine Translation by Jointly Learning to Align and Translate
+    authors: Bahdanau, Cho, Bengio
+    year: 2014
+    url: https://arxiv.org/abs/1409.0473
+edges:
+  - rel: corrects
+    to: recurrent-network
+    why: a fixed-size hidden state cannot carry a whole sequence

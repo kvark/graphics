@@ -1,0 +1,16 @@
+title: AdamW
+cluster: learning
+year: 2017
+summary: >
+  Applies weight decay directly to the weights instead of adding an L2
+  term to the loss. The distinction is invisible in plain SGD and decisive
+  in Adam.
+refs:
+  - title: Decoupled Weight Decay Regularization
+    authors: Loshchilov, Hutter
+    year: 2017
+    url: https://arxiv.org/abs/1711.05101
+edges:
+  - rel: corrects
+    to: adam
+    why: an L2 penalty stops being weight decay once Adam rescales it
