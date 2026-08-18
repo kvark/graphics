@@ -1,0 +1,14 @@
+title: Word Embedding
+cluster: language
+year: 2013
+aka: [word2vec]
+summary: >
+  Maps words to dense vectors trained so that context predicts the word.
+  Gave the field the observation that direction in the space carries
+  meaning.
+wikipedia: https://en.wikipedia.org/wiki/Word2vec
+refs:
+  - title: Efficient Estimation of Word Representations in Vector Space
+    authors: Mikolov, Chen, Corrado, Dean
+    year: 2013
+    url: https://arxiv.org/abs/1301.3781

@@ -9,3 +9,6 @@ edges:
   - rel: requires
     to: polygon-mesh
     why: it fills projected primitives, not implicit surfaces
+  - rel: requires
+    to: z-buffer
+    why: per-pixel depth is what makes visibility local

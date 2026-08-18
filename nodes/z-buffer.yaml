@@ -1,0 +1,12 @@
+title: Z-Buffer
+cluster: visibility
+year: 1974
+summary: >
+  Keeps the nearest depth seen per pixel and rejects fragments behind it.
+  Turns visibility from a global sorting problem into a local comparison,
+  which is why it is in every GPU.
+wikipedia: https://en.wikipedia.org/wiki/Z-buffering
+edges:
+  - rel: corrects
+    to: painters-algorithm
+    why: cyclically overlapping polygons have no correct draw order

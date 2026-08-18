@@ -1,0 +1,17 @@
+title: BERT
+cluster: language
+year: 2018
+summary: >
+  An encoder-only transformer pretrained by masking tokens and predicting
+  them from both sides. Showed that one pretrained model plus a small head
+  beats task-specific architectures.
+wikipedia: https://en.wikipedia.org/wiki/BERT_(language_model)
+refs:
+  - title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+    authors: Devlin, Chang, Lee, Toutanova
+    year: 2018
+    url: https://arxiv.org/abs/1810.04805
+edges:
+  - rel: specializes
+    to: transformer
+    why: encoder only, trained by masking rather than predicting

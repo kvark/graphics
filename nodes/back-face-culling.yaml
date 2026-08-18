@@ -1,0 +1,11 @@
+title: Back-Face Culling
+cluster: visibility
+summary: >
+  Discards triangles whose winding shows they face away from the camera,
+  removing about half the geometry of a closed mesh before it is
+  rasterized at all.
+wikipedia: https://en.wikipedia.org/wiki/Back-face_culling
+edges:
+  - rel: extends
+    to: rasterization
+    why: half a closed mesh can never face the camera

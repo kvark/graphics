@@ -1,0 +1,15 @@
+title: Autoregressive Language Model
+cluster: language
+aka: [GPT, Decoder-only]
+summary: >
+  A decoder-only transformer trained to predict the next token. The
+  objective is trivial and the capability that falls out of scaling it was
+  not anticipated.
+wikipedia: https://en.wikipedia.org/wiki/Generative_pre-trained_transformer
+edges:
+  - rel: specializes
+    to: transformer
+    why: decoder only, predicting forward with a causal mask
+  - rel: alternative-to
+    to: bert
+    why: generates continuations rather than encoding a whole span

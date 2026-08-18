@@ -1,0 +1,8 @@
+title: SIMD
+cluster: hardware
+aka: [Single instruction, multiple data]
+summary: >
+  One instruction applied to many data lanes at once. The arrangement that
+  makes throughput hardware cheap: fetch and decode are paid once for a
+  whole vector.
+wikipedia: https://en.wikipedia.org/wiki/Single_instruction,_multiple_data

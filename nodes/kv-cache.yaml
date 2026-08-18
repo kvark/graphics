@@ -1,0 +1,11 @@
+title: KV Cache
+cluster: efficiency
+summary: >
+  Stores the keys and values already computed for the prefix so each
+  generated token attends without recomputing them. Turns quadratic
+  regeneration into linear, and makes memory the binding constraint.
+wikipedia: https://en.wikipedia.org/wiki/Large_language_model
+edges:
+  - rel: corrects
+    to: transformer
+    why: generation would recompute the prefix per token

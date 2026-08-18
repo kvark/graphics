@@ -1,0 +1,11 @@
+title: Cross-Entropy Loss
+cluster: learning
+summary: >
+  Scores a predicted distribution by the log probability it assigned to
+  the observed outcome. The standard classification objective, and the
+  reason logits are trained rather than probabilities.
+wikipedia: https://en.wikipedia.org/wiki/Cross-entropy
+edges:
+  - rel: requires
+    to: backpropagation
+    why: it is the scalar the backward pass differentiates

@@ -1,0 +1,11 @@
+title: Weight Decay
+cluster: learning
+summary: >
+  Shrinks weights toward zero every step. The oldest regulariser, and the
+  one whose interaction with adaptive optimisers turned out to be subtler
+  than anyone assumed.
+wikipedia: https://en.wikipedia.org/wiki/Ridge_regression
+edges:
+  - rel: alternative-to
+    to: dropout
+    why: constrains weight magnitude rather than co-adaptation

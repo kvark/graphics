@@ -1,0 +1,10 @@
+title: Catastrophic Cancellation
+cluster: numerics
+summary: >
+  Subtracting two nearly equal values discards the leading digits they
+  agree on and promotes rounding error into the result. The reason a
+  mathematically exact rearrangement can be numerically disastrous.
+wikipedia: https://en.wikipedia.org/wiki/Catastrophic_cancellation
+edges:
+  - rel: part-of
+    to: floating-point

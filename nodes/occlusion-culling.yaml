@@ -1,0 +1,11 @@
+title: Occlusion Culling
+cluster: visibility
+summary: >
+  Skips geometry hidden behind other geometry. The hard part is that the
+  answer depends on what has already been drawn, so it is always an
+  estimate made against partial information.
+wikipedia: https://en.wikipedia.org/wiki/Hidden-surface_determination
+edges:
+  - rel: extends
+    to: frustum-culling
+    why: being inside the frustum does not make a thing visible

@@ -1,0 +1,11 @@
+title: Policy Gradient
+cluster: reinforcement
+summary: >
+  Differentiates expected return with respect to the policy parameters
+  directly, so stochastic and continuous action spaces need no argmax over
+  actions.
+wikipedia: https://en.wikipedia.org/wiki/Policy_gradient_method
+edges:
+  - rel: alternative-to
+    to: q-learning
+    why: optimises the policy itself instead of a value function

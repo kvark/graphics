@@ -1,0 +1,16 @@
+title: Direct Preference Optimization
+cluster: language
+year: 2023
+aka: [DPO]
+summary: >
+  Shows the preference objective can be optimised as a classification loss
+  on the model itself, with no reward model and no rollouts.
+refs:
+  - title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+    authors: Rafailov et al.
+    year: 2023
+    url: https://arxiv.org/abs/2305.18290
+edges:
+  - rel: corrects
+    to: rlhf
+    why: a reward model and an RL loop to fit a preference dataset

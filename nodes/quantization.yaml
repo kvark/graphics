@@ -1,0 +1,17 @@
+title: Quantization
+cluster: efficiency
+year: 2022
+summary: >
+  Represents weights, and sometimes activations, as low-bit integers with
+  a scale. Most of the difficulty is the handful of outlier channels whose
+  range the rest cannot share.
+wikipedia: https://en.wikipedia.org/wiki/Quantization_(signal_processing)
+refs:
+  - title: "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale"
+    authors: Dettmers, Lewis, Belkada, Zettlemoyer
+    year: 2022
+    url: https://arxiv.org/abs/2208.07339
+edges:
+  - rel: approximates
+    to: floating-point
+    why: integers plus a scale, trading range for footprint

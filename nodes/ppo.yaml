@@ -1,0 +1,24 @@
+title: Proximal Policy Optimization
+cluster: reinforcement
+year: 2017
+aka: [PPO]
+summary: >
+  Clips the ratio between new and old policy so an update cannot move too
+  far from the data it was collected under. Most of TRPO's stability with
+  none of its second-order machinery.
+refs:
+  - title: Proximal Policy Optimization Algorithms
+    authors: Schulman, Wolski, Dhariwal, Radford, Klimov
+    year: 2017
+    url: https://arxiv.org/abs/1707.06347
+  - title: Trust Region Policy Optimization
+    authors: Schulman, Levine, Abbeel, Jordan, Moritz
+    year: 2015
+    url: https://arxiv.org/abs/1502.05477
+edges:
+  - rel: corrects
+    to: policy-gradient
+    why: an unconstrained step can collapse the policy
+  - rel: requires
+    to: importance-sampling
+    why: the ratio it clips is the importance weight of reused data

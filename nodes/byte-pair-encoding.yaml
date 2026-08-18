@@ -1,0 +1,18 @@
+title: Byte-Pair Encoding
+cluster: language
+year: 2015
+aka: [BPE, Subword tokenization]
+summary: >
+  Merges frequent character pairs into subword units until the vocabulary
+  is full. Any string stays representable, so rare and unseen words
+  degrade into pieces instead of a single unknown token.
+wikipedia: https://en.wikipedia.org/wiki/Byte-pair_encoding
+refs:
+  - title: Neural Machine Translation of Rare Words with Subword Units
+    authors: Sennrich, Haddow, Birch
+    year: 2015
+    url: https://arxiv.org/abs/1508.07909
+edges:
+  - rel: corrects
+    to: word-embedding
+    why: a fixed word vocabulary cannot represent anything unseen

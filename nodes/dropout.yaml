@@ -1,0 +1,12 @@
+title: Dropout
+cluster: learning
+year: 2014
+summary: >
+  Randomly zeroes units during training, so no unit can rely on any
+  particular other one being present. Approximates averaging over an
+  exponential family of thinned networks.
+wikipedia: https://en.wikipedia.org/wiki/Dropout_(neural_networks)
+edges:
+  - rel: corrects
+    to: backpropagation
+    why: units co-adapt and memorise instead of generalising

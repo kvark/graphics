@@ -1,0 +1,7 @@
+title: Floating-Point Arithmetic
+cluster: numerics
+summary: >
+  Numbers as sign, exponent and significand, so a fixed budget of bits
+  spans a huge range at constant relative precision. Every result below is
+  a consequence of that trade.
+wikipedia: https://en.wikipedia.org/wiki/Floating-point_arithmetic

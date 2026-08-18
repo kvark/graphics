@@ -1,0 +1,11 @@
+title: Kahan Summation
+cluster: numerics
+year: 1965
+summary: >
+  Carries a running compensation for the low-order bits lost in each
+  addition, making the error of a long sum independent of its length.
+wikipedia: https://en.wikipedia.org/wiki/Kahan_summation_algorithm
+edges:
+  - rel: corrects
+    to: catastrophic-cancellation
+    why: recovers the low-order bits each addition throws away

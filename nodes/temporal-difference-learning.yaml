@@ -1,0 +1,11 @@
+title: Temporal Difference Learning
+cluster: reinforcement
+summary: >
+  Updates a value estimate toward a later estimate rather than waiting for
+  the final return. Learns from incomplete episodes, which is what makes
+  online learning possible at all.
+wikipedia: https://en.wikipedia.org/wiki/Temporal_difference_learning
+edges:
+  - rel: specializes
+    to: markov-decision-process
+    why: estimates the value function the MDP defines

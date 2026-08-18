@@ -1,0 +1,15 @@
+title: Experience Replay
+cluster: reinforcement
+year: 2013
+summary: >
+  Stores transitions in a buffer and samples them at random, so an update
+  is not dominated by whatever just happened.
+refs:
+  - title: Playing Atari with Deep Reinforcement Learning
+    authors: Mnih et al.
+    year: 2013
+    url: https://arxiv.org/abs/1312.5602
+edges:
+  - rel: corrects
+    to: deep-q-network
+    why: consecutive transitions are correlated

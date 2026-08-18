@@ -1,0 +1,10 @@
+title: Arithmetic Intensity
+cluster: hardware
+summary: >
+  Operations performed per byte moved. The single number that decides
+  whether a kernel is compute bound or bandwidth bound, and therefore
+  which optimisations can possibly help.
+wikipedia: https://en.wikipedia.org/wiki/Roofline_model
+edges:
+  - rel: part-of
+    to: roofline-model

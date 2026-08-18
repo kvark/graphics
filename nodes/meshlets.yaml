@@ -9,3 +9,6 @@ edges:
   - rel: extends
     to: rasterization
     why: culls per cluster instead of per triangle or per object
+  - rel: requires
+    to: simt
+    why: a cluster is sized to one workgroup's registers

@@ -1,0 +1,12 @@
+title: Half Precision
+cluster: numerics
+aka: [fp16, IEEE binary16]
+summary: >
+  Sixteen bits: five of exponent, ten of significand. Halves bandwidth and
+  doubles the working set that fits in cache, at a range narrow enough to
+  matter.
+wikipedia: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
+edges:
+  - rel: specializes
+    to: floating-point
+    why: half the bits, chosen for bandwidth rather than accuracy
