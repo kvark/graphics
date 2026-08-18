@@ -1,0 +1,20 @@
+title: Generalized Advantage Estimation
+cluster: reinforcement
+year: 2015
+aka: [GAE]
+summary: >
+  Blends TD residuals over many horizons with an exponential weight,
+  giving one knob that trades bias against variance in the advantage
+  estimate.
+refs:
+  - title: High-Dimensional Continuous Control Using Generalized Advantage Estimation
+    authors: Schulman, Moritz, Levine, Jordan, Abbeel
+    year: 2015
+    url: https://arxiv.org/abs/1506.02438
+edges:
+  - rel: corrects
+    to: policy-gradient
+    why: raw returns are too noisy to learn from directly
+  - rel: requires
+    to: actor-critic
+    why: the value function it leans on is the critic

@@ -1,0 +1,17 @@
+title: Fully Sharded Data Parallel
+cluster: distributed
+year: 2023
+aka: [FSDP]
+summary: >
+  The sharded-everything form of ZeRO as a framework primitive, gathering
+  each layer's parameters just before use and releasing them straight
+  after.
+refs:
+  - title: "PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel"
+    authors: Zhao et al.
+    year: 2023
+    url: https://arxiv.org/abs/2304.11277
+edges:
+  - rel: specializes
+    to: zero-sharding
+    why: shards parameters as well as optimizer state, per layer

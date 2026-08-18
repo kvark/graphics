@@ -19,3 +19,6 @@ edges:
   - rel: requires
     to: ppo
     why: the reward model is not differentiable through text
+  - rel: requires
+    to: supervised-fine-tuning
+    why: the policy is initialised from a supervised pass

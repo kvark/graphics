@@ -1,0 +1,12 @@
+title: ReLU
+cluster: learning
+aka: [Rectified linear unit]
+summary: >
+  Passes positives through unchanged and zeroes negatives. The derivative
+  is exactly one on the active half, so nothing attenuates the gradient
+  there.
+wikipedia: https://en.wikipedia.org/wiki/Rectified_linear_unit
+edges:
+  - rel: corrects
+    to: backpropagation
+    why: saturating activations drive the gradient toward zero

@@ -1,0 +1,19 @@
+title: Large-Batch Training
+cluster: learning
+year: 2017
+summary: >
+  Scales the learning rate linearly with batch size so that many devices
+  can share one step. Holds up to surprisingly large batches, and only
+  with a warmup in front of it.
+refs:
+  - title: "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour"
+    authors: Goyal et al.
+    year: 2017
+    url: https://arxiv.org/abs/1706.02677
+edges:
+  - rel: requires
+    to: learning-rate-warmup
+    why: the scaled rate is unstable over the first epochs
+  - rel: requires
+    to: data-parallelism
+    why: the batch is large because it is split across devices

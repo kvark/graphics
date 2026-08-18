@@ -1,0 +1,11 @@
+title: Actor-Critic
+cluster: reinforcement
+summary: >
+  Learns a policy and a value function together, using the value estimate
+  as the baseline the policy gradient is measured against. Most modern
+  policy methods are some form of this.
+wikipedia: https://en.wikipedia.org/wiki/Actor-critic_algorithm
+edges:
+  - rel: extends
+    to: policy-gradient
+    why: a learned baseline instead of sampled returns

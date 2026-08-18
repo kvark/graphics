@@ -1,0 +1,20 @@
+title: Reinforcement Learning from Verifiable Rewards
+cluster: language
+year: 2025
+aka: [RLVR]
+summary: >
+  Replaces the learned reward with a programmatic check — does the proof
+  verify, do the tests pass, is the answer right. Works only where
+  correctness is decidable, and there the signal cannot be gamed.
+refs:
+  - title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"
+    authors: DeepSeek-AI
+    year: 2025
+    url: https://arxiv.org/abs/2501.12948
+edges:
+  - rel: corrects
+    to: rlhf
+    why: a learned reward can be gamed; a checked answer cannot
+  - rel: requires
+    to: grpo
+    why: one scalar per completion, with no critic to fit

@@ -1,0 +1,15 @@
+title: Label Smoothing
+cluster: learning
+year: 2015
+summary: >
+  Replaces the one-hot target with a slightly softened distribution, so
+  the model is never asked to be infinitely confident.
+refs:
+  - title: Rethinking the Inception Architecture for Computer Vision
+    authors: Szegedy, Vanhoucke, Ioffe, Shlens, Wojna
+    year: 2015
+    url: https://arxiv.org/abs/1512.00567
+edges:
+  - rel: corrects
+    to: cross-entropy-loss
+    why: a one-hot target pushes logits apart without bound

@@ -22,3 +22,6 @@ edges:
   - rel: requires
     to: importance-sampling
     why: the ratio it clips is the importance weight of reused data
+  - rel: approximates
+    to: trpo
+    why: clipping instead of a constrained second-order solve

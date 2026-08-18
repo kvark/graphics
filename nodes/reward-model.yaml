@@ -1,0 +1,15 @@
+title: Reward Model
+cluster: language
+year: 2022
+summary: >
+  A model trained on pairwise human preferences to score responses,
+  standing in for the objective nobody can write down. Also the component
+  that gets gamed once the policy optimises against it hard enough.
+refs:
+  - title: Training language models to follow instructions with human feedback
+    authors: Ouyang et al.
+    year: 2022
+    url: https://arxiv.org/abs/2203.02155
+edges:
+  - rel: part-of
+    to: rlhf

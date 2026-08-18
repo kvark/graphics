@@ -1,0 +1,20 @@
+title: He Initialization
+cluster: learning
+year: 2015
+aka: [Kaiming initialization]
+summary: >
+  Doubles the initial variance to account for a rectifier discarding half
+  its input. The correction that made very deep rectified networks
+  converge from scratch.
+refs:
+  - title: "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification"
+    authors: He, Zhang, Ren, Sun
+    year: 2015
+    url: https://arxiv.org/abs/1502.01852
+edges:
+  - rel: corrects
+    to: weight-initialization
+    why: the usual variance assumes a symmetric activation
+  - rel: requires
+    to: relu
+    why: the factor of two is exactly what the rectifier discards

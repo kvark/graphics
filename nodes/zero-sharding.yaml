@@ -1,0 +1,20 @@
+title: ZeRO Sharding
+cluster: distributed
+year: 2019
+aka: [ZeRO]
+summary: >
+  Partitions optimizer state, gradients and parameters across data-
+  parallel ranks instead of replicating them, gathering each shard only
+  while it is needed.
+refs:
+  - title: "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models"
+    authors: Rajbhandari, Rasley, Ruwase, He
+    year: 2019
+    url: https://arxiv.org/abs/1910.02054
+edges:
+  - rel: corrects
+    to: data-parallelism
+    why: every replica redundantly stores the same optimizer state
+  - rel: alternative-to
+    to: gradient-checkpointing
+    why: shards state across devices instead of recomputing it

@@ -1,0 +1,20 @@
+title: Group Relative Policy Optimization
+cluster: reinforcement
+year: 2024
+aka: [GRPO]
+summary: >
+  Samples a group of completions per prompt and uses their mean reward as
+  the baseline, so the advantage is relative within the group. Drops the
+  value network entirely.
+refs:
+  - title: "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models"
+    authors: Shao et al.
+    year: 2024
+    url: https://arxiv.org/abs/2402.03300
+edges:
+  - rel: corrects
+    to: ppo
+    why: the critic is a second model the size of the policy
+  - rel: alternative-to
+    to: actor-critic
+    why: a group-relative baseline instead of a learned one
