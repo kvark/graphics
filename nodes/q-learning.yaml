@@ -1,0 +1,11 @@
+title: Q-Learning
+cluster: reinforcement
+year: 1989
+summary: >
+  Learns the value of each state-action pair directly, converging to the
+  optimal policy without ever modelling the transitions.
+wikipedia: https://en.wikipedia.org/wiki/Q-learning
+edges:
+  - rel: specializes
+    to: temporal-difference-learning
+    why: "the bootstrapped target is the best next action's value"

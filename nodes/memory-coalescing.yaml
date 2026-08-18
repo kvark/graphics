@@ -1,0 +1,11 @@
+title: Memory Coalescing
+cluster: hardware
+summary: >
+  Lanes whose addresses fall in one cache line are served by a single
+  transaction. Scattered addresses become one transaction each, which is
+  the difference between using and wasting the memory bus.
+wikipedia: https://en.wikipedia.org/wiki/Single_instruction,_multiple_threads
+edges:
+  - rel: requires
+    to: simt
+    why: the lanes must issue their loads in the same cycle

@@ -1,0 +1,18 @@
+title: Hierarchical Z-Buffer
+cluster: visibility
+year: 1993
+summary: >
+  Keeps a mip pyramid of depth so a whole screen region can be rejected in
+  one test against its coarsest level, instead of per pixel.
+refs:
+  - title: Hierarchical Z-Buffer Visibility
+    authors: Greene, Kass, Miller
+    year: 1993
+    url: https://doi.org/10.1145/166117.166147
+edges:
+  - rel: extends
+    to: z-buffer
+    why: rejects a whole region against a depth pyramid
+  - rel: specializes
+    to: occlusion-culling
+    why: the occluders are whatever the depth buffer already holds

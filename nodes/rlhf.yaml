@@ -1,0 +1,21 @@
+title: RLHF
+cluster: language
+year: 2022
+aka: [Reinforcement learning from human feedback]
+summary: >
+  Fits a reward model to human preference comparisons, then optimises the
+  language model against it. The step that turned a next-token predictor
+  into something that follows instructions.
+wikipedia: https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback
+refs:
+  - title: Training language models to follow instructions with human feedback
+    authors: Ouyang et al.
+    year: 2022
+    url: https://arxiv.org/abs/2203.02155
+edges:
+  - rel: extends
+    to: autoregressive-language-model
+    why: aligns to preferences that next-token loss cannot express
+  - rel: requires
+    to: ppo
+    why: the reward model is not differentiable through text

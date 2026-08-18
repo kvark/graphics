@@ -1,0 +1,16 @@
+title: Gradient Checkpointing
+cluster: efficiency
+year: 2016
+summary: >
+  Keeps only a subset of activations and recomputes the rest during the
+  backward pass, trading arithmetic for memory at roughly the square root
+  of the naive cost.
+refs:
+  - title: Training Deep Nets with Sublinear Memory Cost
+    authors: Chen, Xu, Zhang, Guestrin
+    year: 2016
+    url: https://arxiv.org/abs/1604.06174
+edges:
+  - rel: corrects
+    to: backpropagation
+    why: keeping every activation exhausts memory

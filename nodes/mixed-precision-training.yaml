@@ -1,0 +1,19 @@
+title: Mixed-Precision Training
+cluster: efficiency
+year: 2017
+summary: >
+  Stores and multiplies in sixteen bits while keeping a master copy of the
+  weights and the accumulations in thirty-two, with a loss scale to keep
+  small gradients representable.
+refs:
+  - title: Mixed Precision Training
+    authors: Micikevicius et al.
+    year: 2017
+    url: https://arxiv.org/abs/1710.03740
+edges:
+  - rel: requires
+    to: half-precision
+    why: the halved bandwidth is the entire point
+  - rel: corrects
+    to: stochastic-gradient-descent
+    why: full-precision training is bandwidth bound

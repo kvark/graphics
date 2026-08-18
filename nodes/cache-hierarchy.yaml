@@ -1,0 +1,7 @@
+title: Cache Hierarchy
+cluster: hardware
+summary: >
+  Successive levels trade capacity for latency and bandwidth. Almost every
+  optimisation below the algorithmic level is a rearrangement to make a
+  working set fit one level higher up.
+wikipedia: https://en.wikipedia.org/wiki/Cache_hierarchy

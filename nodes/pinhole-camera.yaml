@@ -1,0 +1,7 @@
+title: Pinhole Camera
+cluster: camera
+summary: >
+  Every ray passes through a single point, so the projection is a pure
+  perspective divide. The default camera in rendering because it is the
+  one with no extra parameters.
+wikipedia: https://en.wikipedia.org/wiki/Pinhole_camera_model

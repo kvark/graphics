@@ -1,0 +1,10 @@
+title: Frustum Culling
+cluster: visibility
+summary: >
+  Rejects objects whose bounding volume lies wholly outside the viewing
+  volume, before any of their triangles are touched.
+wikipedia: https://en.wikipedia.org/wiki/Viewing_frustum
+edges:
+  - rel: extends
+    to: rasterization
+    why: geometry off screen still costs vertex work otherwise

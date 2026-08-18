@@ -1,0 +1,17 @@
+title: Deep Q-Network
+cluster: reinforcement
+year: 2013
+aka: [DQN]
+summary: >
+  Replaces the Q table with a convolutional network reading pixels. The
+  result that made reinforcement learning on raw sensory input look
+  tractable.
+refs:
+  - title: Playing Atari with Deep Reinforcement Learning
+    authors: Mnih et al.
+    year: 2013
+    url: https://arxiv.org/abs/1312.5602
+edges:
+  - rel: corrects
+    to: q-learning
+    why: a table cannot cover a high-dimensional state space

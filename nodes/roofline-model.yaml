@@ -1,0 +1,9 @@
+title: Roofline Model
+cluster: hardware
+year: 2009
+summary: >
+  Plots attainable performance against arithmetic intensity, bounded by
+  peak compute on one side and memory bandwidth on the other. Tells you
+  which of the two you are actually fighting before you optimise the wrong
+  one.
+wikipedia: https://en.wikipedia.org/wiki/Roofline_model

@@ -1,0 +1,15 @@
+title: Gradient Clipping
+cluster: learning
+year: 2012
+summary: >
+  Rescales the gradient when its norm exceeds a threshold. Crude, and it
+  turns a run-ending weight update into a merely bad one.
+refs:
+  - title: On the difficulty of training Recurrent Neural Networks
+    authors: Pascanu, Mikolov, Bengio
+    year: 2012
+    url: https://arxiv.org/abs/1211.5063
+edges:
+  - rel: corrects
+    to: recurrent-network
+    why: exploding gradients destroy the weights in one step

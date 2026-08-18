@@ -1,0 +1,10 @@
+title: "Painter's Algorithm"
+cluster: visibility
+summary: >
+  Sort primitives by depth and draw back to front, letting later writes
+  cover earlier ones. Needs no extra memory and fails on any arrangement
+  without a consistent order.
+wikipedia: https://en.wikipedia.org/wiki/Painter%27s_algorithm
+edges:
+  - rel: part-of
+    to: rasterization

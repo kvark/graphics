@@ -14,3 +14,6 @@ edges:
   - rel: corrects
     to: attention
     why: it is memory-bandwidth bound, not compute bound
+  - rel: requires
+    to: cache-hierarchy
+    why: it tiles attention to fit in on-chip memory

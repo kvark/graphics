@@ -1,0 +1,16 @@
+title: Chinchilla Scaling
+cluster: language
+year: 2022
+summary: >
+  Refits the compute-optimal frontier and finds parameters and tokens
+  should grow together in roughly equal proportion. Implied the models of
+  the day were several times too large for the data they saw.
+refs:
+  - title: Training Compute-Optimal Large Language Models
+    authors: Hoffmann et al.
+    year: 2022
+    url: https://arxiv.org/abs/2203.15556
+edges:
+  - rel: corrects
+    to: scaling-laws
+    why: the earlier fits left models too large for their data

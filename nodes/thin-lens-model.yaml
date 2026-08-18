@@ -1,0 +1,11 @@
+title: Thin Lens Model
+cluster: camera
+summary: >
+  Gives the camera an aperture of finite size, so only one distance is in
+  focus and everything else spreads. The cheapest model that produces
+  depth of field at all.
+wikipedia: https://en.wikipedia.org/wiki/Depth_of_field
+edges:
+  - rel: corrects
+    to: pinhole-camera
+    why: a pinhole holds everything in focus, unlike any real lens

@@ -1,0 +1,12 @@
+title: SIMT
+cluster: hardware
+aka: [Single instruction, multiple threads]
+summary: >
+  Lanes are presented as independent threads sharing an instruction
+  stream. Lets ordinary branching code be written for vector hardware, at
+  the cost of hiding when that code stops being vector-friendly.
+wikipedia: https://en.wikipedia.org/wiki/Single_instruction,_multiple_threads
+edges:
+  - rel: extends
+    to: simd
+    why: lanes get their own program counter, so branches compile

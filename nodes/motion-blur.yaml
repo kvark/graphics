@@ -1,0 +1,14 @@
+title: Motion Blur
+cluster: camera
+summary: >
+  Integrates the scene over the shutter interval rather than sampling one
+  instant. Removes temporal aliasing for the same reason spatial
+  supersampling removes the spatial kind.
+wikipedia: https://en.wikipedia.org/wiki/Motion_blur_(media)
+edges:
+  - rel: extends
+    to: pinhole-camera
+    why: the shutter is open for an interval, not an instant
+  - rel: specializes
+    to: supersampling
+    why: the extra samples are spread over time instead of area

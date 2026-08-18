@@ -1,0 +1,12 @@
+title: bfloat16
+cluster: numerics
+year: 2018
+summary: >
+  Keeps float32's eight exponent bits and spends the savings on
+  significand instead. The same range as single precision, so values that
+  were representable before still are.
+wikipedia: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
+edges:
+  - rel: corrects
+    to: half-precision
+    why: "fp16's exponent range underflows small gradients"

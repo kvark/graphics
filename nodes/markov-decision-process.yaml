@@ -1,0 +1,8 @@
+title: Markov Decision Process
+cluster: reinforcement
+aka: [MDP]
+summary: >
+  States, actions, transition probabilities and rewards, where the next
+  state depends only on the present one. The formalism every method below
+  is defined against.
+wikipedia: https://en.wikipedia.org/wiki/Markov_decision_process

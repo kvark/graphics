@@ -1,0 +1,16 @@
+title: Speculative Decoding
+cluster: efficiency
+year: 2022
+summary: >
+  A small draft model proposes several tokens and the large model verifies
+  them in one batched pass, keeping the longest correct prefix. Exact: the
+  output distribution is unchanged.
+refs:
+  - title: Fast Inference from Transformers via Speculative Decoding
+    authors: Leviathan, Kalman, Matias
+    year: 2022
+    url: https://arxiv.org/abs/2211.17192
+edges:
+  - rel: corrects
+    to: kv-cache
+    why: decoding stays serial, one token per pass

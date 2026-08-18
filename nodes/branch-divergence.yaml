@@ -1,0 +1,10 @@
+title: Branch Divergence
+cluster: hardware
+summary: >
+  When lanes in a group take different sides of a branch, the hardware
+  runs both sides and masks off the lanes that should not execute. Cost is
+  the sum of the paths, not the average.
+wikipedia: https://en.wikipedia.org/wiki/Single_instruction,_multiple_threads
+edges:
+  - rel: part-of
+    to: simt

@@ -1,0 +1,16 @@
+title: Scaling Laws
+cluster: language
+year: 2020
+summary: >
+  Loss falls as a power law in parameters, data and compute, over many
+  orders of magnitude. Turned model design into a budgeting exercise with
+  a predictable return.
+refs:
+  - title: Scaling Laws for Neural Language Models
+    authors: Kaplan et al.
+    year: 2020
+    url: https://arxiv.org/abs/2001.08361
+edges:
+  - rel: validates
+    to: autoregressive-language-model
+    why: predicts the loss a given budget will reach

@@ -1,0 +1,11 @@
+title: Condition Number
+cluster: numerics
+summary: >
+  How much a problem amplifies error in its input. Separates a badly
+  behaved problem from a badly written algorithm, which is a distinction
+  worth making before optimising either.
+wikipedia: https://en.wikipedia.org/wiki/Condition_number
+edges:
+  - rel: validates
+    to: floating-point
+    why: bounds how much accuracy a result can possibly retain

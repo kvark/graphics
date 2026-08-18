@@ -1,0 +1,9 @@
+title: Circle of Confusion
+cluster: camera
+summary: >
+  The blur disc a point source projects onto the sensor when it is out of
+  focus. Its diameter is what depth-of-field effects actually compute.
+wikipedia: https://en.wikipedia.org/wiki/Circle_of_confusion
+edges:
+  - rel: part-of
+    to: thin-lens-model

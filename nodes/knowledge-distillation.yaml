@@ -1,0 +1,17 @@
+title: Knowledge Distillation
+cluster: efficiency
+year: 2015
+summary: >
+  Trains a small model against the large model's full output distribution
+  rather than the hard labels. The relative probabilities of the wrong
+  answers carry most of the transferred information.
+wikipedia: https://en.wikipedia.org/wiki/Knowledge_distillation
+refs:
+  - title: Distilling the Knowledge in a Neural Network
+    authors: Hinton, Vinyals, Dean
+    year: 2015
+    url: https://arxiv.org/abs/1503.02531
+edges:
+  - rel: requires
+    to: cross-entropy-loss
+    why: "the target is the teacher's whole distribution"

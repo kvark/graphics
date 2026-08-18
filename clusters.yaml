@@ -75,3 +75,38 @@
   domain: ai
   title: Generative Models
   blurb: Learning to sample from a distribution rather than to label one.
+
+- id: hardware
+  domain: shared
+  title: Execution Hardware
+  blurb: What the machine is actually good at, and which of its limits a technique is fighting.
+
+- id: numerics
+  domain: shared
+  title: Numerics
+  blurb: What finite precision does to an otherwise correct algorithm.
+
+- id: visibility
+  domain: graphics
+  title: Visibility
+  blurb: Deciding what can be seen before paying to shade it.
+
+- id: camera
+  domain: graphics
+  title: Camera and Motion
+  blurb: The aperture and the shutter, and the effects that come from each being finite.
+
+- id: efficiency
+  domain: ai
+  title: Efficiency and Deployment
+  blurb: Fitting training and inference into the memory and bandwidth actually available.
+
+- id: language
+  domain: ai
+  title: Language Models
+  blurb: Pretraining, scaling and alignment of models over text.
+
+- id: reinforcement
+  domain: ai
+  title: Reinforcement Learning
+  blurb: Learning from a reward signal rather than from labelled answers.

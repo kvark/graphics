@@ -1,0 +1,17 @@
+title: LoRA
+cluster: efficiency
+year: 2021
+aka: [Low-rank adaptation]
+summary: >
+  Freezes the pretrained weights and learns a low-rank update beside them.
+  Fine-tuning then costs a fraction of the memory, and the adapters can be
+  swapped or merged afterwards.
+refs:
+  - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+    authors: Hu et al.
+    year: 2021
+    url: https://arxiv.org/abs/2106.09685
+edges:
+  - rel: extends
+    to: transformer
+    why: adapts a frozen model through small low-rank updates

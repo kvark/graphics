@@ -1,0 +1,16 @@
+title: Hair Scattering Model
+cluster: materials
+year: 2003
+summary: >
+  Models a hair as a dielectric cylinder with a tilted cuticle, splitting
+  scattering into reflection, transmission and internal reflection lobes.
+  Explains the two offset highlights real hair shows.
+refs:
+  - title: Light Scattering from Human Hair Fibers
+    authors: Marschner, Jensen, Cammarano, Worley, Hanrahan
+    year: 2003
+    url: https://doi.org/10.1145/1201775.882345
+edges:
+  - rel: extends
+    to: bsdf
+    why: a fibre scatters around its axis, not a normal

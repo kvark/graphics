@@ -1,0 +1,15 @@
+title: Learning-Rate Warmup
+cluster: learning
+year: 2017
+summary: >
+  Ramps the step size up from near zero over the first few thousand
+  updates instead of starting at full rate.
+refs:
+  - title: Attention Is All You Need
+    authors: Vaswani et al.
+    year: 2017
+    url: https://arxiv.org/abs/1706.03762
+edges:
+  - rel: corrects
+    to: adam
+    why: early steps are huge while the second moment is noisy

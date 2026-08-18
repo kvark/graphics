@@ -1,0 +1,18 @@
+title: Mixture of Experts
+cluster: efficiency
+year: 2017
+aka: [MoE]
+summary: >
+  Routes each token to a few of many expert subnetworks, so parameter
+  count grows without the arithmetic growing with it. The routing is the
+  hard part, and load balance is a training objective of its own.
+wikipedia: https://en.wikipedia.org/wiki/Mixture_of_experts
+refs:
+  - title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer"
+    authors: Shazeer et al.
+    year: 2017
+    url: https://arxiv.org/abs/1701.06538
+edges:
+  - rel: corrects
+    to: transformer
+    why: compute grows with capacity if every weight is used
